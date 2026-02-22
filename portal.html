@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>社内ポータル | 人事グループ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;700&family=Noto+Sans+JP:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--ink:#1a1a2e;--cream:#f8f5ef;--warm:#ede8df;--accent:#c8a96e;--accent-light:#e8d5b0;--text:#3d3d52;--muted:#8585a0;--green:#3d8a5e;--red:#8a3d3d;--blue:#3d5e8a}
+html{scroll-behavior:smooth}
+body{font-family:'Noto Sans JP',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden}
+
+/* INTERNAL NAV - darker */
+.portal-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:72px;background:var(--ink);border-bottom:1px solid rgba(200,169,110,0.2)}
+.portal-nav-logo{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:500;color:var(--cream);letter-spacing:0.05em;text-decoration:none}
+.portal-nav-logo span{font-size:11px;font-family:'Noto Sans JP',sans-serif;font-weight:300;display:block;letter-spacing:0.2em;color:rgba(248,245,239,0.45);margin-top:-2px}
+.portal-nav-links{display:flex;gap:32px;list-style:none;align-items:center}
+.portal-nav-links a{font-size:13px;font-weight:300;letter-spacing:0.1em;color:rgba(248,245,239,0.6);text-decoration:none;transition:color 0.25s}
+.portal-nav-links a:hover,.portal-nav-links a.active{color:var(--accent)}
+.btn-recruit{border:1px solid rgba(200,169,110,0.4);color:var(--accent)!important;padding:8px 20px;font-size:12px!important}
+.btn-recruit:hover{background:var(--accent)!important;color:var(--ink)!important;border-color:var(--accent)!important}
+
+/* Hero band */
+.portal-hero{background:var(--ink);padding:120px 80px 64px;position:relative;overflow:hidden}
+.portal-hero::before{content:'社内ポータル';position:absolute;top:-20px;right:-20px;font-family:'Noto Serif JP',serif;font-size:160px;font-weight:300;color:rgba(255,255,255,0.025);pointer-events:none;line-height:1;white-space:nowrap}
+.portal-hero-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr auto;align-items:end;gap:48px;position:relative;z-index:2}
+.portal-greeting{font-size:11px;letter-spacing:0.3em;color:var(--accent);text-transform:uppercase;margin-bottom:12px}
+.portal-hero-title{font-family:'Noto Serif JP',serif;font-size:clamp(28px,3.5vw,46px);font-weight:300;color:var(--cream);letter-spacing:0.05em;line-height:1.4;margin-bottom:12px}
+.portal-hero-sub{font-size:14px;font-weight:300;color:rgba(248,245,239,0.5);letter-spacing:0.05em;line-height:1.8}
+.portal-date{text-align:right;color:rgba(248,245,239,0.4);font-size:12px;letter-spacing:0.1em;line-height:1.8}
+
+/* Search */
+.portal-search{background:rgba(255,255,255,0.06);backdrop-filter:blur(8px);padding:32px 80px;border-top:1px solid rgba(255,255,255,0.05)}
+.portal-search-inner{max-width:1200px;margin:0 auto}
+.search-box{display:flex;gap:0}
+.search-input{flex:1;padding:16px 24px;background:rgba(255,255,255,0.08);border:1px solid rgba(200,169,110,0.25);border-right:none;font-family:'Noto Sans JP',sans-serif;font-size:14px;color:var(--cream);letter-spacing:0.05em;outline:none}
+.search-input::placeholder{color:rgba(248,245,239,0.35)}
+.search-input:focus{border-color:var(--accent);background:rgba(255,255,255,0.12)}
+.search-btn{background:var(--accent);border:none;padding:0 28px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:opacity 0.25s}
+.search-btn:hover{opacity:0.85}
+.search-tags{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.search-tag{font-size:11px;color:rgba(248,245,239,0.45);padding:4px 12px;border:1px solid rgba(255,255,255,0.1);cursor:pointer;letter-spacing:0.06em;transition:all 0.25s}
+.search-tag:hover{border-color:var(--accent);color:var(--accent)}
+
+/* Action section */
+.action-section{padding:80px}
+.action-inner{max-width:1200px;margin:0 auto}
+.section-head{display:flex;align-items:baseline;gap:16px;margin-bottom:40px}
+.section-label{font-size:10px;letter-spacing:0.35em;color:var(--accent);text-transform:uppercase}
+.section-title{font-family:'Noto Serif JP',serif;font-size:clamp(20px,2.5vw,30px);font-weight:300;color:var(--ink);letter-spacing:0.05em}
+
+/* Action cards - big */
+.action-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px}
+.action-card{background:var(--warm);padding:36px 28px;cursor:pointer;transition:all 0.3s;position:relative;overflow:hidden;text-decoration:none;color:inherit;display:block}
+.action-card::before{content:'';position:absolute;inset:0;background:var(--ink);transform:scaleY(0);transform-origin:bottom;transition:transform 0.3s;z-index:0}
+.action-card:hover::before{transform:scaleY(1)}
+.action-card *{position:relative;z-index:1}
+.action-card:hover .action-icon{color:var(--accent)}
+.action-card:hover .action-label{color:var(--accent)}
+.action-card:hover .action-title{color:var(--cream)}
+.action-card:hover .action-desc{color:rgba(248,245,239,0.55)}
+.action-card:hover .action-arrow{color:var(--accent)}
+.action-icon{font-size:32px;margin-bottom:16px;display:block;transition:color 0.3s}
+.action-label{font-size:9px;letter-spacing:0.3em;color:var(--accent);text-transform:uppercase;margin-bottom:8px;display:block;transition:color 0.3s}
+.action-title{font-family:'Noto Serif JP',serif;font-size:17px;font-weight:400;color:var(--ink);margin-bottom:10px;letter-spacing:0.04em;line-height:1.5;transition:color 0.3s}
+.action-desc{font-size:12px;font-weight:300;color:var(--muted);line-height:1.8;letter-spacing:0.03em;transition:color 0.3s}
+.action-arrow{position:absolute;bottom:28px;right:28px;font-size:20px;color:rgba(26,26,46,0.2);transition:color 0.3s}
+
+/* Quick links */
+.quick-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:2px}
+.quick-card{background:var(--ink);padding:28px 32px;display:flex;align-items:center;gap:20px;cursor:pointer;transition:background 0.25s;text-decoration:none;color:inherit}
+.quick-card:hover{background:#2d2d4a}
+.quick-icon{font-size:24px;flex-shrink:0}
+.quick-title{font-size:14px;font-weight:400;color:var(--cream);letter-spacing:0.04em;margin-bottom:4px}
+.quick-sub{font-size:11px;font-weight:300;color:rgba(248,245,239,0.4);letter-spacing:0.04em}
+.quick-arrow{margin-left:auto;color:var(--accent);font-size:18px}
+
+/* Updates */
+.updates-bg{background:var(--warm);padding:80px}
+.updates-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr;gap:64px}
+.update-list{display:flex;flex-direction:column;gap:0}
+.update-item{display:flex;gap:24px;align-items:flex-start;padding:24px 0;border-bottom:1px solid rgba(26,26,46,0.08);text-decoration:none;color:inherit;transition:opacity 0.25s}
+.update-item:hover{opacity:0.7}
+.update-meta{flex-shrink:0;min-width:120px}
+.update-date{font-size:12px;color:var(--muted);letter-spacing:0.1em;margin-bottom:6px}
+.update-badge{font-size:9px;letter-spacing:0.15em;padding:3px 10px;background:var(--accent);color:var(--ink)}
+.update-badge.notice{background:var(--ink);color:var(--cream)}
+.update-badge.new{background:#c8696e;color:white}
+.update-title{font-size:14px;font-weight:400;color:var(--ink);letter-spacing:0.04em;line-height:1.6;margin-bottom:4px}
+.update-sub{font-size:12px;font-weight:300;color:var(--muted);letter-spacing:0.04em;line-height:1.6}
+.contact-box{background:var(--ink);padding:40px;display:flex;flex-direction:column;gap:24px;height:fit-content}
+.contact-box h3{font-family:'Noto Serif JP',serif;font-size:18px;font-weight:300;color:var(--cream);letter-spacing:0.05em;margin-bottom:8px}
+.contact-box p{font-size:12px;font-weight:300;color:rgba(248,245,239,0.55);line-height:1.9;letter-spacing:0.04em}
+.contact-item{display:flex;gap:12px;align-items:flex-start;padding-top:16px;border-top:1px solid rgba(255,255,255,0.06)}
+.contact-item-icon{font-size:20px;flex-shrink:0;margin-top:2px}
+.contact-item-label{font-size:11px;color:var(--accent);letter-spacing:0.15em;margin-bottom:4px}
+.contact-item-val{font-size:13px;color:rgba(248,245,239,0.7);letter-spacing:0.06em}
+
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.8s ease,transform 0.8s ease}
+.reveal.visible{opacity:1;transform:none}
+@media(max-width:900px){.portal-nav{padding:0 24px}.portal-nav-links{display:none}.portal-hero{padding:100px 24px 48px}.portal-search{padding:24px}.action-section{padding:48px 24px}.action-grid{grid-template-columns:1fr 1fr}.quick-grid{grid-template-columns:1fr}.updates-bg{padding:48px 24px}.updates-inner{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav class="portal-nav">
+  <a href="portal.html" class="portal-nav-logo">社内ポータル<span>人事グループ 内部向けサイト</span></a>
+  <ul class="portal-nav-links">
+    <li><a href="portal.html" class="active">ホーム</a></li>
+    <li><a href="faq.html">FAQ</a></li>
+    <li><a href="procedures.html">手続きフロー</a></li>
+    <li><a href="regulations.html">規程・制度</a></li>
+    <li><a href="hr-recruit-top.html" class="btn-recruit">採用サイトへ →</a></li>
+  </ul>
+</nav>
+
+<div class="portal-hero">
+  <div class="portal-hero-inner">
+    <div>
+      <p class="portal-greeting">Internal Portal — 人事グループ</p>
+      <h1 class="portal-hero-title">何をしたいですか？<br>必要な手続きをすぐに見つけましょう。</h1>
+      <p class="portal-hero-sub">有給申請・残業申請・各種届出・FAQ・規程集</p>
+    </div>
+    <div class="portal-date">
+      <p style="font-size:20px;font-family:'Cormorant Garamond',serif;color:rgba(248,245,239,0.7)">2026</p>
+      <p>February 21 (Sat)</p>
+      <p style="color:var(--accent);margin-top:4px">人事担当者在席中</p>
+    </div>
+  </div>
+</div>
+
+<div class="portal-search">
+  <div class="portal-search-inner">
+    <div class="search-box">
+      <input type="text" class="search-input" placeholder="手続き・制度名・キーワードで検索…（例：有給、産休、引越し）">
+      <button class="search-btn">🔍</button>
+    </div>
+    <div class="search-tags">
+      <span class="search-tag" onclick="this.style.borderColor='var(--accent)';this.style.color='var(--accent)'">有給申請</span>
+      <span class="search-tag">残業申請</span>
+      <span class="search-tag">育休・産休</span>
+      <span class="search-tag">結婚手続き</span>
+      <span class="search-tag">引越し手続き</span>
+      <span class="search-tag">福利厚生申請</span>
+      <span class="search-tag">給与明細</span>
+    </div>
+  </div>
+</div>
+
+<!-- Actions -->
+<section class="action-section">
+  <div class="action-inner">
+    <div class="section-head">
+      <p class="section-label">Quick Actions</p>
+      <h2 class="section-title">やりたいことから探す</h2>
+    </div>
+    <div class="action-grid">
+      <a href="procedures.html" class="action-card reveal">
+        <span class="action-icon">📅</span>
+        <span class="action-label">Leave</span>
+        <p class="action-title">有給を<br>申請したい</p>
+        <p class="action-desc">年次有給休暇・特別休暇の申請方法と必要書類</p>
+        <span class="action-arrow">›</span>
+      </a>
+      <a href="procedures.html" class="action-card reveal">
+        <span class="action-icon">⏱</span>
+        <span class="action-label">Overtime</span>
+        <p class="action-title">残業を<br>申請したい</p>
+        <p class="action-desc">残業・時間外労働の事前申請・事後申請の手順</p>
+        <span class="action-arrow">›</span>
+      </a>
+      <a href="procedures.html" class="action-card reveal">
+        <span class="action-icon">💍</span>
+        <span class="action-label">Life Event</span>
+        <p class="action-title">結婚・引越しの<br>手続きをしたい</p>
+        <p class="action-desc">氏名・住所変更・慶弔申請・各種証明書の提出</p>
+        <span class="action-arrow">›</span>
+      </a>
+      <a href="procedures.html" class="action-card reveal">
+        <span class="action-icon">🎁</span>
+        <span class="action-label">Benefits</span>
+        <p class="action-title">福利厚生を<br>申請したい</p>
+        <p class="action-desc">各種補助金・健康診断・育児支援制度の申請</p>
+        <span class="action-arrow">›</span>
+      </a>
+    </div>
+    <div class="quick-grid">
+      <a href="procedures.html" class="quick-card reveal">
+        <span class="quick-icon">👶</span>
+        <div><p class="quick-title">産休・育休の手続き</p><p class="quick-sub">申請書類・提出期限・復帰後の手続き</p></div>
+        <span class="quick-arrow">›</span>
+      </a>
+      <a href="procedures.html" class="quick-card reveal">
+        <span class="quick-icon">🏥</span>
+        <div><p class="quick-title">健康診断・人間ドック</p><p class="quick-sub">予約方法・補助金申請・結果提出</p></div>
+        <span class="quick-arrow">›</span>
+      </a>
+      <a href="procedures.html" class="quick-card reveal">
+        <span class="quick-icon">📝</span>
+        <div><p class="quick-title">その他申請・届出</p><p class="quick-sub">住民票・各種証明書・通勤経路変更 など</p></div>
+        <span class="quick-arrow">›</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- More actions row -->
+<section class="action-section" style="padding-top:0">
+  <div class="action-inner">
+    <div class="section-head">
+      <p class="section-label">More Resources</p>
+      <h2 class="section-title">制度・情報から探す</h2>
+    </div>
+    <div class="action-grid">
+      <a href="faq.html" class="action-card reveal">
+        <span class="action-icon">❓</span>
+        <span class="action-label">FAQ</span>
+        <p class="action-title">よくある<br>質問（FAQ）</p>
+        <p class="action-desc">勤怠・規程・福利厚生カテゴリ別のQ&A集</p>
+        <span class="action-arrow">›</span>
+      </a>
+      <a href="regulations.html" class="action-card reveal">
+        <span class="action-icon">📖</span>
+        <span class="action-label">Regulations</span>
+        <p class="action-title">規程・制度<br>Web版</p>
+        <p class="action-desc">就業規則・各種規程のWeb版。変更履歴付き</p>
+        <span class="action-arrow">›</span>
+      </a>
+      <a href="procedures.html" class="action-card reveal">
+        <span class="action-icon">🗺</span>
+        <span class="action-label">How-to</span>
+        <p class="action-title">手続き<br>フロー図解</p>
+        <p class="action-desc">各種申請の手順をステップごとに図解で説明</p>
+        <span class="action-arrow">›</span>
+      </a>
+      <a href="/cdn-cgi/l/email-protection#731b015e031c0107121f33101c1e03121d0a5d1903" class="action-card reveal">
+        <span class="action-icon">💬</span>
+        <span class="action-label">Contact</span>
+        <p class="action-title">人事担当者に<br>相談する</p>
+        <p class="action-desc">FAQで解決しない場合は直接ご連絡ください</p>
+        <span class="action-arrow">›</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Updates & contact -->
+<section class="updates-bg">
+  <div class="updates-inner">
+    <div>
+      <div class="section-head"><p class="section-label">Updates</p><h2 class="section-title">お知らせ・更新情報</h2></div>
+      <div class="update-list">
+        <a href="regulations.html#ikuji" class="update-item reveal">
+          <div class="update-meta"><p class="update-date">2026.02.15</p><span class="update-badge new">NEW</span></div>
+          <div><p class="update-title">2026年度 育児休業制度の改定について</p><p class="update-sub">パパ育休取得可能期間が2週間→4週間に延長されました</p></div>
+        </a>
+        <a href="procedures.html#kyuka" class="update-item reveal">
+          <div class="update-meta"><p class="update-date">2026.02.10</p><span class="update-badge">更新</span></div>
+          <div><p class="update-title">有給休暇申請フォームのシステム移行について</p><p class="update-sub">3月1日より新システム（HR Core）へ移行します。手順書を配布しましたのでご確認ください。</p></div>
+        </a>
+        <a href="faq.html#kyuyo" class="update-item reveal">
+          <div class="update-meta"><p class="update-date">2026.02.01</p><span class="update-badge notice">通知</span></div>
+          <div><p class="update-title">2025年度 年末調整の訂正申告受付期間のお知らせ</p><p class="update-sub">2月28日まで受け付けています。修正が必要な方はお早めに</p></div>
+        </a>
+        <a href="procedures.html#fukuri" class="update-item reveal">
+          <div class="update-meta"><p class="update-date">2026.01.20</p><span class="update-badge">更新</span></div>
+          <div><p class="update-title">健康診断予約システムのリニューアルについて</p><p class="update-sub">提携クリニックが18院→24院に拡大しました</p></div>
+        </a>
+        <a href="regulations.html#fukuri" class="update-item reveal">
+          <div class="update-meta"><p class="update-date">2026.01.10</p><span class="update-badge">更新</span></div>
+          <div><p class="update-title">通勤手当上限額の改定（2026年4月適用）</p><p class="update-sub">月額上限が35,000円→50,000円に変更されます</p></div>
+        </a>
+      </div>
+    </div>
+    <div>
+      <div class="section-head"><p class="section-label">Contact</p><h2 class="section-title">お問い合わせ</h2></div>
+      <div class="contact-box reveal">
+        <h3>人事グループへのご相談</h3>
+        <p>FAQや手続きフローで解決しない場合はお気軽にご連絡ください。</p>
+        <div class="contact-item">
+          <span class="contact-item-icon">📧</span>
+          <div><p class="contact-item-label">MAIL</p><p class="contact-item-val"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="452d3768352a3731242905262a2835242b3c6b2f35">[email&#160;protected]</a></p></div>
+        </div>
+        <div class="contact-item">
+          <span class="contact-item-icon">📞</span>
+          <div><p class="contact-item-label">TEL（内線）</p><p class="contact-item-val">内線 #2100<br><span style="font-size:11px;color:rgba(248,245,239,0.35)">平日 9:00〜17:30</span></p></div>
+        </div>
+        <div class="contact-item">
+          <span class="contact-item-icon">🏢</span>
+          <div><p class="contact-item-label">場所</p><p class="contact-item-val">本社3階 人事グループ<br><span style="font-size:11px;color:rgba(248,245,239,0.35)">対面相談は事前予約推奨</span></p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+const 

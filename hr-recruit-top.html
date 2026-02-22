@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>人事グループ | 採用サイト</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;700&family=Noto+Sans+JP:wght@300;400;500&family=DM+Serif+Display&family=Cormorant+Garamond:ital,wght@0,300;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #1a1a2e;
+    --ink-soft: #2d2d4a;
+    --cream: #f8f5ef;
+    --warm: #ede8df;
+    --accent: #c8a96e;
+    --accent-light: #e8d5b0;
+    --text: #3d3d52;
+    --muted: #8585a0;
+    --white: #ffffff;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 48px;
+    height: 72px;
+    background: rgba(248,245,239,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(200,169,110,0.2);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--ink);
+    letter-spacing: 0.05em;
+  }
+  .nav-logo span {
+    font-size: 11px;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 300;
+    display: block;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+    margin-top: -2px;
+  }
+  .nav-links {
+    display: flex; gap: 40px; list-style: none;
+    align-items: center;
+  }
+  .nav-links a {
+    font-size: 13px;
+    font-weight: 300;
+    letter-spacing: 0.12em;
+    color: var(--text);
+    text-decoration: none;
+    transition: color 0.25s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-links .btn-nav {
+    background: var(--ink);
+    color: var(--cream) !important;
+    padding: 10px 22px;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    transition: background 0.25s !important;
+  }
+  .nav-links .btn-nav:hover { background: var(--accent) !important; color: var(--ink) !important; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 72px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 64px 80px 80px;
+    position: relative;
+    z-index: 2;
+  }
+  .hero-label {
+    font-size: 10px;
+    letter-spacing: 0.35em;
+    color: var(--accent);
+    text-transform: uppercase;
+    font-weight: 400;
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .hero-label::before {
+    content: '';
+    width: 32px; height: 1px;
+    background: var(--accent);
+  }
+  .hero-headline {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(38px, 4.5vw, 62px);
+    font-weight: 300;
+    line-height: 1.4;
+    color: var(--ink);
+    margin-bottom: 24px;
+    letter-spacing: 0.04em;
+  }
+  .hero-headline em {
+    font-style: normal;
+    color: var(--accent);
+    display: block;
+  }
+  .hero-sub {
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.9;
+    color: var(--muted);
+    margin-bottom: 52px;
+    max-width: 400px;
+    letter-spacing: 0.05em;
+  }
+  .hero-ctas {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--ink);
+    color: var(--cream);
+    padding: 16px 36px;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    text-decoration: none;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .btn-primary::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 0; height: 2px;
+    background: var(--accent);
+    transition: width 0.3s;
+  }
+  .btn-primary:hover::after { width: 100%; }
+  .btn-primary:hover { background: var(--ink-soft); }
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid var(--ink);
+    color: var(--ink);
+    padding: 16px 36px;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+  .btn-secondary:hover {
+    background: var(--ink);
+    color: var(--cream);
+  }
+  .btn-arrow { font-size: 16px; transition: transform 0.3s; }
+  .btn-primary:hover .btn-arrow,
+  .btn-secondary:hover .btn-arrow { transform: translateX(4px); }
+
+  .hero-right {
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-right-bg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--ink) 0%, #2a2a4a 50%, #1a2540 100%);
+  }
+  .hero-right-pattern {
+    position: absolute;
+    inset: 0;
+    opacity: 0.07;
+    background-image:
+      repeating-linear-gradient(45deg, #fff 0, #fff 1px, transparent 0, transparent 50%),
+      repeating-linear-gradient(-45deg, #fff 0, #fff 1px, transparent 0, transparent 50%);
+    background-size: 30px 30px;
+  }
+  .hero-right-content {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 60px;
+  }
+  .hero-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 52px;
+    font-weight: 300;
+    font-style: italic;
+    color: rgba(255,255,255,0.15);
+    line-height: 1.1;
+    margin-bottom: 48px;
+    letter-spacing: -0.02em;
+  }
+  .hero-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .hero-stat {
+    border-top: 1px solid rgba(200,169,110,0.4);
+    padding-top: 20px;
+  }
+  .hero-stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+  .hero-stat-label {
+    font-size: 11px;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.1em;
+    margin-top: 6px;
+    font-weight: 300;
+  }
+  .hero-scroll {
+    position: absolute;
+    bottom: 40px; left: 80px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--muted);
+    text-transform: uppercase;
+    z-index: 3;
+    animation: float 3s ease-in-out infinite;
+  }
+  .hero-scroll-line {
+    width: 48px; height: 1px;
+    background: var(--accent);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-scroll-line::after {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: var(--ink);
+    animation: slide 2s ease-in-out infinite;
+  }
+  @keyframes slide {
+    0% { left: -100%; }
+    100% { left: 100%; }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+
+  /* ── MISSION ── */
+  .section {
+    padding: 120px 80px;
+  }
+  .section-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-label::before {
+    content: '';
+    width: 24px; height: 1px;
+    background: var(--accent);
+  }
+  .section-title {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(28px, 3vw, 44px);
+    font-weight: 300;
+    color: var(--ink);
+    margin-bottom: 16px;
+    letter-spacing: 0.05em;
+    line-height: 1.4;
+  }
+  .section-desc {
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--muted);
+    line-height: 1.9;
+    max-width: 520px;
+    letter-spacing: 0.04em;
+  }
+
+  .mission-bg {
+    background: var(--ink);
+    position: relative;
+    overflow: hidden;
+  }
+  .mission-bg::before {
+    content: 'MISSION';
+    position: absolute;
+    top: -20px; right: -20px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 200px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.03);
+    letter-spacing: -0.05em;
+    pointer-events: none;
+    line-height: 1;
+  }
+  .mission-bg .section-title { color: var(--cream); }
+  .mission-bg .section-desc { color: rgba(248,245,239,0.55); }
+  .mission-bg .section-label { color: var(--accent); }
+  .mission-bg .section-label::before { background: var(--accent); }
+
+  .mission-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-top: 64px;
+  }
+  .mission-card {
+    background: rgba(255,255,255,0.04);
+    padding: 48px 40px;
+    position: relative;
+    transition: background 0.3s;
+    border-top: 2px solid transparent;
+  }
+  .mission-card:hover {
+    background: rgba(255,255,255,0.07);
+    border-top-color: var(--accent);
+  }
+  .mission-icon {
+    width: 48px; height: 48px;
+    border: 1px solid rgba(200,169,110,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    margin-bottom: 28px;
+  }
+  .mission-card-title {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--cream);
+    margin-bottom: 16px;
+    letter-spacing: 0.05em;
+  }
+  .mission-card-text {
+    font-size: 13px;
+    font-weight: 300;
+    color: rgba(248,245,239,0.6);
+    line-height: 2;
+    letter-spacing: 0.05em;
+  }
+  .mission-card-num {
+    position: absolute;
+    top: 40px; right: 40px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    font-weight: 300;
+    color: rgba(200,169,110,0.12);
+    line-height: 1;
+  }
+
+  /* ── BENEFITS ── */
+  .benefits-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 80px;
+    align-items: start;
+    margin-top: 64px;
+  }
+  .benefits-sticky {
+    position: sticky;
+    top: 100px;
+  }
+  .benefits-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+  }
+  .benefit-item {
+    background: var(--warm);
+    padding: 32px 28px;
+    transition: all 0.3s;
+    cursor: default;
+    position: relative;
+    overflow: hidden;
+  }
+  .benefit-item::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 0; height: 2px;
+    background: var(--accent);
+    transition: width 0.4s;
+  }
+  .benefit-item:hover { background: var(--accent-light); }
+  .benefit-item:hover::after { width: 100%; }
+  .benefit-icon {
+    font-size: 24px;
+    margin-bottom: 14px;
+    display: block;
+  }
+  .benefit-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 8px;
+    letter-spacing: 0.05em;
+  }
+  .benefit-detail {
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--muted);
+    line-height: 1.7;
+    letter-spacing: 0.03em;
+  }
+
+  /* ── INTERVIEW ── */
+  .interview-bg { background: var(--warm); }
+
+  .people-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-top: 64px;
+  }
+  .people-card {
+    background: var(--cream);
+    overflow: hidden;
+    transition: transform 0.4s, box-shadow 0.4s;
+    position: relative;
+  }
+  .people-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 24px 64px rgba(26,26,46,0.12);
+  }
+  .people-card-img {
+    aspect-ratio: 3/4;
+    background: var(--ink);
+    position: relative;
+    overflow: hidden;
+  }
+  .people-card-img-fill {
+    position: absolute;
+    inset: 0;
+    opacity: 0.7;
+    background: linear-gradient(135deg, #2a2a4a, #1a2540);
+  }
+  .people-card-img-name-bg {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 40px 28px 24px;
+    background: linear-gradient(to top, rgba(26,26,46,0.9), transparent);
+  }
+  .people-dept {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .people-name {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--cream);
+    letter-spacing: 0.05em;
+  }
+  .people-year {
+    font-size: 11px;
+    color: rgba(248,245,239,0.5);
+    margin-top: 4px;
+  }
+  .people-card-body {
+    padding: 28px;
+  }
+  .people-quote {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--ink);
+    line-height: 1.8;
+    margin-bottom: 16px;
+    letter-spacing: 0.04em;
+    position: relative;
+    padding-left: 16px;
+    border-left: 2px solid var(--accent);
+  }
+  .people-story {
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--muted);
+    line-height: 1.8;
+    letter-spacing: 0.03em;
+  }
+  .people-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--ink);
+    text-decoration: none;
+    margin-top: 20px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--accent);
+    transition: color 0.25s;
+  }
+  .people-link:hover { color: var(--accent); }
+
+  .all-interviews {
+    display: flex;
+    justify-content: center;
+    margin-top: 64px;
+  }
+
+  /* ── EVENTS ── */
+  .events-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    margin-top: 64px;
+  }
+  .event-item {
+    padding: 36px 0;
+    border-bottom: 1px solid rgba(26,26,46,0.1);
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 24px;
+    align-items: start;
+    transition: opacity 0.25s;
+  }
+  .event-item:hover { opacity: 0.75; cursor: pointer; }
+  .event-date-box {
+    text-align: center;
+    border: 1px solid var(--accent);
+    padding: 12px 8px;
+  }
+  .event-month {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    text-transform: uppercase;
+  }
+  .event-day {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    color: var(--ink);
+    line-height: 1;
+    margin: 4px 0;
+  }
+  .event-dow {
+    font-size: 10px;
+    color: var(--muted);
+  }
+  .event-type-badge {
+    display: inline-block;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    background: var(--accent);
+    color: var(--ink);
+    padding: 3px 10px;
+    margin-bottom: 8px;
+  }
+  .event-title {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 8px;
+    letter-spacing: 0.04em;
+    line-height: 1.5;
+  }
+  .event-detail {
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+    line-height: 1.7;
+  }
+  .events-cta-box {
+    background: var(--ink);
+    padding: 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 300px;
+  }
+  .events-cta-box h3 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 22px;
+    font-weight: 300;
+    color: var(--cream);
+    line-height: 1.7;
+    letter-spacing: 0.05em;
+    margin-bottom: 24px;
+  }
+  .events-cta-box p {
+    font-size: 13px;
+    font-weight: 300;
+    color: rgba(248,245,239,0.55);
+    line-height: 1.9;
+    letter-spacing: 0.04em;
+    margin-bottom: 36px;
+  }
+  .btn-accent {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--accent);
+    color: var(--ink);
+    padding: 14px 28px;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    font-weight: 500;
+    text-decoration: none;
+    transition: opacity 0.25s;
+    align-self: flex-start;
+  }
+  .btn-accent:hover { opacity: 0.85; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink);
+    padding: 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  footer::before {
+    content: 'HR';
+    position: absolute;
+    bottom: -40px; right: 40px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 240px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.03);
+    line-height: 1;
+    pointer-events: none;
+  }
+  .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 64px;
+  }
+  .footer-brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 500;
+    color: var(--cream);
+    margin-bottom: 16px;
+    letter-spacing: 0.05em;
+  }
+  .footer-brand-sub {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+    margin-bottom: 24px;
+  }
+  .footer-desc {
+    font-size: 12px;
+    font-weight: 300;
+    color: rgba(248,245,239,0.45);
+    line-height: 1.9;
+    letter-spacing: 0.04em;
+  }
+  .footer-nav-title {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .footer-nav-links {
+    list-style: none;
+  }
+  .footer-nav-links li {
+    margin-bottom: 12px;
+  }
+  .footer-nav-links a {
+    font-size: 12px;
+    font-weight: 300;
+    color: rgba(248,245,239,0.55);
+    text-decoration: none;
+    letter-spacing: 0.06em;
+    transition: color 0.25s;
+  }
+  .footer-nav-links a:hover { color: var(--accent); }
+  .footer-bottom {
+    max-width: 1200px;
+    margin: 48px auto 0;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    color: rgba(248,245,239,0.3);
+    letter-spacing: 0.1em;
+  }
+
+  /* ── INNER PORTAL BANNER ── */
+  .inner-banner {
+    background: var(--accent-light);
+    padding: 40px 80px;
+  }
+  .inner-banner-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 48px;
+  }
+  .inner-banner-text h3 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 8px;
+    letter-spacing: 0.05em;
+  }
+  .inner-banner-text p {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+
+  /* ── ANIMATIONS ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 0 24px; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { display: none; }
+    .hero-left { padding: 60px 24px; }
+    .section { padding: 80px 24px; }
+    .mission-grid { grid-template-columns: 1fr; }
+    .benefits-grid { grid-template-columns: 1fr; gap: 40px; }
+    .people-grid { grid-template-columns: 1fr; }
+    .events-layout { grid-template-columns: 1fr; gap: 40px; }
+    .footer-inner { grid-template-columns: 1fr 1fr; gap: 40px; }
+    .inner-banner { padding: 32px 24px; }
+    .inner-banner-inner { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="hr-recruit-top.html" class="nav-logo" style="text-decoration:none;">
+    Human Resources
+    <span>人事グループ 採用サイト</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="company.html">会社紹介</a></li>
+    <li><a href="benefits.html">働く環境</a></li>
+    <li><a href="interviews.html">先輩の声</a></li>
+    <li><a href="events.html">採用イベント</a></li>
+    <li><a href="portal.html" class="btn-nav">社員の方はこちら →</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left reveal">
+    <p class="hero-label">Recruit 2026</p>
+    <h1 class="hero-headline">
+      人と組織が<br>
+      ともに育つ場所へ。
+      <em>人事グループで、<br>はたらく未来をつくる。</em>
+    </h1>
+    <p class="hero-sub">
+      私たちは「人」が会社の最大の資産だと信じています。<br>
+      あなたの力で、一緒に組織の未来を描きませんか。
+    </p>
+    <div class="hero-ctas">
+      <a href="apply.html" class="btn-primary">新卒エントリー <span class="btn-arrow">→</span></a>
+      <a href="apply.html" class="btn-secondary">既卒・中途はこちら <span class="btn-arrow">→</span></a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-right-bg"></div>
+    <div class="hero-right-pattern"></div>
+    <div class="hero-right-content">
+      <p class="hero-quote">"People<br>first."</p>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-num">94<small style="font-size:18px">%</small></div>
+          <div class="hero-stat-label">社員満足度</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">3.2<small style="font-size:16px">年</small></div>
+          <div class="hero-stat-label">平均昇格年数</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">100<small style="font-size:16px">%</small></div>
+          <div class="hero-stat-label">育休取得実績</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span class="hero-scroll-line"></span>
+    Scroll
+  </div>
+</section>
+
+<!-- MISSION -->
+<section class="section mission-bg">
+  <div class="section-inner">
+    <p class="section-label">Mission & Vision</p>
+    <h2 class="section-title">人事グループの<br>ミッションとビジョン</h2>
+    <p class="section-desc">
+      組織と人を繋ぎ、一人ひとりのポテンシャルを最大化する。<br>
+      それが人事グループの存在意義です。
+    </p>
+    <div class="mission-grid">
+      <div class="mission-card reveal">
+        <span class="mission-card-num">01</span>
+        <div class="mission-icon">🎯</div>
+        <h3 class="mission-card-title">人材を活かす</h3>
+        <p class="mission-card-text">
+          社員一人ひとりの強みを発見し、適材適所で最大限の力が発揮できる環境を整えます。評価・育成・配置の三位一体で個人と組織を繋ぎます。
+        </p>
+      </div>
+      <div class="mission-card reveal">
+        <span class="mission-card-num">02</span>
+        <div class="mission-icon">🌱</div>
+        <h3 class="mission-card-title">成長を支える</h3>
+        <p class="mission-card-text">
+          入社から定年退職まで、キャリアの各ステージで必要な学びを提供。研修体系・メンター制度・キャリア面談で継続的な成長を支援します。
+        </p>
+      </div>
+      <div class="mission-card reveal">
+        <span class="mission-card-num">03</span>
+        <div class="mission-icon">🤝</div>
+        <h3 class="mission-card-title">文化を創る</h3>
+        <p class="mission-card-text">
+          心理的安全性の高い職場づくり、多様性の尊重、ウェルビーイングの向上を通じて、誰もが活躍できる組織文化を共に創造します。
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<section class="section">
+  <div class="section-inner">
+    <p class="section-label">Work Environment</p>
+    <h2 class="section-title">働く環境・制度紹介</h2>
+    <p class="section-desc">
+      「制度があるから使える」ではなく、「制度があるから選べる」。<br>多彩な制度で、あなたらしい働き方を実現できます。
+    </p>
+    <div class="benefits-grid">
+      <div class="benefits-sticky reveal">
+        <div style="background:var(--ink);padding:48px;position:relative;overflow:hidden;">
+          <div style="position:absolute;top:-20px;right:-20px;font-family:'Cormorant Garamond',serif;font-size:160px;color:rgba(255,255,255,0.04);line-height:1;pointer-events:none;">福利<br>厚生</div>
+          <p style="font-size:11px;letter-spacing:0.3em;color:var(--accent);margin-bottom:24px;">BENEFITS HIGHLIGHT</p>
+          <h3 style="font-family:'Noto Serif JP',serif;font-size:26px;font-weight:300;color:var(--cream);line-height:1.7;margin-bottom:20px;letter-spacing:0.05em;">
+            あなたのライフスタイルに合わせた、充実の福利厚生
+          </h3>
+          <p style="font-size:13px;font-weight:300;color:rgba(248,245,239,0.55);line-height:1.9;letter-spacing:0.04em;">
+            育休・産休の完全取得サポート、フレックスタイム、リモートワーク制度など、ライフステージが変わっても働き続けられる環境を整えています。
+          </p>
+          <a href="benefits.html" class="btn-accent" style="margin-top:36px;">制度詳細を見る →</a>
+        </div>
+      </div>
+      <div class="benefits-list reveal">
+        <div class="benefit-item">
+          <span class="benefit-icon">🏠</span>
+          <p class="benefit-name">リモートワーク制度</p>
+          <p class="benefit-detail">週3日まで在宅勤務可。自宅環境整備補助金あり（上限5万円）</p>
+        </div>
+        <div class="benefit-item">
+          <span class="benefit-icon">👶</span>
+          <p class="benefit-name">育休・産休サポート</p>
+          <p class="benefit-detail">取得率100%。男性育休も積極推進。復帰後の柔軟勤務対応</p>
+        </div>
+        <div class="benefit-item">
+          <span class="benefit-icon">📚</span>
+          <p class="benefit-name">自己啓発支援</p>
+          <p class="benefit-detail">資格取得費用補助・書籍購入補助・外部研修受講支援（年間上限20万円）</p>
+        </div>
+        <div class="benefit-item">
+          <span class="benefit-icon">⏰</span>
+          <p class="benefit-name">フレックスタイム</p>
+          <p class="benefit-detail">コアタイム10:00〜15:00。ライフスタイルに合わせた柔軟な勤務が可能</p>
+        </div>
+        <div class="benefit-item">
+          <span class="benefit-icon">🏥</span>
+          <p class="benefit-name">健康管理サポート</p>
+          <p class="benefit-detail">定期健診・人間ドック費用全額補助。メンタルヘルス相談窓口完備</p>
+        </div>
+        <div class="benefit-item">
+          <span class="benefit-icon">📈</span>
+          <p class="benefit-name">評価・昇給制度</p>
+          <p class="benefit-detail">半期ごとの目標設定・面談。成果に連動した透明性の高い評価体系</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INTERVIEW -->
+<section class="section interview-bg">
+  <div class="section-inner">
+    <p class="section-label">People</p>
+    <h2 class="section-title">先輩社員の声</h2>
+    <p class="section-desc">
+      実際に働く仲間が、入社後の成長やリアルな日常を語ります。
+    </p>
+    <div class="people-grid">
+      <div class="people-card reveal">
+        <div class="people-card-img">
+          <div class="people-card-img-fill" style="background:linear-gradient(160deg,#2d2d5a,#1a2540);"></div>
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0.15;">
+            <span style="font-family:'Cormorant Garamond',serif;font-size:96px;color:white;">A</span>
+          </div>
+          <div class="people-card-img-name-bg">
+            <p class="people-dept">採用・研修グループ</p>
+            <p class="people-name">田中 美咲</p>
+            <p class="people-year">2020年入社 / 新卒</p>
+          </div>
+        </div>
+        <div class="people-card-body">
+          <p class="people-quote">「最初の配属で人事に。最初は戸惑いもあったけれど、今は天職だと思っています。」</p>
+          <p class="people-story">入社後3年で採用リーダーに抜擢。新卒採用の企画から内定者フォローまでを一貫して担当し、毎年100名以上の採用に携わる。</p>
+          <a href="interviews.html" class="people-link">インタビューを読む →</a>
+        </div>
+      </div>
+      <div class="people-card reveal">
+        <div class="people-card-img">
+          <div class="people-card-img-fill" style="background:linear-gradient(160deg,#1e3a4a,#2a3040);"></div>
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0.15;">
+            <span style="font-family:'Cormorant Garamond',serif;font-size:96px;color:white;">B</span>
+          </div>
+          <div class="people-card-img-name-bg">
+            <p class="people-dept">労務・制度企画グループ</p>
+            <p class="people-name">鈴木 拓也</p>
+            <p class="people-year">2018年入社 / 中途</p>
+          </div>
+        </div>
+        <div class="people-card-body">
+          <p class="people-quote">「制度は人を守るためにある。その設計に携われることが何より嬉しい。」</p>
+          <p class="people-story">前職の労務経験を活かしフレックスタイム・育休制度の大幅改定を主導。「働きやすさ」の数値化に取り組み、社員満足度を10pt向上させた。</p>
+          <a href="interviews.html" class="people-link">インタビューを読む →</a>
+        </div>
+      </div>
+      <div class="people-card reveal">
+        <div class="people-card-img">
+          <div class="people-card-img-fill" style="background:linear-gradient(160deg,#3a2d48,#241e40);"></div>
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0.15;">
+            <span style="font-family:'Cormorant Garamond',serif;font-size:96px;color:white;">C</span>
+          </div>
+          <div class="people-card-img-name-bg">
+            <p class="people-dept">組織開発・DE&Iグループ</p>
+            <p class="people-name">渡辺 彩乃</p>
+            <p class="people-year">2022年入社 / 新卒</p>
+          </div>
+        </div>
+        <div class="people-card-body">
+          <p class="people-quote">「多様な人たちが活躍できる組織にする。それが私の使命です。」</p>
+          <p class="people-story">入社2年目から女性活躍推進プロジェクトを担当。社内アンケートの設計・分析・施策立案まで一人で完結。現在はDE&I全体の戦略立案に挑戦中。</p>
+          <a href="interviews.html" class="people-link">インタビューを読む →</a>
+        </div>
+      </div>
+    </div>
+    <div class="all-interviews">
+      <a href="interviews.html" class="btn-secondary">全ての先輩インタビューを見る <span class="btn-arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- EVENTS -->
+<section class="section">
+  <div class="section-inner">
+    <p class="section-label">Recruit Events</p>
+    <h2 class="section-title">採用イベント・説明会</h2>
+    <p class="section-desc">
+      人事グループの仕事や社風を直接体感できる機会をご用意しています。
+    </p>
+    <div class="events-layout">
+      <div>
+        <div class="event-item reveal">
+          <div class="event-date-box">
+            <p class="event-month">Mar</p>
+            <p class="event-day">15</p>
+            <p class="event-dow">土</p>
+          </div>
+          <div>
+            <span class="event-type-badge">オンライン</span>
+            <p class="event-title">2026年度 新卒採用 会社・人事グループ合同説明会</p>
+            <p class="event-detail">13:00〜15:30 ／ 定員50名<br>人事グループの仕事内容・キャリアパスを詳しく紹介</p>
+          </div>
+        </div>
+        <div class="event-item reveal">
+          <div class="event-date-box">
+            <p class="event-month">Mar</p>
+            <p class="event-day">22</p>
+            <p class="event-dow">土</p>
+          </div>
+          <div>
+            <span class="event-type-badge">対面</span>
+            <p class="event-title">人事グループ 1dayインターンシップ</p>
+            <p class="event-detail">10:00〜17:00 ／ 定員20名（本社開催）<br>実際の業務を体験できるリアルなプログラム</p>
+          </div>
+        </div>
+        <div class="event-item reveal">
+          <div class="event-date-box">
+            <p class="event-month">Apr</p>
+            <p class="event-day">5</p>
+            <p class="event-dow">土</p>
+          </div>
+          <div>
+            <span class="event-type-badge">オンライン</span>
+            <p class="event-title">OB・OG座談会（人事グループ先輩社員との交流）</p>
+            <p class="event-detail">14:00〜16:00 ／ 定員30名<br>少人数制で先輩社員とじっくり話せる機会</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="events-cta-box reveal">
+          <div>
+            <h3>エントリーから内定まで、<br>あなたに寄り添います。</h3>
+            <p>
+              書類選考→一次面接（人事）→最終面接（役員）という3ステップ。各ステップでフィードバックをお伝えし、成長の機会としてご活用いただけます。
+            </p>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:12px;">
+            <a href="apply.html" class="btn-accent">新卒エントリーはこちら →</a>
+            <a href="apply.html" style="display:inline-flex;align-items:center;gap:8px;font-size:12px;color:rgba(248,245,239,0.55);text-decoration:none;letter-spacing:0.12em;transition:color 0.25s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='rgba(248,245,239,0.55)'" href="apply.html">中途・既卒採用はこちら →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INNER PORTAL BANNER -->
+<div class="inner-banner">
+  <div class="inner-banner-inner">
+    <div class="inner-banner-text">
+      <h3>👋 在籍社員の方へ — 社内ポータルはこちら</h3>
+      <p>有給申請・残業申請・各種手続き・FAQ・規程集はこちらからアクセスできます</p>
+    </div>
+    <a href="portal.html" class="btn-primary" style="white-space:nowrap;">社内ポータルへ <span class="btn-arrow">→</span></a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <p class="footer-brand">Human Resources</p>
+      <p class="footer-brand-sub">人事グループ 採用サイト</p>
+      <p class="footer-desc">
+        人と組織の未来を共に描く。私たちは社員一人ひとりが最大限に輝ける環境づくりに取り組んでいます。
+      </p>
+    </div>
+    <div>
+      <p class="footer-nav-title">採用情報</p>
+      <ul class="footer-nav-links">
+        <li><a href="company.html">会社・人事紹介</a></li>
+        <li><a href="benefits.html">働く環境・制度</a></li>
+        <li><a href="interviews.html">先輩インタビュー</a></li>
+        <li><a href="events.html">採用イベント</a></li>
+        <li><a href="apply.html">応募フォーム</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-nav-title">社内ポータル</p>
+      <ul class="footer-nav-links">
+        <li><a href="portal.html">申請・手続き</a></li>
+        <li><a href="faq.html">よくある質問</a></li>
+        <li><a href="procedures.html">手続きフロー</a></li>
+        <li><a href="regulations.html">規程・制度</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-nav-title">その他</p>
+      <ul class="footer-nav-links">
+        <li><a href="#">プライバシーポリシー</a></li>
+        <li><a href="mailto:hr-recruit@company.jp">お問い合わせ</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Human Resources Group. All rights reserved.</span>
+    <span style="letter-spacing:0.2em;">HR · GROUP</span>
+  </div>
+</footer>
+
+<script>
+  // Reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+
+  reveals.forEach(el => observer.observe(el));
+
+  // Initial reveal for hero
+  document.querySelector('.hero .reveal').classList.add('visible');
+</script>
+
+</body>
+</html>

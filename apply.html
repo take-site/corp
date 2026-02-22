@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>応募フォーム | 人事グループ採用サイト</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;700&family=Noto+Sans+JP:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--ink:#1a1a2e;--cream:#f8f5ef;--warm:#ede8df;--accent:#c8a96e;--accent-light:#e8d5b0;--text:#3d3d52;--muted:#8585a0}
+html{scroll-behavior:smooth}
+body{font-family:'Noto Sans JP',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:72px;background:rgba(248,245,239,0.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(200,169,110,0.2)}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:500;color:var(--ink);letter-spacing:0.05em;text-decoration:none}
+.nav-logo span{font-size:11px;font-family:'Noto Sans JP',sans-serif;font-weight:300;display:block;letter-spacing:0.2em;color:var(--muted);margin-top:-2px}
+.nav-links{display:flex;gap:40px;list-style:none;align-items:center}
+.nav-links a{font-size:13px;font-weight:300;letter-spacing:0.12em;color:var(--text);text-decoration:none;transition:color 0.25s}
+.nav-links a:hover{color:var(--accent)}
+.btn-nav{background:var(--ink);color:var(--cream)!important;padding:10px 22px;font-size:12px!important}
+.btn-nav:hover{background:var(--accent)!important;color:var(--ink)!important}
+.page-header{padding:160px 80px 80px;background:var(--ink);position:relative;overflow:hidden}
+.page-header::after{content:'APPLY';position:absolute;bottom:-30px;right:40px;font-family:'Cormorant Garamond',serif;font-size:160px;font-weight:300;color:rgba(255,255,255,0.04);line-height:1;pointer-events:none}
+.page-header-inner{max-width:1200px;margin:0 auto;position:relative;z-index:2}
+.page-label{font-size:10px;letter-spacing:0.4em;color:var(--accent);text-transform:uppercase;margin-bottom:20px;display:flex;align-items:center;gap:12px}
+.page-label::before{content:'';width:24px;height:1px;background:var(--accent)}
+.page-title{font-family:'Noto Serif JP',serif;font-size:clamp(32px,4vw,56px);font-weight:300;color:var(--cream);letter-spacing:0.05em;line-height:1.4;margin-bottom:16px}
+.page-subtitle{font-size:15px;font-weight:300;color:rgba(248,245,239,0.55);line-height:1.9;letter-spacing:0.04em;max-width:560px}
+.breadcrumb{background:var(--warm);padding:16px 80px}
+.breadcrumb-inner{max-width:1200px;margin:0 auto;display:flex;gap:8px;align-items:center;font-size:12px;color:var(--muted)}
+.breadcrumb a{color:var(--muted);text-decoration:none}.breadcrumb a:hover{color:var(--accent)}
+
+/* Form layout */
+.apply-section{padding:100px 80px}
+.apply-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 2fr;gap:80px;align-items:start}
+
+/* Sidebar */
+.apply-sidebar{position:sticky;top:100px}
+.steps{display:flex;flex-direction:column;gap:0}
+.step{display:flex;gap:20px;align-items:flex-start;padding:24px 0;border-bottom:1px solid rgba(26,26,46,0.1)}
+.step:last-child{border-bottom:none}
+.step-num{width:36px;height:36px;border:1px solid var(--accent);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--accent);flex-shrink:0}
+.step.active .step-num{background:var(--accent);color:var(--ink)}
+.step-label{font-size:9px;letter-spacing:0.25em;color:var(--accent);text-transform:uppercase;margin-bottom:4px}
+.step-title{font-size:14px;font-weight:400;color:var(--ink);letter-spacing:0.04em}
+.step-note{font-size:11px;font-weight:300;color:var(--muted);margin-top:4px;line-height:1.6}
+
+.sidebar-note{background:var(--accent-light);padding:24px;margin-top:24px}
+.sidebar-note h4{font-size:13px;font-weight:500;color:var(--ink);margin-bottom:8px;letter-spacing:0.05em}
+.sidebar-note p{font-size:12px;font-weight:300;color:var(--text);line-height:1.8;letter-spacing:0.04em}
+
+/* Form */
+.apply-form{background:white;padding:56px}
+.form-section-title{font-family:'Noto Serif JP',serif;font-size:20px;font-weight:300;color:var(--ink);margin-bottom:32px;padding-bottom:16px;border-bottom:1px solid rgba(26,26,46,0.1);letter-spacing:0.05em}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:24px}
+.form-row.full{grid-template-columns:1fr}
+.form-group{display:flex;flex-direction:column;gap:8px}
+.form-label{font-size:12px;font-weight:500;color:var(--ink);letter-spacing:0.1em}
+.form-label .required{color:var(--accent);margin-left:4px;font-size:10px}
+.form-input,.form-select,.form-textarea{width:100%;padding:14px 16px;border:1px solid rgba(26,26,46,0.15);background:var(--cream);font-family:'Noto Sans JP',sans-serif;font-size:14px;font-weight:300;color:var(--text);letter-spacing:0.04em;transition:border-color 0.25s;outline:none}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--accent)}
+.form-textarea{resize:vertical;min-height:120px;line-height:1.8}
+.form-select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238585a0' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center}
+.form-hint{font-size:11px;color:var(--muted);letter-spacing:0.04em}
+.form-divider{border:none;border-top:1px solid rgba(26,26,46,0.08);margin:40px 0}
+.form-check-group{display:flex;flex-wrap:wrap;gap:12px}
+.form-check{display:flex;align-items:center;gap:8px;cursor:pointer}
+.form-check input{width:16px;height:16px;accent-color:var(--accent);cursor:pointer}
+.form-check span{font-size:13px;font-weight:300;color:var(--text);letter-spacing:0.04em}
+.privacy-box{background:var(--cream);border:1px solid rgba(26,26,46,0.1);padding:24px;font-size:12px;font-weight:300;color:var(--muted);line-height:1.9;letter-spacing:0.04em;max-height:120px;overflow-y:auto;margin-bottom:24px}
+.form-submit{display:flex;justify-content:center;margin-top:48px;flex-direction:column;align-items:center;gap:16px}
+.btn-submit{background:var(--ink);color:var(--cream);border:none;padding:20px 64px;font-size:14px;font-family:'Noto Sans JP',sans-serif;letter-spacing:0.2em;cursor:pointer;transition:background 0.3s;position:relative;overflow:hidden}
+.btn-submit::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background:var(--accent);transition:width 0.3s}
+.btn-submit:hover{background:#2d2d4a}.btn-submit:hover::after{width:100%}
+.form-submit-note{font-size:12px;color:var(--muted);letter-spacing:0.05em;text-align:center}
+
+footer{background:var(--ink);padding:80px;position:relative;overflow:hidden}
+footer::before{content:'HR';position:absolute;bottom:-40px;right:40px;font-family:'Cormorant Garamond',serif;font-size:240px;font-weight:300;color:rgba(255,255,255,0.03);line-height:1;pointer-events:none}
+.footer-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:64px}
+.footer-brand{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:500;color:var(--cream);margin-bottom:16px}
+.footer-brand-sub{font-size:11px;letter-spacing:0.2em;color:var(--muted);margin-bottom:24px}
+.footer-desc{font-size:12px;font-weight:300;color:rgba(248,245,239,0.45);line-height:1.9}
+.footer-nav-title{font-size:10px;letter-spacing:0.3em;color:var(--accent);text-transform:uppercase;margin-bottom:20px}
+.footer-nav-links{list-style:none}
+.footer-nav-links li{margin-bottom:12px}
+.footer-nav-links a{font-size:12px;font-weight:300;color:rgba(248,245,239,0.55);text-decoration:none;transition:color 0.25s}
+.footer-nav-links a:hover{color:var(--accent)}
+.footer-bottom{max-width:1200px;margin:48px auto 0;padding-top:24px;border-top:1px solid rgba(255,255,255,0.06);display:flex;justify-content:space-between;font-size:11px;color:rgba(248,245,239,0.3)}
+@media(max-width:900px){nav{padding:0 24px}.nav-links{display:none}.page-header{padding:120px 24px 60px}.breadcrumb{padding:14px 24px}.apply-section{padding:64px 24px}.apply-inner{grid-template-columns:1fr}.apply-sidebar{position:static}.apply-form{padding:32px 24px}.form-row{grid-template-columns:1fr}.footer-inner{grid-template-columns:1fr 1fr;gap:40px}footer{padding:60px 24px}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="hr-recruit-top.html" class="nav-logo">Human Resources<span>人事グループ 採用サイト</span></a>
+  <ul class="nav-links">
+    <li><a href="company.html">会社紹介</a></li>
+    <li><a href="benefits.html">働く環境</a></li>
+    <li><a href="interviews.html">先輩の声</a></li>
+    <li><a href="events.html">採用イベント</a></li>
+    <li><a href="portal.html" class="btn-nav">社員の方はこちら →</a></li>
+  </ul>
+</nav>
+<div class="page-header">
+  <div class="page-header-inner">
+    <p class="page-label">Entry Form</p>
+    <h1 class="page-title">応募・イベント申込フォーム</h1>
+    <p class="page-subtitle">書類選考後、1週間以内にメールでご連絡します。不明な点はお気軽にお問い合わせください。</p>
+  </div>
+</div>
+<div class="breadcrumb"><div class="breadcrumb-inner"><a href="hr-recruit-top.html">TOP</a><span> › </span><span>応募フォーム</span></div></div>
+
+<section class="apply-section">
+  <div class="apply-inner">
+    <div class="apply-sidebar">
+      <div class="steps">
+        <div class="step active">
+          <div class="step-num">1</div>
+          <div><p class="step-label">Current</p><p class="step-title">フォーム入力</p><p class="step-note">必要事項をご記入ください</p></div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div><p class="step-label">Next</p><p class="step-title">書類選考</p><p class="step-note">1週間以内に結果をご連絡</p></div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div><p class="step-label">Step 3</p><p class="step-title">Webテスト</p><p class="step-note">ご自宅でのオンライン受検</p></div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div><p class="step-label">Step 4</p><p class="step-title">一次面接</p><p class="step-note">オンライン 30〜45分</p></div>
+        </div>
+        <div class="step">
+          <div class="step-num">5</div>
+          <div><p class="step-label">Final</p><p class="step-title">最終面接・内定</p><p class="step-note">対面60分。内定後も丁寧にフォロー</p></div>
+        </div>
+      </div>
+      <div class="sidebar-note">
+        <h4>📞 お問い合わせ</h4>
+        <p>採用に関するご質問は<br><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="127a603f60777160677b6652717d7f62737c6b3c7862">[email&#160;protected]</a><br>または 03-XXXX-XXXX まで<br>（平日 10:00〜18:00）</p>
+      </div>
+    </div>
+
+    <div class="apply-form">
+      <h2 class="form-section-title">01 — 応募区分</h2>
+      <div class="form-row full" style="margin-bottom:32px">
+        <div class="form-group">
+          <p class="form-label">応募種別 <span class="required">必須</span></p>
+          <div class="form-check-group">
+            <label class="form-check"><input type="radio" name="type" value="新卒"> <span>新卒採用（2027年卒）</span></label>
+            <label class="form-check"><input type="radio" name="type" value="既卒"> <span>既卒・第二新卒</span></label>
+            <label class="form-check"><input type="radio" name="type" value="中途"> <span>中途採用</span></label>
+            <label class="form-check"><input type="radio" name="type" value="イベント"> <span>イベント申込のみ</span></label>
+          </div>
+        </div>
+      </div>
+
+      <hr class="form-divider">
+      <h2 class="form-section-title">02 — 基本情報</h2>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">姓 <span class="required">必須</span></label>
+          <input type="text" class="form-input" placeholder="山田">
+        </div>
+        <div class="form-group">
+          <label class="form-label">名 <span class="required">必須</span></label>
+          <input type="text" class="form-input" placeholder="太郎">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">姓（フリガナ）<span class="required">必須</span></label>
+          <input type="text" class="form-input" placeholder="ヤマダ">
+        </div>
+        <div class="form-group">
+          <label class="form-label">名（フリガナ）<span class="required">必須</span></label>
+          <input type="text" class="form-input" placeholder="タロウ">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">メールアドレス <span class="required">必須</span></label>
+          <input type="email" class="form-input" placeholder="example@email.com">
+          <p class="form-hint">選考結果はこちらにお送りします</p>
+        </div>
+        <div class="form-group">
+          <label class="form-label">電話番号 <span class="required">必須</span></label>
+          <input type="tel" class="form-input" placeholder="090-0000-0000">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">最終学歴 <span class="required">必須</span></label>
+          <select class="form-select form-input">
+            <option value="">選択してください</option>
+            <option>大学院（修士）</option>
+            <option>大学院（博士）</option>
+            <option>大学</option>
+            <option>短期大学</option>
+            <option>専門学校</option>
+            <option>高等専門学校</option>
+            <option>高等学校</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">卒業（予定）年月</label>
+          <input type="text" class="form-input" placeholder="2027年3月">
+        </div>
+      </div>
+
+      <hr class="form-divider">
+      <h2 class="form-section-title">03 — 希望・自己PR</h2>
+      <div class="form-row full">
+        <div class="form-group">
+          <label class="form-label">希望職種・チーム</label>
+          <div class="form-check-group">
+            <label class="form-check"><input type="checkbox" name="team"> <span>採用チーム</span></label>
+            <label class="form-check"><input type="checkbox" name="team"> <span>人材育成チーム</span></label>
+            <label class="form-check"><input type="checkbox" name="team"> <span>労務・制度チーム</span></label>
+            <label class="form-check"><input type="checkbox" name="team"> <span>組織開発・DE&Iチーム</span></label>
+            <label class="form-check"><input type="checkbox" name="team"> <span>どこでも可</span></label>
+          </div>
+        </div>
+      </div>
+      <div class="form-row full" style="margin-top:24px">
+        <div class="form-group">
+          <label class="form-label">志望動機 <span class="required">必須</span></label>
+          <textarea class="form-textarea" placeholder="当グループへの志望動機をご記入ください（300字以上）" style="min-height:160px"></textarea>
+        </div>
+      </div>
+      <div class="form-row full">
+        <div class="form-group">
+          <label class="form-label">自己PR <span class="required">必須</span></label>
+          <textarea class="form-textarea" placeholder="あなたの強みや経験をご記入ください（300字以上）" style="min-height:160px"></textarea>
+        </div>
+      </div>
+      <div class="form-row full">
+        <div class="form-group">
+          <label class="form-label">参加希望イベント（任意）</label>
+          <select class="form-select form-input">
+            <option value="">特になし</option>
+            <option>3/15 合同説明会（オンライン）</option>
+            <option>3/22 1dayインターンシップ（対面）</option>
+            <option>4/5 OB・OG座談会（オンライン）</option>
+            <option>4/19 業務紹介セミナー（ハイブリッド）</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row full">
+        <div class="form-group">
+          <label class="form-label">その他メッセージ（任意）</label>
+          <textarea class="form-textarea" placeholder="ご質問・ご要望などがあればご記入ください"></textarea>
+        </div>
+      </div>
+
+      <hr class="form-divider">
+      <h2 class="form-section-title">04 — 個人情報の取り扱い</h2>
+      <div class="privacy-box">
+        ご記入いただいた個人情報は、採用選考および採用に関する連絡のみに使用いたします。第三者への提供、採用目的以外の使用は一切行いません。個人情報の取り扱いについての詳細は、当社プライバシーポリシーをご確認ください。ご提供いただいた情報は、選考終了後2年間保管の上、適切に廃棄いたします。個人情報の開示・訂正・削除のご請求は、採用担当（<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="335b411e41565041465a4773505c5e43525d4a1d5943">[email&#160;protected]</a>）までご連絡ください。
+      </div>
+      <label class="form-check"><input type="checkbox" required> <span style="font-size:13px;color:var(--text)">個人情報の取り扱いに同意します <span style="color:var(--accent)">（必須）</span></span></label>
+
+      <div class="form-submit">
+        <button class="btn-submit" onclick="handleSubmit(event)">確認画面へ進む →</button>
+        <p class="form-submit-note">送信後、確認メールが自動送信されます</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div><p class="footer-brand">Human Resources</p><p class="footer-brand-sub">人事グループ 採用サイト</p><p class="footer-desc">人と組織の未来を共に描く。</p></div>
+    <div><p class="footer-nav-title">採用情報</p><ul class="footer-nav-links"><li><a href="company.html">会社・人事紹介</a></li><li><a href="benefits.html">働く環境・制度</a></li><li><a href="interviews.html">先輩インタビュー</a></li><li><a href="events.html">採用イベント</a></li></ul></div>
+    <div><p class="footer-nav-title">社内ポータル</p><ul class="footer-nav-links"><li><a href="portal.html">申請・手続き</a></li><li><a href="faq.html">よくある質問</a></li><li><a href="procedures.html">手続きフロー</a></li><li><a href="regulations.html">規程・制度</a></li></ul></div>
+    <div><p class="footer-nav-title">その他</p><ul class="footer-nav-links"><li><a href="#">プライバシーポリシー</a></li><li><a href="mailto:hr-recruit@company.jp">お問い合わせ</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><span>© 2026 Human Resources Group.</span><span>HR · GROUP</span></div>
+</footer>
+<script data-cfasync="false" src="/cdn-cgi/
