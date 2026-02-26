@@ -196,15 +196,27 @@
     position: absolute;
     inset: 0;
     background: linear-gradient(135deg, var(--ink) 0%, #2a2a4a 50%, #1a2540 100%);
+    background-image: url(img/back.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  .hero-right-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(26,26,46,0.75) 0%, rgba(42,42,74,0.6) 50%, rgba(26,37,64,0.85) 100%);
+    pointer-events: none;
   }
   .hero-right-pattern {
     position: absolute;
     inset: 0;
-    opacity: 0.07;
+    opacity: 0.06;
     background-image:
       repeating-linear-gradient(45deg, #fff 0, #fff 1px, transparent 0, transparent 50%),
       repeating-linear-gradient(-45deg, #fff 0, #fff 1px, transparent 0, transparent 50%);
     background-size: 30px 30px;
+    pointer-events: none;
   }
   .hero-right-content {
     position: relative;
@@ -220,7 +232,8 @@
     font-size: 52px;
     font-weight: 300;
     font-style: italic;
-    color: rgba(255,255,255,0.15);
+    color: rgba(248,245,239,0.92);
+    text-shadow: 0 2px 20px rgba(0,0,0,0.4);
     line-height: 1.1;
     margin-bottom: 48px;
     letter-spacing: -0.02em;
@@ -239,12 +252,14 @@
     font-size: 36px;
     font-weight: 500;
     color: var(--accent);
+    text-shadow: 0 1px 12px rgba(0,0,0,0.3);
     letter-spacing: -0.02em;
     line-height: 1;
   }
   .hero-stat-label {
     font-size: 11px;
-    color: rgba(255,255,255,0.5);
+    color: rgba(248,245,239,0.75);
+    text-shadow: 0 1px 8px rgba(0,0,0,0.3);
     letter-spacing: 0.1em;
     margin-top: 6px;
     font-weight: 300;
