@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>プライバシーポリシー | 人事グループ採用サイト</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;700&family=Noto+Sans+JP:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--ink:#1a1a2e;--ink-soft:#2d2d4a;--cream:#f8f5ef;--warm:#ede8df;--accent:#c8a96e;--accent-light:#e8d5b0;--text:#3d3d52;--muted:#8585a0}
+html{scroll-behavior:smooth}
+body{font-family:'Noto Sans JP',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:72px;background:rgba(248,245,239,0.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(200,169,110,0.2)}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:500;color:var(--ink);letter-spacing:0.05em;text-decoration:none}
+.nav-logo span{font-size:11px;font-family:'Noto Sans JP',sans-serif;font-weight:300;display:block;letter-spacing:0.2em;color:var(--muted);margin-top:-2px}
+.nav-links{display:flex;gap:40px;list-style:none;align-items:center}
+.nav-links a{font-size:13px;font-weight:300;letter-spacing:0.12em;color:var(--text);text-decoration:none;transition:color 0.25s}
+.nav-links a:hover,.nav-links a.active{color:var(--accent)}
+.btn-nav{background:var(--ink);color:var(--cream)!important;padding:10px 22px;font-size:12px!important;letter-spacing:0.15em!important;transition:background 0.25s!important}
+.btn-nav:hover{background:var(--accent)!important;color:var(--ink)!important}
+
+.page-header{padding:160px 80px 80px;background:var(--ink);position:relative;overflow:hidden}
+.page-header::after{content:'PRIVACY';position:absolute;bottom:-30px;right:40px;font-family:'Cormorant Garamond',serif;font-size:160px;font-weight:300;color:rgba(255,255,255,0.04);line-height:1;pointer-events:none}
+.page-header-inner{max-width:1200px;margin:0 auto;position:relative;z-index:2}
+.page-label{font-size:10px;letter-spacing:0.4em;color:var(--accent);text-transform:uppercase;margin-bottom:20px;display:flex;align-items:center;gap:12px}
+.page-label::before{content:'';width:24px;height:1px;background:var(--accent)}
+.page-title{font-family:'Noto Serif JP',serif;font-size:clamp(32px,4vw,56px);font-weight:300;color:var(--cream);letter-spacing:0.05em;line-height:1.4;margin-bottom:16px}
+.page-subtitle{font-size:15px;font-weight:300;color:rgba(248,245,239,0.55);line-height:1.9;letter-spacing:0.04em;max-width:640px}
+
+.breadcrumb{background:var(--warm);padding:16px 80px}
+.breadcrumb-inner{max-width:1200px;margin:0 auto;display:flex;gap:8px;align-items:center;font-size:12px;color:var(--muted);letter-spacing:0.08em}
+.breadcrumb a{color:var(--muted);text-decoration:none}.breadcrumb a:hover{color:var(--accent)}
+
+.section{padding:100px 80px}
+.section-inner{max-width:1200px;margin:0 auto}
+.privacy-body{font-size:14px;font-weight:300;color:var(--text);line-height:2.2;letter-spacing:0.04em}
+.privacy-body h3{font-family:'Noto Serif JP',serif;font-size:18px;font-weight:400;color:var(--ink);margin:40px 0 16px;padding-bottom:8px;border-bottom:1px solid rgba(200,169,110,0.3);letter-spacing:0.05em}
+.privacy-body h3:first-child{margin-top:0}
+.privacy-body p{margin-bottom:16px}
+.privacy-body ol,.privacy-body ul{padding-left:24px;margin-bottom:16px}
+.privacy-body li{margin-bottom:8px;line-height:1.9}
+.privacy-contact{background:var(--warm);padding:24px 32px;margin-top:32px;font-size:13px}
+.privacy-contact a{color:var(--accent);text-decoration:none}
+.privacy-contact a:hover{text-decoration:underline}
+.privacy-updated{font-size:12px;color:var(--muted);margin-top:48px;letter-spacing:0.06em}
+
+footer{background:var(--ink);padding:80px;position:relative;overflow:hidden}
+footer::before{content:'HR';position:absolute;bottom:-40px;right:40px;font-family:'Cormorant Garamond',serif;font-size:240px;font-weight:300;color:rgba(255,255,255,0.03);line-height:1;pointer-events:none}
+.footer-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:64px}
+.footer-brand{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:500;color:var(--cream);margin-bottom:16px;letter-spacing:0.05em}
+.footer-brand-sub{font-size:11px;letter-spacing:0.2em;color:var(--muted);margin-bottom:24px}
+.footer-desc{font-size:12px;font-weight:300;color:rgba(248,245,239,0.45);line-height:1.9;letter-spacing:0.04em}
+.footer-nav-title{font-size:10px;letter-spacing:0.3em;color:var(--accent);text-transform:uppercase;margin-bottom:20px}
+.footer-nav-links{list-style:none}
+.footer-nav-links li{margin-bottom:12px}
+.footer-nav-links a{font-size:12px;font-weight:300;color:rgba(248,245,239,0.55);text-decoration:none;letter-spacing:0.06em;transition:color 0.25s}
+.footer-nav-links a:hover{color:var(--accent)}
+.footer-bottom{max-width:1200px;margin:48px auto 0;padding-top:24px;border-top:1px solid rgba(255,255,255,0.06);display:flex;justify-content:space-between;align-items:center;font-size:11px;color:rgba(248,245,239,0.3);letter-spacing:0.1em}
+
+@media(max-width:900px){nav{padding:0 24px}.nav-links{display:none}.page-header{padding:120px 24px 60px}.breadcrumb{padding:14px 24px}.section{padding:64px 24px}.footer-inner{grid-template-columns:1fr 1fr;gap:40px}footer{padding:60px 24px}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">Human Resources<span>人事グループ 採用サイト</span></a>
+  <ul class="nav-links">
+    <li><a href="company.html">会社紹介</a></li>
+    <li><a href="benefits.html">働く環境</a></li>
+    <li><a href="interviews.html">先輩の声</a></li>
+    <li><a href="events.html">採用イベント</a></li>
+    <li><a href="portal.html" class="btn-nav">社員の方はこちら →</a></li>
+  </ul>
+</nav>
+
+<div class="page-header">
+  <div class="page-header-inner">
+    <p class="page-label">Privacy Policy</p>
+    <h1 class="page-title">プライバシーポリシー</h1>
+    <p class="page-subtitle">人事グループ採用サイトでは、お客様の個人情報の保護に努めています。以下のとおり取り扱いを定めます。</p>
+  </div>
+</div>
+<div class="breadcrumb">
+  <div class="breadcrumb-inner">
+    <a href="index.html">TOP</a><span class="breadcrumb-sep">›</span>
+    <span>プライバシーポリシー</span>
+  </div>
+</div>
+
+<section class="section">
+  <div class="section-inner">
+    <div class="privacy-body">
+      <h3>1. 個人情報の定義</h3>
+      <p>本ポリシーにおいて「個人情報」とは、生存する個人に関する情報であって、氏名・生年月日・連絡先・メールアドレス・履歴書・職務経歴書等、当該情報に含まれる氏名その他の記述等により特定の個人を識別することができるものをいいます。</p>
+
+      <h3>2. 収集する情報と利用目的</h3>
+      <p>当社は、採用選考・採用に関する連絡・入社手続き・採用統計の目的において、以下の情報を収集することがあります。</p>
+      <ul>
+        <li>氏名、ふりがな、生年月日、性別</li>
+        <li>住所、電話番号、メールアドレス</li>
+        <li>学歴、職歴、資格、志望動機等（応募フォーム・履歴書・職務経歴書に記載された内容）</li>
+        <li>面接・選考過程で得た評価・記録</li>
+      </ul>
+      <p>これらは採用選考および採用に関する連絡にのみ使用し、目的外利用は行いません。</p>
+
+      <h3>3. 第三者への提供</h3>
+      <p>ご提供いただいた個人情報を、採用目的以外で第三者に提供することはありません。法令に基づく開示請求がある場合を除き、ご本人の同意なく開示・提供することはありません。</p>
+
+      <h3>4. 安全管理</h3>
+      <p>個人情報の漏えい・滅失・毀損の防止のため、アクセス制限・担当者教育・記録の保管期間の設定等、適切な安全管理措置を講じます。</p>
+
+      <h3>5. 保管期間と廃棄</h3>
+      <p>採用選考にご提出いただいた個人情報は、選考終了後2年間を目安に保管したのち、適切に廃棄いたします。採用に至った方の情報は、人事労務管理に必要な範囲で保管します。</p>
+
+      <h3>6. 開示・訂正・削除等のご請求</h3>
+      <p>ご本人から、個人情報の開示・訂正・削除・利用停止等のご請求があった場合、ご本人確認のうえ、法令に沿って対応いたします。お問い合わせは下記採用担当までご連絡ください。</p>
+
+      <div class="privacy-contact">
+        <strong>個人情報に関するお問い合わせ</strong><br>
+        人事グループ 採用担当<br>
+        <a href="mailto:hr-recruit@company.jp">hr-recruit@company.jp</a>
+      </div>
+
+      <p class="privacy-updated">制定日：2026年1月1日</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <p class="footer-brand">Human Resources</p>
+      <p class="footer-brand-sub">人事グループ 採用サイト</p>
+      <p class="footer-desc">人と組織の未来を共に描く。社員一人ひとりが最大限に輝ける環境づくりに取り組んでいます。</p>
+    </div>
+    <div>
+      <p class="footer-nav-title">採用情報</p>
+      <ul class="footer-nav-links">
+        <li><a href="company.html">会社・人事紹介</a></li>
+        <li><a href="benefits.html">働く環境・制度</a></li>
+        <li><a href="interviews.html">先輩インタビュー</a></li>
+        <li><a href="events.html">採用イベント</a></li>
+        <li><a href="apply.html">応募フォーム</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-nav-title">社内ポータル</p>
+      <ul class="footer-nav-links">
+        <li><a href="portal.html">申請・手続き</a></li>
+        <li><a href="faq.html">よくある質問</a></li>
+        <li><a href="procedures.html">手続きフロー</a></li>
+        <li><a href="regulations.html">規程・制度</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-nav-title">その他</p>
+      <ul class="footer-nav-links">
+        <li><a href="privacy.html">プライバシーポリシー</a></li>
+        <li><a href="mailto:hr-recruit@company.jp">お問い合わせ</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Human Resources Group. All rights reserved.</span>
+    <span style="letter-spacing:0.2em">HR · GROUP</span>
+  </div>
+</footer>
+</body>
+</html>

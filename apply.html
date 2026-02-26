@@ -68,6 +68,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .form-check input{width:16px;height:16px;accent-color:var(--accent);cursor:pointer}
 .form-check span{font-size:13px;font-weight:300;color:var(--text);letter-spacing:0.04em}
 .privacy-box{background:var(--cream);border:1px solid rgba(26,26,46,0.1);padding:24px;font-size:12px;font-weight:300;color:var(--muted);line-height:1.9;letter-spacing:0.04em;max-height:120px;overflow-y:auto;margin-bottom:24px}
+.privacy-box a{color:var(--accent);text-decoration:none}
+.privacy-box a:hover{text-decoration:underline}
 .form-submit{display:flex;justify-content:center;margin-top:48px;flex-direction:column;align-items:center;gap:16px}
 .btn-submit{background:var(--ink);color:var(--cream);border:none;padding:20px 64px;font-size:14px;font-family:'Noto Sans JP',sans-serif;letter-spacing:0.2em;cursor:pointer;transition:background 0.3s;position:relative;overflow:hidden}
 .btn-submit::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background:var(--accent);transition:width 0.3s}
@@ -255,7 +257,7 @@ footer::before{content:'HR';position:absolute;bottom:-40px;right:40px;font-famil
       <hr class="form-divider">
       <h2 class="form-section-title">04 — 個人情報の取り扱い</h2>
       <div class="privacy-box">
-        ご記入いただいた個人情報は、採用選考および採用に関する連絡のみに使用いたします。第三者への提供、採用目的以外の使用は一切行いません。個人情報の取り扱いについての詳細は、当社プライバシーポリシーをご確認ください。ご提供いただいた情報は、選考終了後2年間保管の上、適切に廃棄いたします。個人情報の開示・訂正・削除のご請求は、採用担当（<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="335b411e41565041465a4773505c5e43525d4a1d5943">[email&#160;protected]</a>）までご連絡ください。
+        ご記入いただいた個人情報は、採用選考および採用に関する連絡のみに使用いたします。第三者への提供、採用目的以外の使用は一切行いません。個人情報の取り扱いについての詳細は、<a href="privacy.html">当社プライバシーポリシー</a>をご確認ください。ご提供いただいた情報は、選考終了後2年間保管の上、適切に廃棄いたします。個人情報の開示・訂正・削除のご請求は、採用担当（<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="335b411e41565041465a4773505c5e43525d4a1d5943">[email&#160;protected]</a>）までご連絡ください。
       </div>
       <label class="form-check"><input type="checkbox" required> <span style="font-size:13px;color:var(--text)">個人情報の取り扱いに同意します <span style="color:var(--accent)">（必須）</span></span></label>
 
@@ -272,7 +274,7 @@ footer::before{content:'HR';position:absolute;bottom:-40px;right:40px;font-famil
     <div><p class="footer-brand">Human Resources</p><p class="footer-brand-sub">人事グループ 採用サイト</p><p class="footer-desc">人と組織の未来を共に描く。</p></div>
     <div><p class="footer-nav-title">採用情報</p><ul class="footer-nav-links"><li><a href="company.html">会社・人事紹介</a></li><li><a href="benefits.html">働く環境・制度</a></li><li><a href="interviews.html">先輩インタビュー</a></li><li><a href="events.html">採用イベント</a></li></ul></div>
     <div><p class="footer-nav-title">社内ポータル</p><ul class="footer-nav-links"><li><a href="portal.html">申請・手続き</a></li><li><a href="faq.html">よくある質問</a></li><li><a href="procedures.html">手続きフロー</a></li><li><a href="regulations.html">規程・制度</a></li></ul></div>
-    <div><p class="footer-nav-title">その他</p><ul class="footer-nav-links"><li><a href="#">プライバシーポリシー</a></li><li><a href="mailto:hr-recruit@company.jp">お問い合わせ</a></li></ul></div>
+    <div><p class="footer-nav-title">その他</p><ul class="footer-nav-links"><li><a href="privacy.html">プライバシーポリシー</a></li><li><a href="mailto:hr-recruit@company.jp">お問い合わせ</a></li></ul></div>
   </div>
   <div class="footer-bottom"><span>© 2026 Human Resources Group.</span><span>HR · GROUP</span></div>
 </footer>
