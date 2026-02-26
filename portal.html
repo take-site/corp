@@ -22,22 +22,26 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--cream);color:var(--t
 .btn-recruit{border:1px solid rgba(200,169,110,0.4);color:var(--accent)!important;padding:8px 20px;font-size:12px!important}
 .btn-recruit:hover{background:var(--accent)!important;color:var(--ink)!important;border-color:var(--accent)!important}
 
-/* Hero band */
-.portal-hero{background:var(--ink);padding:120px 80px 64px;position:relative;overflow:hidden}
+/* Hero band - 検索ボックスを内蔵 */
+.portal-hero{background:var(--ink);padding:120px 80px 48px;position:relative;overflow:hidden}
 .portal-hero::before{content:'社内ポータル';position:absolute;top:-20px;right:-20px;font-family:'Noto Serif JP',serif;font-size:160px;font-weight:300;color:rgba(255,255,255,0.025);pointer-events:none;line-height:1;white-space:nowrap}
-.portal-hero-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr auto;align-items:end;gap:48px;position:relative;z-index:2}
+.portal-hero-inner{max-width:1200px;margin:0 auto;position:relative;z-index:2}
+.portal-hero-top{display:grid;grid-template-columns:1fr auto;align-items:end;gap:48px;margin-bottom:40px}
 .portal-greeting{font-size:11px;letter-spacing:0.3em;color:var(--accent);text-transform:uppercase;margin-bottom:12px}
 .portal-hero-title{font-family:'Noto Serif JP',serif;font-size:clamp(28px,3.5vw,46px);font-weight:300;color:var(--cream);letter-spacing:0.05em;line-height:1.4;margin-bottom:12px}
 .portal-hero-sub{font-size:14px;font-weight:300;color:rgba(248,245,239,0.5);letter-spacing:0.05em;line-height:1.8}
 .portal-date{text-align:right;color:rgba(248,245,239,0.4);font-size:12px;letter-spacing:0.1em;line-height:1.8}
 
-/* Search */
-.portal-search{background:rgba(255,255,255,0.06);backdrop-filter:blur(8px);padding:32px 80px;border-top:1px solid rgba(255,255,255,0.05)}
+/* Search - ヒーロー内で上に配置 */
+.portal-search{background:transparent;padding:0}
 .portal-search-inner{max-width:1200px;margin:0 auto}
 .search-box{display:flex;gap:0}
-.search-input{flex:1;padding:16px 24px;background:rgba(255,255,255,0.08);border:1px solid rgba(200,169,110,0.25);border-right:none;font-family:'Noto Sans JP',sans-serif;font-size:14px;color:var(--cream);letter-spacing:0.05em;outline:none}
-.search-input::placeholder{color:rgba(248,245,239,0.35)}
-.search-input:focus{border-color:var(--accent);background:rgba(255,255,255,0.12)}
+.search-input{flex:1;padding:16px 24px;background:rgba(26,26,46,0.5);border:1px solid rgba(200,169,110,0.4);border-right:none;font-family:'Noto Sans JP',sans-serif;font-size:14px;color:#ffffff;letter-spacing:0.05em;outline:none;-webkit-text-fill-color:#ffffff}
+.search-input::placeholder{color:rgba(255,255,255,0.85)}
+.search-input::-webkit-input-placeholder{color:rgba(255,255,255,0.85);-webkit-text-fill-color:rgba(255,255,255,0.85)}
+.search-input::-moz-placeholder{color:rgba(255,255,255,0.85)}
+.search-input:focus{border-color:var(--accent);background:rgba(26,26,46,0.7);color:#ffffff;-webkit-text-fill-color:#ffffff}
+.search-input:-webkit-autofill,.search-input:-webkit-autofill:hover,.search-input:-webkit-autofill:focus{background:rgba(26,26,46,0.6);-webkit-text-fill-color:#ffffff;color:#ffffff}
 .search-btn{background:var(--accent);border:none;padding:0 28px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:opacity 0.25s}
 .search-btn:hover{opacity:0.85}
 .search-tags{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
@@ -100,10 +104,12 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--cream);color:var(--t
 
 .reveal{opacity:0;transform:translateY(28px);transition:opacity 0.8s ease,transform 0.8s ease}
 .reveal.visible{opacity:1;transform:none}
+/* ページ読み込み時からすべて表示 */
+.portal-page .reveal{opacity:1;transform:none}
 @media(max-width:900px){.portal-nav{padding:0 24px}.portal-nav-links{display:none}.portal-hero{padding:100px 24px 48px}.portal-search{padding:24px}.action-section{padding:48px 24px}.action-grid{grid-template-columns:1fr 1fr}.quick-grid{grid-template-columns:1fr}.updates-bg{padding:48px 24px}.updates-inner{grid-template-columns:1fr}}
 </style>
 </head>
-<body>
+<body class="portal-page">
 <nav class="portal-nav">
   <a href="portal.html" class="portal-nav-logo">社内ポータル<span>人事グループ 内部向けサイト</span></a>
   <ul class="portal-nav-links">
@@ -117,34 +123,35 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--cream);color:var(--t
 
 <div class="portal-hero">
   <div class="portal-hero-inner">
-    <div>
-      <p class="portal-greeting">Internal Portal — 人事グループ</p>
-      <h1 class="portal-hero-title">何をしたいですか？<br>必要な手続きをすぐに見つけましょう。</h1>
-      <p class="portal-hero-sub">有給申請・残業申請・各種届出・FAQ・規程集</p>
+    <div class="portal-hero-top">
+      <div>
+        <p class="portal-greeting">Internal Portal — 人事グループ</p>
+        <h1 class="portal-hero-title">何をしたいですか？<br>必要な手続きをすぐに見つけましょう。</h1>
+        <p class="portal-hero-sub">有給申請・残業申請・各種届出・FAQ・規程集</p>
+      </div>
+      <div class="portal-date">
+        <p style="font-size:20px;font-family:'Cormorant Garamond',serif;color:rgba(248,245,239,0.7)">2026</p>
+        <p>February 21 (Sat)</p>
+        <p style="color:var(--accent);margin-top:4px">人事担当者在席中</p>
+      </div>
     </div>
-    <div class="portal-date">
-      <p style="font-size:20px;font-family:'Cormorant Garamond',serif;color:rgba(248,245,239,0.7)">2026</p>
-      <p>February 21 (Sat)</p>
-      <p style="color:var(--accent);margin-top:4px">人事担当者在席中</p>
-    </div>
-  </div>
-</div>
-
-<div class="portal-search">
-  <div class="portal-search-inner">
-    <div class="search-box">
-      <input type="text" class="search-input" id="portal-search-input" placeholder="手続き・制度名・キーワードで検索…（例：有給、産休、引越し）" autocomplete="off">
-      <button type="button" class="search-btn" id="portal-search-btn" aria-label="検索">🔍</button>
-    </div>
-    <p class="portal-search-no-result" id="portal-no-result" style="display:none;text-align:center;color:rgba(248,245,239,0.5);font-size:14px;margin-top:16px;">該当する項目がありません。別のキーワードでお試しください。</p>
-    <div class="search-tags">
-      <span class="search-tag" data-keyword="有給">有給申請</span>
-      <span class="search-tag" data-keyword="残業">残業申請</span>
-      <span class="search-tag" data-keyword="育休">育休・産休</span>
-      <span class="search-tag" data-keyword="結婚">結婚手続き</span>
-      <span class="search-tag" data-keyword="引越し">引越し手続き</span>
-      <span class="search-tag" data-keyword="福利厚生">福利厚生申請</span>
-      <span class="search-tag" data-keyword="給与">給与明細</span>
+    <div class="portal-search">
+      <div class="portal-search-inner">
+        <div class="search-box">
+          <input type="text" class="search-input" id="portal-search-input" placeholder="手続き・制度名・キーワードで検索…（例：有給、産休、引越し）" autocomplete="off">
+          <button type="button" class="search-btn" id="portal-search-btn" aria-label="検索">🔍</button>
+        </div>
+        <p class="portal-search-no-result" id="portal-no-result" style="display:none;text-align:center;color:rgba(255,255,255,0.8);font-size:14px;margin-top:12px;">該当する項目がありません。別のキーワードでお試しください。</p>
+        <div class="search-tags">
+          <span class="search-tag" data-keyword="有給">有給申請</span>
+          <span class="search-tag" data-keyword="残業">残業申請</span>
+          <span class="search-tag" data-keyword="育休">育休・産休</span>
+          <span class="search-tag" data-keyword="結婚">結婚手続き</span>
+          <span class="search-tag" data-keyword="引越し">引越し手続き</span>
+          <span class="search-tag" data-keyword="福利厚生">福利厚生申請</span>
+          <span class="search-tag" data-keyword="給与">給与明細</span>
+        </div>
+      </div>
     </div>
   </div>
 </div>
