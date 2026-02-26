@@ -62,9 +62,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 
 /* HR team */
 .team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:64px}
-.team-card{background:var(--warm);padding:36px 28px;transition:background 0.3s}
+.team-card{display:block;background:var(--warm);padding:36px 28px;transition:background 0.3s;text-decoration:none;color:inherit}
 .team-card:hover{background:var(--accent-light)}
-.team-avatar{width:64px;height:64px;background:var(--ink);border-radius:50%;margin-bottom:20px;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--accent)}
+.team-avatar{width:64px;height:64px;border-radius:50%;margin-bottom:20px;overflow:hidden;background:var(--ink);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--accent)}
+.team-avatar img{width:100%;height:100%;object-fit:cover}
 .team-role{font-size:10px;letter-spacing:0.25em;color:var(--accent);margin-bottom:8px;text-transform:uppercase}
 .team-name{font-family:'Noto Serif JP',serif;font-size:17px;font-weight:400;color:var(--ink);margin-bottom:12px;letter-spacing:0.05em}
 .team-bio{font-size:12px;font-weight:300;color:var(--muted);line-height:1.9;letter-spacing:0.03em}
@@ -92,7 +93,14 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .cta-band{background:var(--accent-light);padding:80px}
 .cta-band-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:48px}
 .cta-band h2{font-family:'Noto Serif JP',serif;font-size:28px;font-weight:300;color:var(--ink);letter-spacing:0.05em;line-height:1.6}
-.cta-band-btns{display:flex;gap:16px;flex-shrink:0}
+.cta-band-btns{display:flex;gap:20px;flex-shrink:0;flex-wrap:wrap}
+.cta-band-btns .btn-primary,.cta-band-btns .btn-secondary{display:inline-flex;align-items:center;gap:10px;padding:18px 36px;font-size:14px;font-weight:400;letter-spacing:0.12em;text-decoration:none;transition:all 0.3s;border-radius:2px}
+.cta-band-btns .btn-primary{background:var(--ink);color:var(--cream)}
+.cta-band-btns .btn-primary:hover{background:var(--ink-soft);color:var(--cream)}
+.cta-band-btns .btn-secondary{border:2px solid var(--ink);color:var(--ink);background:transparent}
+.cta-band-btns .btn-secondary:hover{background:var(--ink);color:var(--cream)}
+.cta-band-btns .btn-primary span,.cta-band-btns .btn-secondary span{display:inline-block;transition:transform 0.25s}
+.cta-band-btns .btn-primary:hover span,.cta-band-btns .btn-secondary:hover span{transform:translateX(4px)}
 
 footer{background:var(--ink);padding:80px;position:relative;overflow:hidden}
 footer::before{content:'HR';position:absolute;bottom:-40px;right:40px;font-family:'Cormorant Garamond',serif;font-size:240px;font-weight:300;color:rgba(255,255,255,0.03);line-height:1;pointer-events:none}
@@ -233,30 +241,30 @@ footer::before{content:'HR';position:absolute;bottom:-40px;right:40px;font-famil
     <h2 class="section-title">人事グループの仲間たち</h2>
     <p class="section-desc">採用・育成・労務・組織開発の4チームが連携し、会社と社員を支えています。</p>
     <div class="team-grid">
-      <div class="team-card reveal">
-        <div class="team-avatar">A</div>
+      <a href="interview-sato.html" class="team-card reveal">
+        <div class="team-avatar"><img src="img/sato.png" alt=""></div>
         <p class="team-role">採用チームリーダー</p>
         <p class="team-name">佐藤 健一</p>
         <p class="team-bio">新卒採用を10年担当。「採用は会社の未来への投資」をモットーに年間200名超の採用を指揮。</p>
-      </div>
-      <div class="team-card reveal">
-        <div class="team-avatar">B</div>
+      </a>
+      <a href="interview-yamamoto.html" class="team-card reveal">
+        <div class="team-avatar"><img src="img/yamamoto.png" alt=""></div>
         <p class="team-role">人材育成チームリーダー</p>
         <p class="team-name">山本 花子</p>
         <p class="team-bio">研修体系の設計から1on1コーチングまで。「人が育つ文化」の醸成に注力する8年のキャリア。</p>
-      </div>
-      <div class="team-card reveal">
-        <div class="team-avatar">C</div>
+      </a>
+      <a href="interview-takahashi.html" class="team-card reveal">
+        <div class="team-avatar"><img src="img/takahashi.png" alt=""></div>
         <p class="team-role">労務・制度チームリーダー</p>
         <p class="team-name">高橋 次郎</p>
         <p class="team-bio">社会保険労務士資格保有。フレックス制度・育休制度の大規模改定を主導した制度設計のプロ。</p>
-      </div>
-      <div class="team-card reveal">
-        <div class="team-avatar">D</div>
+      </a>
+      <a href="interview-tamura.html" class="team-card reveal">
+        <div class="team-avatar"><img src="img/tamura.png" alt=""></div>
         <p class="team-role">組織開発・DE&Iリーダー</p>
         <p class="team-name">田村 由美</p>
         <p class="team-bio">心理的安全性・DE&Iの推進担当。組織サーベイの設計・分析から施策立案まで一気通貫で担う。</p>
-      </div>
+      </a>
     </div>
   </div>
 </section>
@@ -302,8 +310,8 @@ footer::before{content:'HR';position:absolute;bottom:-40px;right:40px;font-famil
   <div class="cta-band-inner">
     <h2>人事グループで、<br>組織の未来を一緒に描きませんか。</h2>
     <div class="cta-band-btns">
-      <a href="apply.html" class="btn-primary">エントリーはこちら →</a>
-      <a href="events.html" class="btn-secondary">採用イベントを見る</a>
+      <a href="apply.html" class="btn-primary">エントリーはこちら <span aria-hidden="true">→</span></a>
+      <a href="events.html" class="btn-secondary">採用イベントを見る <span aria-hidden="true">→</span></a>
     </div>
   </div>
 </div>
