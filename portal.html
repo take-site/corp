@@ -10,7 +10,7 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{--ink:#1a1a2e;--cream:#f8f5ef;--warm:#ede8df;--accent:#c8a96e;--accent-light:#e8d5b0;--text:#3d3d52;--muted:#8585a0;--green:#3d8a5e;--red:#8a3d3d;--blue:#3d5e8a}
 html{scroll-behavior:smooth}
-body{font-family:'Noto Sans JP',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden}
+body{font-family:'Noto Sans JP',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden;overflow-wrap:break-word}
 
 /* INTERNAL NAV - darker */
 .portal-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:72px;background:var(--ink);border-bottom:1px solid rgba(200,169,110,0.2)}
@@ -133,17 +133,18 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--cream);color:var(--t
 <div class="portal-search">
   <div class="portal-search-inner">
     <div class="search-box">
-      <input type="text" class="search-input" placeholder="手続き・制度名・キーワードで検索…（例：有給、産休、引越し）">
-      <button class="search-btn">🔍</button>
+      <input type="text" class="search-input" id="portal-search-input" placeholder="手続き・制度名・キーワードで検索…（例：有給、産休、引越し）" autocomplete="off">
+      <button type="button" class="search-btn" id="portal-search-btn" aria-label="検索">🔍</button>
     </div>
+    <p class="portal-search-no-result" id="portal-no-result" style="display:none;text-align:center;color:rgba(248,245,239,0.5);font-size:14px;margin-top:16px;">該当する項目がありません。別のキーワードでお試しください。</p>
     <div class="search-tags">
-      <span class="search-tag" onclick="this.style.borderColor='var(--accent)';this.style.color='var(--accent)'">有給申請</span>
-      <span class="search-tag">残業申請</span>
-      <span class="search-tag">育休・産休</span>
-      <span class="search-tag">結婚手続き</span>
-      <span class="search-tag">引越し手続き</span>
-      <span class="search-tag">福利厚生申請</span>
-      <span class="search-tag">給与明細</span>
+      <span class="search-tag" data-keyword="有給">有給申請</span>
+      <span class="search-tag" data-keyword="残業">残業申請</span>
+      <span class="search-tag" data-keyword="育休">育休・産休</span>
+      <span class="search-tag" data-keyword="結婚">結婚手続き</span>
+      <span class="search-tag" data-keyword="引越し">引越し手続き</span>
+      <span class="search-tag" data-keyword="福利厚生">福利厚生申請</span>
+      <span class="search-tag" data-keyword="給与">給与明細</span>
     </div>
   </div>
 </div>
@@ -156,28 +157,28 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--cream);color:var(--t
       <h2 class="section-title">やりたいことから探す</h2>
     </div>
     <div class="action-grid">
-      <a href="procedures.html" class="action-card reveal">
+      <a href="procedures.html" class="action-card reveal visible">
         <span class="action-icon">📅</span>
         <span class="action-label">Leave</span>
         <p class="action-title">有給を<br>申請したい</p>
         <p class="action-desc">年次有給休暇・特別休暇の申請方法と必要書類</p>
         <span class="action-arrow">›</span>
       </a>
-      <a href="procedures.html" class="action-card reveal">
+      <a href="procedures.html" class="action-card reveal visible">
         <span class="action-icon">⏱</span>
         <span class="action-label">Overtime</span>
         <p class="action-title">残業を<br>申請したい</p>
         <p class="action-desc">残業・時間外労働の事前申請・事後申請の手順</p>
         <span class="action-arrow">›</span>
       </a>
-      <a href="procedures.html" class="action-card reveal">
+      <a href="procedures.html" class="action-card reveal visible">
         <span class="action-icon">💍</span>
         <span class="action-label">Life Event</span>
         <p class="action-title">結婚・引越しの<br>手続きをしたい</p>
         <p class="action-desc">氏名・住所変更・慶弔申請・各種証明書の提出</p>
         <span class="action-arrow">›</span>
       </a>
-      <a href="procedures.html" class="action-card reveal">
+      <a href="procedures.html" class="action-card reveal visible">
         <span class="action-icon">🎁</span>
         <span class="action-label">Benefits</span>
         <p class="action-title">福利厚生を<br>申請したい</p>
@@ -186,17 +187,17 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--cream);color:var(--t
       </a>
     </div>
     <div class="quick-grid">
-      <a href="procedures.html" class="quick-card reveal">
+      <a href="procedures.html" class="quick-card reveal visible">
         <span class="quick-icon">👶</span>
         <div><p class="quick-title">産休・育休の手続き</p><p class="quick-sub">申請書類・提出期限・復帰後の手続き</p></div>
         <span class="quick-arrow">›</span>
       </a>
-      <a href="procedures.html" class="quick-card reveal">
+      <a href="procedures.html" class="quick-card reveal visible">
         <span class="quick-icon">🏥</span>
         <div><p class="quick-title">健康診断・人間ドック</p><p class="quick-sub">予約方法・補助金申請・結果提出</p></div>
         <span class="quick-arrow">›</span>
       </a>
-      <a href="procedures.html" class="quick-card reveal">
+      <a href="procedures.html" class="quick-card reveal visible">
         <span class="quick-icon">📝</span>
         <div><p class="quick-title">その他申請・届出</p><p class="quick-sub">住民票・各種証明書・通勤経路変更 など</p></div>
         <span class="quick-arrow">›</span>
@@ -280,7 +281,7 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--cream);color:var(--t
         <p>FAQや手続きフローで解決しない場合はお気軽にご連絡ください。</p>
         <div class="contact-item">
           <span class="contact-item-icon">📧</span>
-          <div><p class="contact-item-label">MAIL</p><p class="contact-item-val"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="452d3768352a3731242905262a2835242b3c6b2f35">[email&#160;protected]</a></p></div>
+          <div><p class="contact-item-label">MAIL</p><p class="contact-item-val"><a href="mailto:hr-recruit@company.jp" style="color:inherit;text-decoration:none;">hr-recruit@company.jp</a></p></div>
         </div>
         <div class="contact-item">
           <span class="contact-item-icon">📞</span>
@@ -296,4 +297,46 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--cream);color:var(--t
 </section>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-const 
+(function(){
+  const obs=new IntersectionObserver(function(entries){
+    entries.forEach(function(entry,i){
+      if(entry.isIntersecting) setTimeout(function(){ entry.target.classList.add('visible'); }, i*80);
+    });
+  },{threshold:0.05,rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach(function(el){ obs.observe(el); });
+})();
+
+(function(){
+  var searchInput=document.getElementById('portal-search-input');
+  var searchBtn=document.getElementById('portal-search-btn');
+  var noResult=document.getElementById('portal-no-result');
+  function runPortalSearch(){
+    var q=(searchInput.value||'').trim().toLowerCase();
+    var actionCards=document.querySelectorAll('.action-section .action-card');
+    var quickCards=document.querySelectorAll('.action-section .quick-card');
+    var updateItems=document.querySelectorAll('.update-list .update-item');
+    var all=[].slice.call(actionCards).concat([].slice.call(quickCards)).concat([].slice.call(updateItems));
+    var anyVisible=false;
+    all.forEach(function(el){
+      var text=(el.textContent||'').toLowerCase();
+      var match=!q||text.indexOf(q)!==-1;
+      el.style.display=match?'':'none';
+      if(match) anyVisible=true;
+    });
+    noResult.style.display=(q&&!anyVisible)?'block':'none';
+  }
+  searchInput.addEventListener('input',runPortalSearch);
+  searchInput.addEventListener('keydown',function(e){ if(e.key==='Enter'){ e.preventDefault(); runPortalSearch(); } });
+  searchBtn.addEventListener('click',runPortalSearch);
+  document.querySelectorAll('.search-tag').forEach(function(tag){
+    tag.style.cursor='pointer';
+    tag.addEventListener('click',function(){
+      var kw=this.getAttribute('data-keyword')||'';
+      searchInput.value=kw;
+      runPortalSearch();
+    });
+  });
+})();
+</script>
+</body>
+</html> 
