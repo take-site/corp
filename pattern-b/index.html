@@ -387,9 +387,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 20px;
     margin-bottom: 28px;
   }
+  .mission-icon .icon-svg, .benefit-icon .icon-svg { width: 24px; height: 24px; color: var(--accent); display: block; }
+  .benefit-icon { display: block; margin-bottom: 14px; }
   .mission-card-title {
     font-family: 'Noto Serif JP', serif;
     font-size: 20px;
@@ -450,11 +451,6 @@
   }
   .benefit-item:hover { background: var(--accent-light); }
   .benefit-item:hover::after { width: 100%; }
-  .benefit-icon {
-    font-size: 24px;
-    margin-bottom: 14px;
-    display: block;
-  }
   .benefit-name {
     font-size: 13px;
     font-weight: 500;
@@ -886,7 +882,7 @@
     <div class="mission-grid">
       <div class="mission-card reveal">
         <span class="mission-card-num">01</span>
-        <div class="mission-icon">🎯</div>
+        <div class="mission-icon"><svg class="icon-svg" aria-hidden="true"><use href="img/icons.svg#icon-target"/></svg></div>
         <h3 class="mission-card-title">人材を活かす</h3>
         <p class="mission-card-text">
           社員一人ひとりの強みを発見し、適材適所で最大限の力が発揮できる環境を整えます。評価・育成・配置の三位一体で個人と組織を繋ぎます。
@@ -894,7 +890,7 @@
       </div>
       <div class="mission-card reveal">
         <span class="mission-card-num">02</span>
-        <div class="mission-icon">🌱</div>
+        <div class="mission-icon"><svg class="icon-svg" aria-hidden="true"><use href="img/icons.svg#icon-leaf"/></svg></div>
         <h3 class="mission-card-title">成長を支える</h3>
         <p class="mission-card-text">
           入社から定年退職まで、キャリアの各ステージで必要な学びを提供。研修体系・メンター制度・キャリア面談で継続的な成長を支援します。
@@ -902,7 +898,7 @@
       </div>
       <div class="mission-card reveal">
         <span class="mission-card-num">03</span>
-        <div class="mission-icon">🤝</div>
+        <div class="mission-icon"><svg class="icon-svg" aria-hidden="true"><use href="img/icons.svg#icon-handshake"/></svg></div>
         <h3 class="mission-card-title">文化を創る</h3>
         <p class="mission-card-text">
           心理的安全性の高い職場づくり、多様性の尊重、ウェルビーイングの向上を通じて、誰もが活躍できる組織文化を共に創造します。
@@ -936,32 +932,32 @@
       </div>
       <div class="benefits-list reveal">
         <div class="benefit-item">
-          <span class="benefit-icon">🏠</span>
+          <span class="benefit-icon"><svg class="icon-svg" aria-hidden="true"><use href="img/icons.svg#icon-home"/></svg></span>
           <p class="benefit-name">リモートワーク制度</p>
           <p class="benefit-detail">週3日まで在宅勤務可。自宅環境整備補助金あり（上限5万円）</p>
         </div>
         <div class="benefit-item">
-          <span class="benefit-icon">👶</span>
+          <span class="benefit-icon"><svg class="icon-svg" aria-hidden="true"><use href="img/icons.svg#icon-baby"/></svg></span>
           <p class="benefit-name">育休・産休サポート</p>
           <p class="benefit-detail">取得率100%。男性育休も積極推進。復帰後の柔軟勤務対応</p>
         </div>
         <div class="benefit-item">
-          <span class="benefit-icon">📚</span>
+          <span class="benefit-icon"><svg class="icon-svg" aria-hidden="true"><use href="img/icons.svg#icon-book"/></svg></span>
           <p class="benefit-name">自己啓発支援</p>
           <p class="benefit-detail">資格取得費用補助・書籍購入補助・外部研修受講支援（年間上限20万円）</p>
         </div>
         <div class="benefit-item">
-          <span class="benefit-icon">⏰</span>
+          <span class="benefit-icon"><svg class="icon-svg" aria-hidden="true"><use href="img/icons.svg#icon-clock"/></svg></span>
           <p class="benefit-name">フレックスタイム</p>
           <p class="benefit-detail">コアタイム10:00〜15:00。ライフスタイルに合わせた柔軟な勤務が可能</p>
         </div>
         <div class="benefit-item">
-          <span class="benefit-icon">🏥</span>
+          <span class="benefit-icon"><svg class="icon-svg" aria-hidden="true"><use href="img/icons.svg#icon-health"/></svg></span>
           <p class="benefit-name">健康管理サポート</p>
           <p class="benefit-detail">定期健診・人間ドック費用全額補助。メンタルヘルス相談窓口完備</p>
         </div>
         <div class="benefit-item">
-          <span class="benefit-icon">📈</span>
+          <span class="benefit-icon"><svg class="icon-svg" aria-hidden="true"><use href="img/icons.svg#icon-chart"/></svg></span>
           <p class="benefit-name">評価・昇給制度</p>
           <p class="benefit-detail">半期ごとの目標設定・面談。成果に連動した透明性の高い評価体系</p>
         </div>
@@ -1100,7 +1096,7 @@
 <div class="inner-banner">
   <div class="inner-banner-inner">
     <div class="inner-banner-text">
-      <h3>👋 在籍社員の方へ — 社内ポータルはこちら</h3>
+      <h3>在籍社員の方へ — 社内ポータルはこちら</h3>
       <p>有給申請・残業申請・各種手続き・FAQ・規程集はこちらからアクセスできます</p>
     </div>
     <a href="portal.html" class="btn-primary" style="white-space:nowrap;">社内ポータルへ <span class="btn-arrow">→</span></a>
@@ -1139,9 +1135,9 @@
     <div>
       <p class="footer-nav-title">その他</p>
       <ul class="footer-nav-links">
-        <li><a href="privacy.html">プライバシーポリシー</a></li>
+        <li><a href="../privacy.html">プライバシーポリシー</a></li>
         <li><a href="mailto:hr-recruit@company.jp">お問い合わせ</a></li>
-        <li><a href="pattern-b/index.html" style="font-size:11px;opacity:0.85;">シンプル表示（絵文字なし）</a></li>
+        <li><a href="../index.html" style="font-size:11px;opacity:0.85;">通常表示（絵文字あり）</a></li>
       </ul>
     </div>
   </div>
