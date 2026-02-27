@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="img/favicon.png" type="image/png">
+<title>FAQ | 社内ポータル 人事グループ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;700&family=Noto+Sans+JP:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--ink:#1a1a2e;--cream:#f8f5ef;--warm:#ede8df;--accent:#c8a96e;--accent-light:#e8d5b0;--text:#3d3d52;--muted:#8585a0}
+html{scroll-behavior:smooth}
+body{font-family:'Noto Sans JP',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden;overflow-wrap:break-word}
+.portal-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:72px;background:var(--ink);border-bottom:1px solid rgba(200,169,110,0.2)}
+.portal-nav-logo{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:500;color:var(--cream);letter-spacing:0.05em;text-decoration:none}
+.portal-nav-logo span{font-size:11px;font-family:'Noto Sans JP',sans-serif;font-weight:300;display:block;letter-spacing:0.2em;color:rgba(248,245,239,0.45);margin-top:-2px}
+.portal-nav-links{display:flex;gap:32px;list-style:none;align-items:center}
+.portal-nav-links a{font-size:13px;font-weight:300;letter-spacing:0.1em;color:rgba(248,245,239,0.6);text-decoration:none;transition:color 0.25s}
+.portal-nav-links a:hover,.portal-nav-links a.active{color:var(--accent)}
+.btn-recruit{border:1px solid rgba(200,169,110,0.4);color:var(--accent)!important;padding:8px 20px;font-size:12px!important}
+.btn-recruit:hover{background:var(--accent)!important;color:var(--ink)!important;border-color:var(--accent)!important}
+.page-header{padding:160px 80px 80px;background:var(--ink);position:relative;overflow:hidden}
+.page-header::after{content:'FAQ';position:absolute;bottom:-30px;right:40px;font-family:'Cormorant Garamond',serif;font-size:200px;font-weight:300;color:rgba(255,255,255,0.04);line-height:1;pointer-events:none}
+.page-header-inner{max-width:1200px;margin:0 auto;position:relative;z-index:2}
+.page-label{font-size:10px;letter-spacing:0.4em;color:var(--accent);text-transform:uppercase;margin-bottom:20px;display:flex;align-items:center;gap:12px}
+.page-label::before{content:'';width:24px;height:1px;background:var(--accent)}
+.page-title{font-family:'Noto Serif JP',serif;font-size:clamp(32px,4vw,56px);font-weight:300;color:var(--cream);letter-spacing:0.05em;line-height:1.4;margin-bottom:16px}
+.page-subtitle{font-size:15px;font-weight:300;color:rgba(248,245,239,0.55);line-height:1.9;letter-spacing:0.04em;white-space:nowrap}
+.breadcrumb{background:rgba(26,26,46,0.95);padding:16px 80px}
+.breadcrumb-inner{max-width:1200px;margin:0 auto;display:flex;gap:8px;align-items:center;font-size:12px;color:rgba(248,245,239,0.4)}
+.breadcrumb a{color:rgba(248,245,239,0.4);text-decoration:none}.breadcrumb a:hover{color:var(--accent)}
+
+/* Search */
+/* 検索ボックスの位置を変える場合: .faq-search の padding や .faq-search-inner の margin を変更 */
+.faq-search{background:var(--ink);padding:0 80px 48px}
+.faq-search-inner{max-width:1200px;margin:0 auto}
+.faq-search .search-box{display:flex;gap:0;max-width:560px;margin:0 auto}
+.search-input{flex:1;min-width:0;padding:16px 24px;background:rgba(255,255,255,0.06);border:1px solid rgba(200,169,110,0.2);border-right:none;font-family:'Noto Sans JP',sans-serif;font-size:14px;color:var(--cream);letter-spacing:0.05em;outline:none}
+.search-input::placeholder{color:rgba(248,245,239,0.3)}
+.search-input:focus{border-color:var(--accent)}
+.search-btn{background:var(--accent);border:none;padding:0 28px;cursor:pointer;font-size:16px;flex-shrink:0}
+
+/* Layout */
+.faq-layout{display:grid;grid-template-columns:240px 1fr;gap:0;max-width:1360px;margin:0 auto}
+
+/* Category sidebar */
+.faq-sidebar{background:var(--warm);padding:48px 0;position:sticky;top:72px;height:calc(100vh - 72px);overflow-y:auto}
+.sidebar-title{font-size:10px;letter-spacing:0.3em;color:var(--accent);text-transform:uppercase;padding:0 32px;margin-bottom:20px}
+.cat-list{display:flex;flex-direction:column;gap:0}
+.cat-item{padding:16px 32px;display:flex;align-items:center;gap:12px;cursor:pointer;transition:background 0.25s;border-left:3px solid transparent;text-decoration:none;color:inherit}
+.cat-item:hover{background:var(--accent-light)}
+.cat-item.active{background:var(--accent-light);border-left-color:var(--accent)}
+.cat-icon{}
+.cat-icon .icon-svg,.faq-section-icon .icon-svg{width:22px;height:22px;color:var(--accent);display:block}
+.cat-name{font-size:13px;font-weight:400;color:var(--ink);letter-spacing:0.04em}
+.cat-count{margin-left:auto;font-size:11px;color:var(--muted);background:rgba(26,26,46,0.08);padding:2px 8px}
+.sidebar-contact{padding:24px 32px;border-top:1px solid rgba(26,26,46,0.1);margin-top:24px}
+.sidebar-contact p{font-size:12px;color:var(--muted);line-height:1.8;letter-spacing:0.04em}
+.sidebar-contact a{color:var(--accent);text-decoration:none;font-size:12px;display:block;margin-top:8px}
+
+/* FAQ content */
+.faq-content{padding:64px 72px}
+.faq-section{margin-bottom:64px}
+.faq-section-header{display:flex;align-items:center;gap:16px;margin-bottom:24px;padding-bottom:20px;border-bottom:1px solid rgba(26,26,46,0.1)}
+.faq-section-icon{}
+.faq-section-title{font-family:'Noto Serif JP',serif;font-size:22px;font-weight:300;color:var(--ink);letter-spacing:0.05em}
+.faq-count{font-size:11px;color:var(--muted);letter-spacing:0.1em;margin-left:auto;background:var(--warm);padding:4px 12px}
+
+/* Accordion */
+.accordion-item{border-bottom:1px solid rgba(26,26,46,0.08);overflow:hidden}
+.accordion-q{display:flex;align-items:flex-start;gap:16px;padding:22px 0;cursor:pointer;transition:color 0.25s}
+.accordion-q:hover{color:var(--ink)}
+.q-badge{min-width:24px;height:24px;background:var(--accent);color:var(--ink);font-size:11px;font-weight:500;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;letter-spacing:0}
+.q-text{font-size:15px;font-weight:400;color:var(--ink);letter-spacing:0.04em;line-height:1.6;flex:1}
+.q-arrow{font-size:18px;color:var(--muted);transition:transform 0.3s;flex-shrink:0;margin-top:3px}
+.accordion-item.open .q-arrow{transform:rotate(90deg);color:var(--accent)}
+.accordion-a{max-height:0;overflow:hidden;transition:max-height 0.4s ease,padding 0.3s}
+.accordion-a.open{max-height:800px;padding-bottom:24px}
+.a-inner{padding:20px 28px;background:var(--warm);margin-left:40px}
+.a-label{font-size:9px;letter-spacing:0.3em;color:var(--accent);text-transform:uppercase;margin-bottom:10px}
+.a-text{font-size:14px;font-weight:300;color:var(--text);line-height:2;letter-spacing:0.04em}
+.a-text a{color:var(--accent);text-decoration:none}
+.a-caution{background:rgba(200,169,110,0.15);border-left:3px solid var(--accent);padding:12px 16px;margin-top:12px;font-size:12px;color:var(--text);line-height:1.8;letter-spacing:0.04em}
+.a-error{background:rgba(200,80,80,0.08);border-left:3px solid #c85050;padding:12px 16px;margin-top:12px;font-size:12px;color:#c85050;line-height:1.8;letter-spacing:0.04em}
+.a-link{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--ink);text-decoration:none;letter-spacing:0.1em;padding-bottom:2px;border-bottom:1px solid var(--accent);margin-top:12px}
+.a-link:hover{color:var(--accent)}
+.faq-updated{font-size:11px;color:var(--muted);letter-spacing:0.06em;margin-top:6px}
+
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease}
+.reveal.visible{opacity:1;transform:none}
+@media(max-width:900px){.portal-nav{padding:0 24px}.portal-nav-links{display:none}.page-header{padding:120px 24px 60px}.breadcrumb{padding:14px 24px}.page-subtitle{white-space:normal}.faq-search{padding:0 24px 40px}.faq-layout{grid-template-columns:1fr}.faq-sidebar{position:static;height:auto}.faq-content{padding:40px 24px}}
+</style>
+</head>
+<body>
+<nav class="portal-nav">
+  <a href="portal.html" class="portal-nav-logo">社内ポータル<span>人事グループ 内部向けサイト</span></a>
+  <ul class="portal-nav-links">
+    <li><a href="portal.html">ホーム</a></li>
+    <li><a href="faq.html" class="active">FAQ</a></li>
+    <li><a href="procedures.html">手続きフロー</a></li>
+    <li><a href="regulations.html">規程・制度</a></li>
+    <li><a href="index.html" class="btn-recruit">採用サイトへ →</a></li>
+  </ul>
+</nav>
+<div class="page-header">
+  <div class="page-header-inner">
+    <p class="page-label">Frequently Asked Questions</p>
+    <h1 class="page-title">よくある質問（FAQ）</h1>
+    <p class="page-subtitle">勤怠・規程・福利厚生カテゴリ別のQ&A集です。失敗例・注意点も掲載しています。</p>
+  </div>
+</div>
+<div class="breadcrumb"><div class="breadcrumb-inner"><a href="portal.html">ホーム</a><span> › </span><span>FAQ</span></div></div>
+
+<div class="faq-search">
+  <div class="faq-search-inner">
+    <div class="search-box">
+      <input type="text" class="search-input" id="faq-search-input" placeholder="質問・キーワードで検索…（例：有給、育休、残業代）" autocomplete="off">
+      <button type="button" class="search-btn" id="faq-search-btn" aria-label="検索">検索</button>
+    </div>
+    <p class="faq-search-no-result" id="faq-no-result" style="display:none;text-align:center;color:rgba(248,245,239,0.5);font-size:14px;margin-top:16px;">該当する質問がありません。別のキーワードでお試しください。</p>
+  </div>
+</div>
+
+<div class="faq-layout">
+  <!-- Sidebar -->
+  <div class="faq-sidebar">
+    <p class="sidebar-title">カテゴリ</p>
+    <div class="cat-list">
+      <a href="#kintai" class="cat-item active" onclick="setActive(this)"><span class="cat-icon"><svg class="icon-svg" aria-hidden="true"><use href="img/icons.svg#icon-clock"/></svg></span><span class="cat-name">勤怠</span><span class="cat-count">8</span></a>
+      <a href="#kyutei" class="cat-item" onclick="setActive(this)"><span class="cat-icon"><svg class="icon-svg" aria-hidden="true"><use href="img/icons.svg#icon-book"/></svg></span><span class="cat-name">規程・就業規則</span><span class="cat-count">6</span></a>
+      <a href="#fukuri" class="cat-item" onclick="setActive(this)"><span class="cat-icon"><svg class="icon-svg" aria-hidden="true"><use href="img/icons.svg#icon-gift"/></svg></span><span class="cat-name">福利厚生</span><span class="cat-count">7</span></a>
+      <a href="#kyuyo" class="cat-item" onclick="setActive(this)"><span class="cat-icon"><svg class="icon-svg" aria-hidden="true"><use href="img/icons.svg#icon-chart"/></svg></span><span class="cat-name">給与・賞与</span><span class="cat-count">5</span></a>
+      <a href="#ikusei" class="cat-item" onclick="setActive(this)"><span class="cat-icon"><svg class="icon-svg" aria-hidden="true"><use href="img/icons.svg#icon-book"/></svg></span><span class="cat-name">研修・育成</span><span class="cat-count">4</span></a>
+    </div>
+    <div class="sidebar-contact">
+      <p>FAQで解決しない場合は人事担当者まで</p>
+      <a href="/cdn-cgi/l/email-protection#d2baa0ffa2bda0a6b3be92b1bdbfa2b3bcabfcb8a2">MAIL <span class="__cf_email__" data-cfemail="6d051f401d021f190c012d0e02001d0c031443071d">[email&#160;protected]</span></a>
+      <a href="tel:2100">TEL 内線 #2100</a>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="faq-content">
+    <!-- 勤怠 -->
+    <div class="faq-section reveal" id="kintai">
+      <div class="faq-section-header">
+        <span class="faq-section-icon"><svg class="icon-svg" aria-hidden="true"><use href="img/icons.svg#icon-clock"/></svg></span>
+        <h2 class="faq-section-title">勤怠</h2>
+        <span class="faq-count">8件</span>
+      </div>
+
+      <div class="accordion-item open" onclick="toggleFaq(this)">
+        <div class="accordion-q"><span class="q-badge">Q</span><p class="q-text">有給休暇はいつから取得できますか？取得手続きを教えてください。</p><span class="q-arrow">›</span></div>
+        <div class="accordion-a open">
+          <div class="a-inner">
+            <p class="a-label">Answer</p>
+            <p class="a-text">入社後6ヶ月が経過し、出勤率が80%以上の場合に10日間の有給が付与されます。その後、1年ごとに日数が増え、最大20日（勤続6.5年以上）まで付与されます。<br><br>
+            申請は <a href="portal.html" style="color:var(--accent)">勤怠管理システム（HR Core）</a> から、希望日の3営業日前までに申請してください。承認後にメール通知が届きます。</p>
+            <div class="a-caution">注意： よくある失敗：前日・当日の申請は緊急の場合を除き認められません。計画的な事前申請をお願いします。</div>
+            <p class="faq-updated">最終更新：2026年1月15日</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item" onclick="toggleFaq(this)">
+        <div class="accordion-q"><span class="q-badge">Q</span><p class="q-text">残業申請はいつまでに行えばよいですか？事後申請はできますか？</p><span class="q-arrow">›</span></div>
+        <div class="accordion-a">
+          <div class="a-inner">
+            <p class="a-label">Answer</p>
+            <p class="a-text">残業は原則として<strong>事前申請制</strong>です。当日17時までにHR Coreで申請し、上長の承認を得てから残業を開始してください。<br><br>
+            緊急の場合のみ翌営業日中の事後申請が認められますが、月2回以上の事後申請は上長からの指導対象となります。</p>
+            <div class="a-error">NG： やりがちなNG：申請なしで残業すると、残業代が不支給になる場合があります。必ず承認を得てから残業を始めてください。</div>
+            <a href="procedures.html" class="a-link">残業申請の手順を見る →</a>
+            <p class="faq-updated">最終更新：2025年11月1日</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item" onclick="toggleFaq(this)">
+        <div class="accordion-q"><span class="q-badge">Q</span><p class="q-text">フレックスタイム制での打刻ルールを教えてください。</p><span class="q-arrow">›</span></div>
+        <div class="accordion-a">
+          <div class="a-inner">
+            <p class="a-label">Answer</p>
+            <p class="a-text">始業・終業は HR Core でのICカード打刻または端末ログイン/ログアウトで自動記録されます。コアタイム（10:00〜15:00）中は必ず勤務してください。月の総労働時間が所定時間（原則160時間）を満たせばOKです。</p>
+            <div class="a-caution">注意： 打刻忘れが月3回以上続くと、勤怠評価に影響する場合があります。気づいた時点ですぐに上長に報告してください。</div>
+            <p class="faq-updated">最終更新：2025年9月1日</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item" onclick="toggleFaq(this)">
+        <div class="accordion-q"><span class="q-badge">Q</span><p class="q-text">リモートワーク中の勤怠管理はどうすればいいですか？</p><span class="q-arrow">›</span></div>
+        <div class="accordion-a">
+          <div class="a-inner">
+            <p class="a-label">Answer</p>
+            <p class="a-text">リモートワーク日は事前に HR Core で申請が必要です（前週金曜17時まで）。当日のPCログイン/ログアウトが自動的に打刻として記録されます。外出が必要な場合は「外勤」として申請してください。</p>
+            <a href="procedures.html" class="a-link">リモートワーク申請の手順 →</a>
+            <p class="faq-updated">最終更新：2025年12月1日</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item" onclick="toggleFaq(this)">
+        <div class="accordion-q"><span class="q-badge">Q</span><p class="q-text">特別休暇（慶弔休暇）の取得条件と日数を教えてください。</p><span class="q-arrow">›</span></div>
+        <div class="accordion-a">
+          <div class="a-inner">
+            <p class="a-label">Answer</p>
+            <p class="a-text">以下の特別休暇が取得できます（有給）：<br><br>
+            結婚休暇：本人5日、子の結婚2日<br>
+            忌引休暇：配偶者・子5日、父母3日、兄弟姉妹・祖父母1日<br>
+            出産付添：2日<br>
+            転勤：1日<br><br>
+            取得には、戸籍謄本・案内状などの証明書類を申請から2週間以内に人事担当者へ提出してください。</p>
+            <div class="a-caution">注意： 証明書類の提出を忘れると、特別休暇が有給休暇に振り替わることがあります。</div>
+            <p class="faq-updated">最終更新：2025年4月1日</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 規程 -->
+    <div class="faq-section reveal" id="kyutei">
+      <div class="faq-section-header">
+        <span class="faq-section-icon"><svg class="icon-svg" aria-hidden="true"><use href="img/icons.svg#icon-book"/></svg></span>
+        <h2 class="faq-section-title">規程・就業規則</h2>
+        <span class="faq-count">6件</span>
+      </div>
+
+      <div class="accordion-item open" onclick="toggleFaq(this)">
+        <div class="accordion-q"><span class="q-badge">Q</span><p class="q-text">就業規則はどこで確認できますか？</p><span class="q-arrow">›</span></div>
+        <div class="accordion-a open">
+          <div class="a-inner">
+            <p class="a-label">Answer</p>
+            <p class="a-text">就業規則はこのポータルの <a href="regulations.html">規程・制度ページ</a> でWeb版が確認できます。変更履歴も掲載しています。PDF原本は社内共有ドライブ（/HR/規程集/）にも格納されています。</p>
+            <a href="regulations.html" class="a-link">規程・制度ページを見る →</a>
+            <p class="faq-updated">最終更新：2026年1月1日</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item" onclick="toggleFaq(this)">
+        <div class="accordion-q"><span class="q-badge">Q</span><p class="q-text">副業・兼業はできますか？届出は必要ですか？</p><span class="q-arrow">›</span></div>
+        <div class="accordion-a">
+          <div class="a-inner">
+            <p class="a-label">Answer</p>
+            <p class="a-text">2024年10月より副業・兼業が原則許可されています。ただし、以下の要件を満たし、<strong>事前に届出が必要</strong>です：<br><br>
+            ・本業に支障をきたさないこと<br>
+            ・競合他社・取引先での就業でないこと<br>
+            ・週20時間以下であること<br><br>
+            HR Coreの「副業・兼業申請」フォームから申請し、承認を得てから開始してください。</p>
+            <div class="a-caution">注意： 届出なしで副業を行った場合、懲戒対象となることがあります。</div>
+            <p class="faq-updated">最終更新：2024年10月1日</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item" onclick="toggleFaq(this)">
+        <div class="accordion-q"><span class="q-badge">Q</span><p class="q-text">退職する場合、何ヶ月前に申し出が必要ですか？</p><span class="q-arrow">›</span></div>
+        <div class="accordion-a">
+          <div class="a-inner">
+            <p class="a-label">Answer</p>
+            <p class="a-text">就業規則上の退職申出期間は<strong>原則2ヶ月前</strong>です。引き継ぎ期間を考慮し、早めにご相談ください。申出方法は所属長への口頭報告 → 退職申出書の提出（HR Core）の順で手続きをお願いします。</p>
+            <p class="faq-updated">最終更新：2025年4月1日</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 福利厚生 -->
+    <div class="faq-section reveal" id="fukuri">
+      <div class="faq-section-header">
+        <span class="faq-section-icon"><svg class="icon-svg" aria-hidden="true"><use href="img/icons.svg#icon-gift"/></svg></span>
+        <h2 class="faq-section-title">福利厚生</h2>
+        <span class="faq-count">7件</span>
+      </div>
+
+      <div class="accordion-item open" onclick="toggleFaq(this)">
+        <div class="accordion-q"><span class="q-badge">Q</span><p class="q-text">リモートワーク環境整備補助金の申請方法を教えてください。</p><span class="q-arrow">›</span></div>
+        <div class="accordion-a open">
+          <div class="a-inner">
+            <p class="a-label">Answer</p>
+            <p class="a-text">在宅勤務環境整備のため、年間上限5万円の補助が受けられます。対象品目：デスク・椅子・モニター・キーボード・WEBカメラ・ルーター等。<br><br>
+            手順：①購入 → ②領収書保管 → ③HR Coreで「テレワーク補助申請」 → ④領収書スキャンを添付 → ⑤翌月給与に加算</p>
+            <div class="a-caution">注意： 購入から3ヶ月以内に申請しないと受付できません。領収書は必ず保管してください。</div>
+            <div class="a-error">NG： 対象外：スマートフォン、家電（冷蔵庫等）、個人用ゲームデバイス</div>
+            <a href="procedures.html" class="a-link">申請フロー詳細を見る →</a>
+            <p class="faq-updated">最終更新：2025年10月1日</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item" onclick="toggleFaq(this)">
+        <div class="accordion-q"><span class="q-badge">Q</span><p class="q-text">育児休業（育休）はいつまでに申請が必要ですか？</p><span class="q-arrow">›</span></div>
+        <div class="accordion-a">
+          <div class="a-inner">
+            <p class="a-label">Answer</p>
+            <p class="a-text">育児休業の申請は、開始予定日の<strong>1ヶ月前まで</strong>（出産予定日が分かり次第できるだけ早めに）行ってください。<br><br>
+            産前は産後休業（産前6週・産後8週）の申請も別途必要です。HR Coreで手続きを行い、母子手帳の写し等の証明書類を提出してください。<br><br>
+            育休期間中は社会保険料が免除され、育児休業給付金（雇用保険）が受給できます。</p>
+            <a href="procedures.html" class="a-link">産休・育休の手続きフローを見る →</a>
+            <p class="faq-updated">最終更新：2026年2月1日</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item" onclick="toggleFaq(this)">
+        <div class="accordion-q"><span class="q-badge">Q</span><p class="q-text">自己啓発支援（資格取得補助）の対象と申請方法を教えてください。</p><span class="q-arrow">›</span></div>
+        <div class="accordion-a">
+          <div class="a-inner">
+            <p class="a-label">Answer</p>
+            <p class="a-text">年間上限20万円で、業務に関連する資格・研修・書籍の費用を補助します。資格試験費用は合格時に全額支給（不合格時は50%）。<br><br>
+            申請タイミング：受講前に「自己啓発申請」 → 上長承認 → 受講 → 領収書提出 → 翌月加算</p>
+            <div class="a-caution">注意： 事前申請なしで受講・購入した場合は補助の対象外となります。必ず受講前に申請してください。</div>
+            <p class="faq-updated">最終更新：2025年4月1日</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 給与 -->
+    <div class="faq-section reveal" id="kyuyo">
+      <div class="faq-section-header">
+        <span class="faq-section-icon"><svg class="icon-svg" aria-hidden="true"><use href="img/icons.svg#icon-chart"/></svg></span>
+        <h2 class="faq-section-title">給与・賞与</h2>
+        <span class="faq-count">5件</span>
+      </div>
+
+      <div class="accordion-item open" onclick="toggleFaq(this)">
+        <div class="accordion-q"><span class="q-badge">Q</span><p class="q-text">給与明細はどこで確認できますか？</p><span class="q-arrow">›</span></div>
+        <div class="accordion-a open">
+          <div class="a-inner">
+            <p class="a-label">Answer</p>
+            <p class="a-text">給与明細は <a href="portal.html" style="color:var(--accent)">HR Core「給与・勤怠」タブ</a> から確認できます。毎月25日に当月分を公開します（25日が休日の場合は前営業日）。紙の明細は発行しておりません。PDFでダウンロードが可能です。</p>
+            <div class="a-caution">注意： 内容に誤りがある場合は当月中に人事担当者へご連絡ください。翌月以降の修正は対応が困難になります。</div>
+            <p class="faq-updated">最終更新：2025年4月1日</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item" onclick="toggleFaq(this)">
+        <div class="accordion-q"><span class="q-badge">Q</span><p class="q-text">賞与の支給時期と計算方法を教えてください。</p><span class="q-arrow">›</span></div>
+        <div class="accordion-a">
+          <div class="a-inner">
+            <p class="a-label">Answer</p>
+            <p class="a-text">賞与は年2回、7月（夏季）と12月（冬季）に支給されます。<br><br>
+            計算方法：月額基本給 × 係数（0〜6.0）。係数は会社業績（50%）と個人評価（50%）の組み合わせで決まります。評価期間は上期1〜6月・下期7〜12月です。</p>
+            <p class="faq-updated">最終更新：2025年4月1日</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 研修・育成 -->
+    <div class="faq-section reveal" id="ikusei">
+      <div class="faq-section-header">
+        <span class="faq-section-icon"><svg class="icon-svg" aria-hidden="true"><use href="img/icons.svg#icon-book"/></svg></span>
+        <h2 class="faq-section-title">研修・育成</h2>
+        <span class="faq-count">4件</span>
+      </div>
+
+      <div class="accordion-item open" onclick="toggleFaq(this)">
+        <div class="accordion-q"><span class="q-badge">Q</span><p class="q-text">入社後の研修スケジュールを教えてください。</p><span class="q-arrow">›</span></div>
+        <div class="accordion-a open">
+          <div class="a-inner">
+            <p class="a-label">Answer</p>
+            <p class="a-text">新卒・中途ともに入社後2週間は入社時研修（会社概要・制度・システム・コンプライアンス）を実施します。その後、配属先に応じてOJTと階層別研修（1年目・3年目・主任・管理職）があります。年間の研修カレンダーはHR Coreの「研修・育成」タブで確認できます。</p>
+            <a href="portal.html" class="a-link">社内ポータルで研修一覧を見る →</a>
+            <p class="faq-updated">最終更新：2025年4月1日</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item" onclick="toggleFaq(this)">
+        <div class="accordion-q"><span class="q-badge">Q</span><p class="q-text">1on1・キャリア面談はどのくらいの頻度で行われますか？</p><span class="q-arrow">›</span></div>
+        <div class="accordion-a">
+          <div class="a-inner">
+            <p class="a-label">Answer</p>
+            <p class="a-text">1on1は直属の上長と原則<strong>月1回</strong>、キャリア面談は人事担当と<strong>年1回</strong>（希望者は追加可）実施しています。1on1では業務の進捗・悩み・目標の振り返り、キャリア面談では中長期のキャリア希望や制度の活用方法などを話し合います。日程は上長・人事から案内があります。</p>
+            <p class="faq-updated">最終更新：2025年4月1日</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item" onclick="toggleFaq(this)">
+        <div class="accordion-q"><span class="q-badge">Q</span><p class="q-text">メンター制度はありますか？</p><span class="q-arrow">›</span></div>
+        <div class="accordion-a">
+          <div class="a-inner">
+            <p class="a-label">Answer</p>
+            <p class="a-text">新卒入社者には入社後1年間、先輩社員がメンターとして配置されます。メンターは業務の相談・社内ルールの説明・悩みの聞き役を担います。メンターの指名は人事から入社前にご連絡します。メンターとの定期面談は月1回を目安に実施してください。</p>
+            <p class="faq-updated">最終更新：2025年4月1日</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+const obs=new IntersectionObserver(e=>{e.forEach((el,i)=>{if(el.isIntersecting)setTimeout(()=>el.target.classList.add('visible'),i*80)})},{threshold:0.1,rootMargin:'0px 0px -60px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+function toggleFaq(item){
+  const isOpen=item.classList.contains('open');
+  document.querySelectorAll('.accordion-item.open').forEach(i=>i.classList.remove('open'));
+  document.querySelectorAll('.accordion-a.open').forEach(a=>a.classList.remove('open'));
+  if(!isOpen){
+    item.classList.add('open');
+    var ans=item.querySelector('.accordion-a');
+    if(ans) ans.classList.add('open');
+  }
+}
+
+// FAQ検索: キーワードに一致するQ&Aのみ表示し、該当がなければメッセージを表示
+function runFaqSearch(){
+  var q=document.getElementById('faq-search-input').value.trim().toLowerCase();
+  var noResult=document.getElementById('faq-no-result');
+  var sections=document.querySelectorAll('.faq-content .faq-section');
+  var anyVisible=false;
+  sections.forEach(function(section){
+    var items=section.querySelectorAll('.accordion-item');
+    var sectionVisible=false;
+    items.forEach(function(item){
+      var text=[];
+      var qEl=item.querySelector('.q-text');
+      var aInner=item.querySelector('.a-inner');
+      if(qEl) text.push(qEl.textContent);
+      if(aInner) text.push(aInner.textContent);
+      var full=text.join(' ').toLowerCase();
+      var match=!q || full.indexOf(q)!==-1;
+      item.style.display=match ? '' : 'none';
+      if(match){ anyVisible=true; sectionVisible=true; }
+    });
+    section.style.display=sectionVisible ? '' : 'none';
+  });
+  noResult.style.display=(q && !anyVisible) ? 'block' : 'none';
+}
+document.getElementById('faq-search-input').addEventListener('input',runFaqSearch);
+document.getElementById('faq-search-input').addEventListener('keydown',function(e){ if(e.key==='Enter'){ e.preventDefault(); runFaqSearch(); } });
+document.getElementById('faq-search-btn').addEventListener('click',runFaqSearch);
+</script>
+</body>
+</html>

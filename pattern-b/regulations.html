@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="img/favicon.png" type="image/png">
+<title>規程・制度Web版 | 社内ポータル 人事グループ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;700&family=Noto+Sans+JP:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--ink:#1a1a2e;--cream:#f8f5ef;--warm:#ede8df;--accent:#c8a96e;--accent-light:#e8d5b0;--text:#3d3d52;--muted:#8585a0}
+html{scroll-behavior:smooth}
+body{font-family:'Noto Sans JP',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden;overflow-wrap:break-word}
+.portal-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:72px;background:var(--ink);border-bottom:1px solid rgba(200,169,110,0.2)}
+.portal-nav-logo{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:500;color:var(--cream);letter-spacing:0.05em;text-decoration:none}
+.portal-nav-logo span{font-size:11px;font-family:'Noto Sans JP',sans-serif;font-weight:300;display:block;letter-spacing:0.2em;color:rgba(248,245,239,0.45);margin-top:-2px}
+.portal-nav-links{display:flex;gap:32px;list-style:none;align-items:center}
+.portal-nav-links a{font-size:13px;font-weight:300;letter-spacing:0.1em;color:rgba(248,245,239,0.6);text-decoration:none;transition:color 0.25s}
+.portal-nav-links a:hover,.portal-nav-links a.active{color:var(--accent)}
+.btn-recruit{border:1px solid rgba(200,169,110,0.4);color:var(--accent)!important;padding:8px 20px;font-size:12px!important}
+.btn-recruit:hover{background:var(--accent)!important;color:var(--ink)!important;border-color:var(--accent)!important}
+.page-header{padding:160px 80px 80px;background:var(--ink);position:relative;overflow:hidden}
+.page-header::after{content:'RULES';position:absolute;bottom:-30px;right:40px;font-family:'Cormorant Garamond',serif;font-size:180px;font-weight:300;color:rgba(255,255,255,0.04);line-height:1;pointer-events:none}
+.page-header-inner{max-width:1200px;margin:0 auto;position:relative;z-index:2}
+.page-label{font-size:10px;letter-spacing:0.4em;color:var(--accent);text-transform:uppercase;margin-bottom:20px;display:flex;align-items:center;gap:12px}
+.page-label::before{content:'';width:24px;height:1px;background:var(--accent)}
+.page-title{font-family:'Noto Serif JP',serif;font-size:clamp(32px,4vw,56px);font-weight:300;color:var(--cream);letter-spacing:0.05em;line-height:1.4;margin-bottom:16px}
+.page-subtitle{font-size:15px;font-weight:300;color:rgba(248,245,239,0.55);line-height:1.9;letter-spacing:0.04em;max-width:640px;overflow-wrap:break-word}
+.breadcrumb{background:rgba(26,26,46,0.95);padding:16px 80px}
+.breadcrumb-inner{max-width:1200px;margin:0 auto;display:flex;gap:8px;align-items:center;font-size:12px;color:rgba(248,245,239,0.4)}
+.breadcrumb a{color:rgba(248,245,239,0.4);text-decoration:none}.breadcrumb a:hover{color:var(--accent)}
+
+.reg-layout{display:grid;grid-template-columns:260px 1fr;gap:0;max-width:1360px;margin:0 auto}
+.reg-sidebar{background:var(--warm);padding:40px 0;position:sticky;top:72px;height:calc(100vh - 72px);overflow-y:auto}
+.sidebar-title{font-size:10px;letter-spacing:0.3em;color:var(--accent);text-transform:uppercase;padding:0 28px;margin-bottom:16px}
+.reg-menu-item{padding:15px 28px;display:flex;align-items:flex-start;gap:12px;cursor:pointer;transition:background 0.25s;border-left:3px solid transparent;text-decoration:none;color:inherit}
+.reg-menu-item:hover,.reg-menu-item.active{background:var(--accent-light);border-left-color:var(--accent)}
+.reg-menu-icon{flex-shrink:0;margin-top:2px}
+.reg-menu-icon .icon-svg{width:20px;height:20px;color:var(--accent);display:block}
+.reg-menu-label{font-size:13px;font-weight:400;color:var(--ink);letter-spacing:0.04em;line-height:1.4}
+.reg-menu-updated{font-size:10px;color:var(--muted);margin-top:2px}
+.reg-menu-badge{font-size:9px;background:#c85050;color:white;padding:2px 6px;letter-spacing:0.1em;margin-left:6px}
+
+.reg-content{padding:64px 72px}
+.reg-section{margin-bottom:80px;scroll-margin-top:90px}
+.reg-sec-header{display:flex;align-items:flex-start;justify-content:space-between;gap:24px;margin-bottom:32px;padding-bottom:20px;border-bottom:1px solid rgba(26,26,46,0.1)}
+.reg-sec-title{font-family:'Noto Serif JP',serif;font-size:24px;font-weight:300;color:var(--ink);letter-spacing:0.05em;margin-bottom:8px}
+.reg-sec-meta{display:flex;gap:16px;flex-wrap:wrap}
+.reg-meta-item{font-size:11px;color:var(--muted);letter-spacing:0.06em;display:flex;align-items:center;gap:4px}
+.reg-pdf-btn{display:inline-flex;align-items:center;gap:8px;background:var(--ink);color:var(--cream);padding:10px 20px;font-size:11px;letter-spacing:0.12em;text-decoration:none;flex-shrink:0;white-space:nowrap;transition:background 0.25s}
+.reg-pdf-btn:hover{background:var(--accent);color:var(--ink)}
+
+/* Change history */
+.change-history{margin-bottom:28px}
+.change-history-title{font-size:11px;letter-spacing:0.25em;color:var(--accent);text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.change-history-title::before{content:'';width:16px;height:1px;background:var(--accent)}
+.change-list{display:flex;flex-direction:column;gap:2px}
+.change-item{display:grid;grid-template-columns:100px 80px 1fr;gap:16px;padding:10px 16px;background:var(--warm);align-items:center}
+.change-item:first-child{background:var(--accent-light)}
+.change-date{font-size:11px;color:var(--muted);letter-spacing:0.08em}
+.change-badge{font-size:9px;padding:2px 10px;letter-spacing:0.1em;text-align:center}
+.change-badge.revised{background:var(--accent);color:var(--ink)}
+.change-badge.new-rule{background:#3d8a5e;color:white}
+.change-badge.minor{background:rgba(26,26,46,0.15);color:var(--text)}
+.change-desc{font-size:12px;font-weight:300;color:var(--text);line-height:1.6}
+
+/* Rule sections */
+.rule-chapter{margin-bottom:36px}
+.rule-chapter-title{font-family:'Noto Serif JP',serif;font-size:18px;font-weight:400;color:var(--ink);margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid rgba(200,169,110,0.3);letter-spacing:0.05em;display:flex;align-items:center;gap:12px}
+.rule-chapter-title span{font-family:'Cormorant Garamond',serif;font-size:28px;color:rgba(200,169,110,0.4);line-height:1}
+.rule-article{margin-bottom:20px}
+.rule-article-title{font-size:14px;font-weight:500;color:var(--ink);margin-bottom:8px;letter-spacing:0.04em;display:flex;gap:8px}
+.rule-article-num{font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--accent)}
+.rule-article-body{font-size:13px;font-weight:300;color:var(--text);line-height:2.1;letter-spacing:0.04em;padding-left:24px}
+.rule-article-body ol{padding-left:24px;margin-top:8px}
+.rule-article-body ol li{margin-bottom:8px;line-height:1.9}
+.rule-article-note{background:var(--accent-light);padding:10px 16px;margin-top:8px;font-size:12px;color:var(--text);line-height:1.8;letter-spacing:0.04em}
+
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease}
+.reveal.visible{opacity:1;transform:none}
+@media(max-width:900px){.portal-nav{padding:0 24px}.portal-nav-links{display:none}.page-header{padding:120px 24px 60px}.breadcrumb{padding:14px 24px}.reg-layout{grid-template-columns:1fr}.reg-sidebar{position:static;height:auto}.reg-content{padding:40px 24px}.reg-sec-header{flex-direction:column}.change-item{grid-template-columns:1fr;gap:6px}}
+</style>
+</head>
+<body>
+<nav class="portal-nav">
+  <a href="portal.html" class="portal-nav-logo">社内ポータル<span>人事グループ 内部向けサイト</span></a>
+  <ul class="portal-nav-links">
+    <li><a href="portal.html">ホーム</a></li>
+    <li><a href="faq.html">FAQ</a></li>
+    <li><a href="procedures.html">手続きフロー</a></li>
+    <li><a href="regulations.html" class="active">規程・制度</a></li>
+    <li><a href="index.html" class="btn-recruit">採用サイトへ →</a></li>
+  </ul>
+</nav>
+<div class="page-header">
+  <div class="page-header-inner">
+    <p class="page-label">Regulations & Policies</p>
+    <h1 class="page-title">規程・制度Web版</h1>
+    <p class="page-subtitle">就業規則・各種規程のWeb版。変更履歴付きでいつでも最新版を確認できます。PDF原本へのリンクも掲載しています。</p>
+  </div>
+</div>
+<div class="breadcrumb"><div class="breadcrumb-inner"><a href="portal.html">ホーム</a><span> › </span><span>規程・制度</span></div></div>
+
+<div class="reg-layout">
+  <div class="reg-sidebar">
+    <p class="sidebar-title">規程一覧</p>
+    <a href="#shugyo" class="reg-menu-item active"><span class="reg-menu-icon"><svg class="icon-svg" aria-hidden="true"><use href="img/icons.svg#icon-book"/></svg></span><div><p class="reg-menu-label">就業規則</p><p class="reg-menu-updated">最終更新：2026年1月1日</p></div></a>
+    <a href="#kyuyo" class="reg-menu-item"><span class="reg-menu-icon"><svg class="icon-svg" aria-hidden="true"><use href="img/icons.svg#icon-chart"/></svg></span><div><p class="reg-menu-label">給与規程</p><p class="reg-menu-updated">最終更新：2025年4月1日</p></div></a>
+    <a href="#ikuji" class="reg-menu-item"><span class="reg-menu-icon"><svg class="icon-svg" aria-hidden="true"><use href="img/icons.svg#icon-baby"/></svg></span><div><p class="reg-menu-label">育児・介護休業規程 <span class="reg-menu-badge">改定</span></p><p class="reg-menu-updated">最終更新：2026年2月1日</p></div></a>
+    <a href="#fukuri" class="reg-menu-item"><span class="reg-menu-icon"><svg class="icon-svg" aria-hidden="true"><use href="img/icons.svg#icon-gift"/></svg></span><div><p class="reg-menu-label">福利厚生規程</p><p class="reg-menu-updated">最終更新：2025年10月1日</p></div></a>
+    <a href="#security" class="reg-menu-item"><span class="reg-menu-icon"><svg class="icon-svg" aria-hidden="true"><use href="img/icons.svg#icon-lock"/></svg></span><div><p class="reg-menu-label">情報セキュリティ規程</p><p class="reg-menu-updated">最終更新：2025年7月1日</p></div></a>
+  </div>
+
+  <div class="reg-content">
+
+    <!-- 就業規則 -->
+    <div class="reg-section reveal" id="shugyo">
+      <div class="reg-sec-header">
+        <div>
+          <p style="font-size:10px;letter-spacing:0.35em;color:var(--accent);text-transform:uppercase;margin-bottom:8px">Employment Regulations</p>
+          <h2 class="reg-sec-title">就業規則</h2>
+          <div class="reg-sec-meta">
+            <span class="reg-meta-item">最終更新：2026年1月1日</span>
+            <span class="reg-meta-item">全28条</span>
+            <span class="reg-meta-item">第17版</span>
+          </div>
+        </div>
+        <a href="kiteifiles/%E5%B0%B1%E6%A5%AD%E8%A6%8F%E5%89%87.pdf" class="reg-pdf-btn" download="就業規則.pdf">PDF原本をダウンロード</a>
+      </div>
+
+      <div class="change-history">
+        <p class="change-history-title">変更履歴</p>
+        <div class="change-list">
+          <div class="change-item">
+            <span class="change-date">2026年1月1日</span>
+            <span class="change-badge revised">改定</span>
+            <span class="change-desc">第19条（副業・兼業）：許可条件の明確化、届出様式の変更</span>
+          </div>
+          <div class="change-item">
+            <span class="change-date">2025年4月1日</span>
+            <span class="change-badge minor">軽微な変更</span>
+            <span class="change-desc">第4条（定義）：「テレワーク勤務」の定義を追加</span>
+          </div>
+          <div class="change-item">
+            <span class="change-date">2024年10月1日</span>
+            <span class="change-badge revised">改定</span>
+            <span class="change-desc">第22条（懲戒）：SNS利用に関する規定を追加</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="rule-chapter">
+        <h3 class="rule-chapter-title"><span>第1章</span>総則</h3>
+        <div class="rule-article">
+          <p class="rule-article-title"><span class="rule-article-num">第1条</span>目的</p>
+          <div class="rule-article-body">この就業規則は、株式会社〇〇（以下「会社」という）の社員（以下「社員」という）の労働条件並びに服務規律に関する事項を定めることを目的とする。</div>
+        </div>
+        <div class="rule-article">
+          <p class="rule-article-title"><span class="rule-article-num">第2条</span>適用範囲</p>
+          <div class="rule-article-body">この規則は、会社に雇用される全ての社員に適用する。ただし、パートタイム・有期雇用社員については、別に定める規則を適用する。</div>
+        </div>
+        <div class="rule-article">
+          <p class="rule-article-title"><span class="rule-article-num">第3条</span>規則の周知</p>
+          <div class="rule-article-body">会社は本規則及びその変更を社員に周知するため、社内ポータルへの掲載、紙面での掲示等の適切な方法により社員に知らせるものとする。</div>
+        </div>
+      </div>
+
+      <div class="rule-chapter">
+        <h3 class="rule-chapter-title"><span>第2章</span>採用・異動</h3>
+        <div class="rule-article">
+          <p class="rule-article-title"><span class="rule-article-num">第4条</span>採用</p>
+          <div class="rule-article-body">会社は、選考試験に合格した者に対して採用内定通知を発し、所定の書類の提出を求める。採用内定者が次の各号のいずれかに該当する場合は、採用内定を取り消すことがある。
+            <ol>
+              <li>提出書類に虚偽の記載があったとき</li>
+              <li>採用内定通知後に採用の取り消しを相当とする事由が生じたとき</li>
+              <li>健康診断の結果、業務遂行が困難と認められたとき</li>
+            </ol>
+          </div>
+        </div>
+        <div class="rule-article">
+          <p class="rule-article-title"><span class="rule-article-num">第5条</span>試用期間</p>
+          <div class="rule-article-body">新たに採用した社員には、採用の日から3ヶ月間の試用期間を設ける。試用期間中に業務適性が認められない場合は本採用しないことがある。なお、試用期間は勤続年数に算入する。</div>
+          <div class="rule-article-note">ポイント：試用期間中も社会保険・雇用保険は入社日から適用されます。</div>
+        </div>
+      </div>
+
+      <div class="rule-chapter">
+        <h3 class="rule-chapter-title"><span>第3章</span>勤務時間・休日・休暇</h3>
+        <div class="rule-article">
+          <p class="rule-article-title"><span class="rule-article-num">第10条</span>所定労働時間</p>
+          <div class="rule-article-body">所定労働時間は、1日8時間、1週間40時間とする。フレックスタイム制を採用する部門においては、コアタイム（10:00〜15:00）の在席を条件として、始業・終業時刻を各自が決定できる。</div>
+        </div>
+        <div class="rule-article">
+          <p class="rule-article-title"><span class="rule-article-num">第11条</span>休日</p>
+          <div class="rule-article-body">所定休日は次のとおりとする。
+            <ol>
+              <li>土曜日・日曜日</li>
+              <li>国民の祝日に関する法律に定める休日</li>
+              <li>年末年始（12月29日〜1月3日）</li>
+              <li>夏季休暇（8月11日〜8月15日）</li>
+              <li>その他会社が定める日</li>
+            </ol>
+          </div>
+        </div>
+        <div class="rule-article">
+          <p class="rule-article-title"><span class="rule-article-num">第12条</span>年次有給休暇</p>
+          <div class="rule-article-body">年次有給休暇は、入社後6ヶ月継続勤務し、全労働日の8割以上出勤した社員に対し、10日付与する。以降、継続勤務年数に応じて最大20日まで付与する。会社は、社員に対して年5日の有給休暇を時季を指定して取得させる義務を負う（労働基準法第39条第7項）。</div>
+          <div class="rule-article-note">最低5日取得の義務化は法律で定められています。期末（3月）に未取得の場合は会社から時季指定される場合があります。</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="border-top:2px solid rgba(200,169,110,0.2);margin:48px 0"></div>
+
+    <!-- 給与規程 -->
+    <div class="reg-section reveal" id="kyuyo">
+      <div class="reg-sec-header">
+        <div>
+          <p style="font-size:10px;letter-spacing:0.35em;color:var(--accent);text-transform:uppercase;margin-bottom:8px">Compensation Policy</p>
+          <h2 class="reg-sec-title">給与規程</h2>
+          <div class="reg-sec-meta">
+            <span class="reg-meta-item">最終更新：2025年4月1日</span>
+          </div>
+        </div>
+        <a href="kiteifiles/%E7%B5%8C%E4%B8%8E%E8%A6%8F%E7%A8%8B.pdf" class="reg-pdf-btn" download="給与規程.pdf">PDF原本をダウンロード</a>
+      </div>
+      <p class="rule-article-body" style="padding-left:0;">給与・賞与・諸手当等に関する規程です。Web版の詳細は準備中です。PDF原本をご確認ください。</p>
+    </div>
+
+    <div style="border-top:2px solid rgba(200,169,110,0.2);margin:48px 0"></div>
+
+    <!-- 育休規程 -->
+    <div class="reg-section reveal" id="ikuji">
+      <div class="reg-sec-header">
+        <div>
+          <p style="font-size:10px;letter-spacing:0.35em;color:var(--accent);text-transform:uppercase;margin-bottom:8px">Parental Leave Policy</p>
+          <h2 class="reg-sec-title">育児・介護休業規程</h2>
+          <div class="reg-sec-meta">
+            <span class="reg-meta-item">最終更新：2026年2月1日</span>
+            <span class="reg-meta-item">最近改定あり</span>
+          </div>
+        </div>
+        <a href="kiteifiles/%E8%82%B2%E5%85%90%E3%83%BB%E4%BB%8B%E8%AD%B7%E4%BC%91%E6%A5%AD%E8%A6%8F%E7%A8%8B.pdf" class="reg-pdf-btn" download="育児・介護休業規程.pdf">PDF原本をダウンロード</a>
+      </div>
+
+      <div class="change-history">
+        <p class="change-history-title">変更履歴</p>
+        <div class="change-list">
+          <div class="change-item">
+            <span class="change-date">2026年2月1日</span>
+            <span class="change-badge revised">改定</span>
+            <span class="change-desc">パパ育休取得可能期間：2週間→4週間に延長。分割取得（最大2回）を新設。</span>
+          </div>
+          <div class="change-item">
+            <span class="change-date">2024年4月1日</span>
+            <span class="change-badge new-rule">新設</span>
+            <span class="change-desc">産後パパ育休（出生時育児休業）制度を追加。子の出生後8週間以内に最大4週間取得可能。</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="rule-chapter">
+        <h3 class="rule-chapter-title"><span>第1章</span>育児休業</h3>
+        <div class="rule-article">
+          <p class="rule-article-title"><span class="rule-article-num">第1条</span>育児休業の取得資格</p>
+          <div class="rule-article-body">1歳に満たない子を養育する社員は、育児休業を取得することができる。有期雇用社員については、子が1歳6ヶ月に達する日までに労働契約期間が満了しないことが条件。</div>
+        </div>
+        <div class="rule-article">
+          <p class="rule-article-title"><span class="rule-article-num">第2条</span>育児休業の期間</p>
+          <div class="rule-article-body">育児休業は、子が1歳（保育所入所待ち等の場合は最大2歳）に達する前日まで取得できる。2026年2月改定により、<strong>パパ育休（産後パパ育休）は子の出生後8週間以内に最大4週間取得可能</strong>（分割取得：最大2回可）。</div>
+          <div class="rule-article-note">パパ育休の取得推奨：当社では全社員の育休取得を推奨しています。上長へ申し出を躊躇わないでください。人事が個別サポートします。</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="border-top:2px solid rgba(200,169,110,0.2);margin:48px 0"></div>
+
+    <!-- 福利厚生規程 -->
+    <div class="reg-section reveal" id="fukuri">
+      <div class="reg-sec-header">
+        <div>
+          <p style="font-size:10px;letter-spacing:0.35em;color:var(--accent);text-transform:uppercase;margin-bottom:8px">Benefits Policy</p>
+          <h2 class="reg-sec-title">福利厚生規程</h2>
+          <div class="reg-sec-meta">
+            <span class="reg-meta-item">最終更新：2025年10月1日</span>
+          </div>
+        </div>
+        <a href="kiteifiles/%E7%A6%8F%E5%88%A9%E5%8E%9A%E7%94%9F%E8%A6%8F%E7%A8%8B.pdf" class="reg-pdf-btn" download="福利厚生規程.pdf">PDF原本をダウンロード</a>
+      </div>
+
+      <div class="rule-chapter">
+        <h3 class="rule-chapter-title"><span>第1章</span>各種補助制度</h3>
+        <div class="rule-article">
+          <p class="rule-article-title"><span class="rule-article-num">第1条</span>テレワーク環境整備補助</p>
+          <div class="rule-article-body">在宅勤務を行う社員に対し、年間上限5万円の環境整備補助を支給する。対象品目はデスク・チェア・モニター・入力デバイス・通信機器等、業務に直接使用するものとする。購入から3ヶ月以内に領収書を添付の上申請すること。</div>
+        </div>
+        <div class="rule-article">
+          <p class="rule-article-title"><span class="rule-article-num">第2条</span>自己啓発支援</p>
+          <div class="rule-article-body">社員の自主的なキャリア開発を支援するため、年間上限20万円の自己啓発費用補助を行う。対象は業務関連の資格取得・外部研修受講・書籍購入とする。<strong>事前申請が必須</strong>であり、事後の申請は認められない。</div>
+        </div>
+        <div class="rule-article">
+          <p class="rule-article-title"><span class="rule-article-num">第3条</span>慶弔見舞金</p>
+          <div class="rule-article-body">以下の事由が生じた場合、所定の慶弔見舞金を支給する。
+            <ol>
+              <li>本人の結婚：10万円（事由発生から3ヶ月以内の申請が必要）</li>
+              <li>本人・配偶者の出産：5万円（出生から3ヶ月以内）</li>
+              <li>家族の弔慰（配偶者・子・父母）：3万円</li>
+              <li>本人の傷病入院（10日以上）：2万円</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="border-top:2px solid rgba(200,169,110,0.2);margin:48px 0"></div>
+
+    <!-- 情報セキュリティ規程 -->
+    <div class="reg-section reveal" id="security">
+      <div class="reg-sec-header">
+        <div>
+          <p style="font-size:10px;letter-spacing:0.35em;color:var(--accent);text-transform:uppercase;margin-bottom:8px">Information Security Policy</p>
+          <h2 class="reg-sec-title">情報セキュリティ規程</h2>
+          <div class="reg-sec-meta">
+            <span class="reg-meta-item">最終更新：2025年7月1日</span>
+          </div>
+        </div>
+        <a href="kiteifiles/%E6%83%85%E5%A0%B1%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3%E8%A6%8F%E7%A8%8B.pdf" class="reg-pdf-btn" download="情報セキュリティ規程.pdf">PDF原本をダウンロード</a>
+      </div>
+      <p class="rule-article-body" style="padding-left:0;">情報資産の取り扱い・セキュリティに関する規程です。Web版の詳細は準備中です。PDF原本をご確認ください。</p>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const obs=new IntersectionObserver(e=>{e.forEach((el,i)=>{if(el.isIntersecting)setTimeout(()=>el.target.classList.add('visible'),i*80)})},{threshold:0.1,rootMargin:'0px 0px -60px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+document.querySelectorAll('.reg-menu-item').forEach(item=>{
+  item.addEventListener('click',()=>{
+    document.querySelectorAll('.reg-menu-item').forEach(i=>i.classList.remove('active'));
+    item.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>

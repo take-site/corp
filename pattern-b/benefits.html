@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="img/favicon.png" type="image/png">
+<title>働く環境・制度 | 人事グループ採用サイト</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;700&family=Noto+Sans+JP:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--ink:#1a1a2e;--ink-soft:#2d2d4a;--cream:#f8f5ef;--warm:#ede8df;--accent:#c8a96e;--accent-light:#e8d5b0;--text:#3d3d52;--muted:#8585a0}
+html{scroll-behavior:smooth}
+body{font-family:'Noto Sans JP',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:72px;background:rgba(248,245,239,0.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(200,169,110,0.2)}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:500;color:var(--ink);letter-spacing:0.05em;text-decoration:none}
+.nav-logo span{font-size:11px;font-family:'Noto Sans JP',sans-serif;font-weight:300;display:block;letter-spacing:0.2em;color:var(--muted);margin-top:-2px}
+.nav-links{display:flex;gap:40px;list-style:none;align-items:center}
+.nav-links a{font-size:13px;font-weight:300;letter-spacing:0.12em;color:var(--text);text-decoration:none;transition:color 0.25s}
+.nav-links a:hover,.nav-links a.active{color:var(--accent)}
+.btn-nav{background:var(--ink);color:var(--cream)!important;padding:10px 22px;font-size:12px!important;letter-spacing:0.15em!important;transition:background 0.25s!important}
+.btn-nav:hover{background:var(--accent)!important;color:var(--ink)!important}
+.page-header{padding:160px 80px 80px;background:var(--ink);position:relative;overflow:hidden}
+.page-header::after{content:'BENEFIT';position:absolute;bottom:-30px;right:40px;font-family:'Cormorant Garamond',serif;font-size:160px;font-weight:300;color:rgba(255,255,255,0.04);line-height:1;pointer-events:none}
+.page-header-inner{max-width:1200px;margin:0 auto;position:relative;z-index:2}
+.page-label{font-size:10px;letter-spacing:0.4em;color:var(--accent);text-transform:uppercase;margin-bottom:20px;display:flex;align-items:center;gap:12px}
+.page-label::before{content:'';width:24px;height:1px;background:var(--accent)}
+.page-title{font-family:'Noto Serif JP',serif;font-size:clamp(32px,4vw,56px);font-weight:300;color:var(--cream);letter-spacing:0.05em;line-height:1.4;margin-bottom:16px}
+.page-subtitle{font-size:15px;font-weight:300;color:rgba(248,245,239,0.55);line-height:1.9;letter-spacing:0.04em;max-width:560px}
+.breadcrumb{background:var(--warm);padding:16px 80px}
+.breadcrumb-inner{max-width:1200px;margin:0 auto;display:flex;gap:8px;align-items:center;font-size:12px;color:var(--muted);letter-spacing:0.08em}
+.breadcrumb a{color:var(--muted);text-decoration:none}.breadcrumb a:hover{color:var(--accent)}
+.section{padding:100px 80px}
+.section-inner{max-width:1200px;margin:0 auto}
+.section-label{font-size:10px;letter-spacing:0.4em;color:var(--accent);text-transform:uppercase;margin-bottom:16px;display:flex;align-items:center;gap:12px}
+.section-label::before{content:'';width:24px;height:1px;background:var(--accent)}
+.section-title{font-family:'Noto Serif JP',serif;font-size:clamp(26px,3vw,40px);font-weight:300;color:var(--ink);margin-bottom:16px;letter-spacing:0.05em;line-height:1.4}
+.section-desc{font-size:15px;font-weight:300;color:var(--muted);line-height:1.9;max-width:520px;letter-spacing:0.04em}
+
+/* Benefits grid */
+.benefits-mega{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:64px}
+.benefit-card{background:var(--warm);padding:44px 36px;position:relative;overflow:hidden;transition:background 0.3s}
+.benefit-card:hover{background:var(--accent-light)}
+.benefit-card::after{content:'';position:absolute;bottom:0;left:0;width:0;height:3px;background:var(--accent);transition:width 0.4s}
+.benefit-card:hover::after{width:100%}
+.benefit-icon{margin-bottom:20px;display:block}
+.benefit-icon .icon-svg,.training-icon .icon-svg{width:28px;height:28px;color:var(--accent);display:block}
+.benefit-tag{font-size:9px;letter-spacing:0.3em;color:var(--accent);text-transform:uppercase;margin-bottom:10px}
+.benefit-title{font-family:'Noto Serif JP',serif;font-size:18px;font-weight:400;color:var(--ink);margin-bottom:14px;letter-spacing:0.04em}
+.benefit-body{font-size:13px;font-weight:300;color:var(--muted);line-height:2;letter-spacing:0.04em}
+.benefit-highlight{display:inline-block;background:var(--accent);color:var(--ink);font-size:11px;padding:4px 12px;margin-top:14px;letter-spacing:0.1em;font-weight:500}
+
+/* Career path */
+.career-bg{background:var(--ink)}
+.career-path{display:grid;grid-template-columns:repeat(5,1fr);gap:0;margin-top:64px;position:relative}
+.career-path::before{content:'';position:absolute;top:36px;left:80px;right:80px;height:1px;background:rgba(200,169,110,0.3);z-index:0}
+.career-stage{position:relative;z-index:1;text-align:center;padding:0 8px}
+.career-dot{width:72px;height:72px;background:rgba(255,255,255,0.06);border:1px solid rgba(200,169,110,0.3);border-radius:50%;margin:0 auto 20px;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--accent);transition:all 0.3s}
+.career-stage:hover .career-dot{background:rgba(200,169,110,0.15);border-color:var(--accent)}
+.career-year{font-size:10px;color:var(--accent);letter-spacing:0.2em;margin-bottom:8px}
+.career-position{font-family:'Noto Serif JP',serif;font-size:14px;color:var(--cream);margin-bottom:10px;letter-spacing:0.04em;line-height:1.5}
+.career-desc{font-size:11px;color:rgba(248,245,239,0.45);line-height:1.8;letter-spacing:0.03em}
+
+/* Evaluation */
+.eval-layout{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:64px}
+.eval-card{padding:52px 48px;background:var(--warm)}
+.eval-card:first-child{background:var(--ink)}
+.eval-num{font-family:'Cormorant Garamond',serif;font-size:72px;font-weight:300;color:rgba(200,169,110,0.2);line-height:1;margin-bottom:16px}
+.eval-title{font-family:'Noto Serif JP',serif;font-size:22px;font-weight:300;line-height:1.5;letter-spacing:0.05em;margin-bottom:20px}
+.eval-card:first-child .eval-title{color:var(--cream)}
+.eval-steps{display:flex;flex-direction:column;gap:16px}
+.eval-step{display:flex;gap:16px;align-items:flex-start}
+.eval-step-num{min-width:28px;height:28px;background:var(--accent);color:var(--ink);font-size:11px;font-weight:500;display:flex;align-items:center;justify-content:center;flex-shrink:0;letter-spacing:0.05em}
+.eval-step-body{font-size:13px;font-weight:300;line-height:1.8;letter-spacing:0.04em}
+.eval-card:first-child .eval-step-body{color:rgba(248,245,239,0.65)}
+
+/* Training */
+.training-grid{display:grid;grid-template-columns:1fr 2fr;gap:80px;margin-top:64px;align-items:start}
+.training-list{display:flex;flex-direction:column;gap:2px}
+.training-item{padding:24px 28px;background:var(--warm);cursor:pointer;display:flex;align-items:center;gap:16px;transition:background 0.25s;border-left:3px solid transparent}
+.training-item:hover,.training-item.active{background:var(--accent-light);border-left-color:var(--accent)}
+.training-icon{flex-shrink:0}
+.training-item-label{font-size:11px;color:var(--accent);letter-spacing:0.2em;margin-bottom:4px}
+.training-item-title{font-size:14px;font-weight:400;color:var(--ink);letter-spacing:0.04em}
+.training-detail{background:var(--ink);padding:56px;position:sticky;top:100px}
+.training-detail h3{font-family:'Noto Serif JP',serif;font-size:26px;font-weight:300;color:var(--cream);margin-bottom:20px;letter-spacing:0.05em;line-height:1.5}
+.training-detail p{font-size:14px;font-weight:300;color:rgba(248,245,239,0.6);line-height:2;letter-spacing:0.04em;margin-bottom:24px}
+.training-tags{display:flex;flex-wrap:wrap;gap:8px}
+.training-tag{font-size:11px;border:1px solid rgba(200,169,110,0.4);color:var(--accent);padding:6px 14px;letter-spacing:0.1em}
+
+/* CTA band */
+.cta-band{background:var(--accent-light);padding:80px}
+.cta-band-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:48px}
+.cta-band h2{font-family:'Noto Serif JP',serif;font-size:28px;font-weight:300;color:var(--ink);letter-spacing:0.05em;line-height:1.6}
+.cta-band-btns{display:flex;gap:16px;flex-shrink:0}
+.btn-primary{display:inline-flex;align-items:center;gap:10px;background:var(--ink);color:var(--cream);padding:16px 36px;font-size:13px;font-weight:400;letter-spacing:0.15em;text-decoration:none;transition:all 0.3s}
+.btn-primary:hover{background:var(--ink-soft)}
+.btn-secondary{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--ink);color:var(--ink);padding:16px 36px;font-size:13px;font-weight:400;letter-spacing:0.15em;text-decoration:none;transition:all 0.3s}
+.btn-secondary:hover{background:var(--ink);color:var(--cream)}
+
+footer{background:var(--ink);padding:80px;position:relative;overflow:hidden}
+footer::before{content:'HR';position:absolute;bottom:-40px;right:40px;font-family:'Cormorant Garamond',serif;font-size:240px;font-weight:300;color:rgba(255,255,255,0.03);line-height:1;pointer-events:none}
+.footer-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:64px}
+.footer-brand{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:500;color:var(--cream);margin-bottom:16px;letter-spacing:0.05em}
+.footer-brand-sub{font-size:11px;letter-spacing:0.2em;color:var(--muted);margin-bottom:24px}
+.footer-desc{font-size:12px;font-weight:300;color:rgba(248,245,239,0.45);line-height:1.9}
+.footer-nav-title{font-size:10px;letter-spacing:0.3em;color:var(--accent);text-transform:uppercase;margin-bottom:20px}
+.footer-nav-links{list-style:none}
+.footer-nav-links li{margin-bottom:12px}
+.footer-nav-links a{font-size:12px;font-weight:300;color:rgba(248,245,239,0.55);text-decoration:none;letter-spacing:0.06em;transition:color 0.25s}
+.footer-nav-links a:hover{color:var(--accent)}
+.footer-bottom{max-width:1200px;margin:48px auto 0;padding-top:24px;border-top:1px solid rgba(255,255,255,0.06);display:flex;justify-content:space-between;align-items:center;font-size:11px;color:rgba(248,245,239,0.3);letter-spacing:0.1em}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.8s ease,transform 0.8s ease}
+.reveal.visible{opacity:1;transform:none}
+@media(max-width:900px){nav{padding:0 24px}.nav-links{display:none}.page-header{padding:120px 24px 60px}.breadcrumb{padding:14px 24px}.section{padding:64px 24px}.benefits-mega{grid-template-columns:1fr}.career-path{grid-template-columns:1fr;gap:32px}.career-path::before{display:none}.eval-layout,.training-grid{grid-template-columns:1fr}.cta-band{padding:48px 24px}.cta-band-inner{flex-direction:column;align-items:flex-start}.footer-inner{grid-template-columns:1fr 1fr;gap:40px}footer{padding:60px 24px}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">Human Resources<span>人事グループ 採用サイト</span></a>
+  <ul class="nav-links">
+    <li><a href="company.html">会社紹介</a></li>
+    <li><a href="benefits.html" class="active">働く環境</a></li>
+    <li><a href="interviews.html">先輩の声</a></li>
+    <li><a href="events.html">採用イベント</a></li>
+    <li><a href="portal.html" class="btn-nav">社員の方はこちら →</a></li>
+  </ul>
+</nav>
+<div class="page-header">
+  <div class="page-header-inner">
+    <p class="page-label">Work Environment</p>
+    <h1 class="page-title">働く環境・制度紹介</h1>
+    <p class="page-subtitle">「制度があるから使える」ではなく、「制度があるから選べる」。あなたらしい働き方を、多彩な仕組みで支えます。</p>
+  </div>
+</div>
+<div class="breadcrumb"><div class="breadcrumb-inner"><a href="index.html">TOP</a><span> › </span><span>働く環境・制度</span></div></div>
+
+<!-- Benefits -->
+<section class="section">
+  <div class="section-inner">
+    <p class="section-label">Benefits</p>
+    <h2 class="section-title">福利厚生一覧</h2>
+    <p class="section-desc">何が得られるかベースで、全制度をわかりやすく紹介します。</p>
+    <div class="benefits-mega">
+      <div class="benefit-card reveal">
+        <span class="benefit-icon"><svg class="icon-svg" aria-hidden="true"><use href="img/icons.svg#icon-home"/></svg></span>
+        <p class="benefit-tag">Lifestyle</p>
+        <h3 class="benefit-title">リモートワーク制度</h3>
+        <p class="benefit-body">週3日まで在宅勤務が可能。自宅環境整備補助金（上限5万円）・インターネット通信費補助あり。チームの状況に応じて柔軟に運用できます。</p>
+        <span class="benefit-highlight">補助金 最大5万円</span>
+      </div>
+      <div class="benefit-card reveal">
+        <span class="benefit-icon"><svg class="icon-svg" aria-hidden="true"><use href="img/icons.svg#icon-clock"/></svg></span>
+        <p class="benefit-tag">Lifestyle</p>
+        <h3 class="benefit-title">フレックスタイム制</h3>
+        <p class="benefit-body">コアタイムは10:00〜15:00のみ。朝型・夜型に関わらず、自分のベストな時間で働けます。月間所定労働時間を満たせばOK。</p>
+        <span class="benefit-highlight">コアタイム 5時間のみ</span>
+      </div>
+      <div class="benefit-card reveal">
+        <span class="benefit-icon"><svg class="icon-svg" aria-hidden="true"><use href="img/icons.svg#icon-baby"/></svg></span>
+        <p class="benefit-tag">Family</p>
+        <h3 class="benefit-title">育休・産休サポート</h3>
+        <p class="benefit-body">産前産後休暇・育児休業の取得率100%達成。男性育休も全員が取得しています。復帰後は時短勤務・テレワーク優遇で無理なく職場復帰できます。</p>
+        <span class="benefit-highlight">取得率 100%</span>
+      </div>
+      <div class="benefit-card reveal">
+        <span class="benefit-icon"><svg class="icon-svg" aria-hidden="true"><use href="img/icons.svg#icon-book"/></svg></span>
+        <p class="benefit-tag">Growth</p>
+        <h3 class="benefit-title">自己啓発支援</h3>
+        <p class="benefit-body">資格取得費用・書籍購入・外部セミナー受講費の補助（年間最大20万円）。業務に関連する資格であれば、試験費用も全額会社負担。</p>
+        <span class="benefit-highlight">年間 最大20万円</span>
+      </div>
+      <div class="benefit-card reveal">
+        <span class="benefit-icon"><svg class="icon-svg" aria-hidden="true"><use href="img/icons.svg#icon-health"/></svg></span>
+        <p class="benefit-tag">Health</p>
+        <h3 class="benefit-title">健康管理サポート</h3>
+        <p class="benefit-body">定期健診・人間ドック費用の全額補助。提携クリニックへの優先予約、がん検診追加オプション付き。社内メンタルヘルス相談窓口も完備。</p>
+        <span class="benefit-highlight">人間ドック 全額補助</span>
+      </div>
+      <div class="benefit-card reveal">
+        <span class="benefit-icon"><svg class="icon-svg" aria-hidden="true"><use href="img/icons.svg#icon-gift"/></svg></span>
+        <p class="benefit-tag">Special</p>
+        <h3 class="benefit-title">ライフイベント支援</h3>
+        <p class="benefit-body">結婚祝い金・出産祝い金・引越し手当を支給。慶弔休暇は業界水準を大きく上回る日数を確保。住宅ローン優遇金利制度（提携金融機関）も活用できます。</p>
+        <span class="benefit-highlight">結婚祝い金 10万円</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Career Path -->
+<section class="section career-bg">
+  <div class="section-inner">
+    <p class="section-label" style="color:var(--accent)">Career Path</p>
+    <h2 class="section-title" style="color:var(--cream)">キャリアパス</h2>
+    <p class="section-desc" style="color:rgba(248,245,239,0.55)">人事グループでの標準的なキャリアステップ。もちろん、成果次第でさらに早い昇格も可能です。</p>
+    <div class="career-path">
+      <div class="career-stage reveal">
+        <div class="career-dot">1</div>
+        <p class="career-year">入社〜2年</p>
+        <p class="career-position">スタッフ</p>
+        <p class="career-desc">OJT・研修で基礎を習得。採用・労務の基本業務を担当</p>
+      </div>
+      <div class="career-stage reveal">
+        <div class="career-dot">2</div>
+        <p class="career-year">3〜5年</p>
+        <p class="career-position">シニアスタッフ</p>
+        <p class="career-desc">特定領域のスペシャリストに。プロジェクトサブリーダーも経験</p>
+      </div>
+      <div class="career-stage reveal">
+        <div class="career-dot">3</div>
+        <p class="career-year">5〜8年</p>
+        <p class="career-position">主任・リーダー</p>
+        <p class="career-desc">チームリーダーとして後輩育成・プロジェクト推進を担う</p>
+      </div>
+      <div class="career-stage reveal">
+        <div class="career-dot">4</div>
+        <p class="career-year">8〜12年</p>
+        <p class="career-position">課長・マネージャー</p>
+        <p class="career-desc">経営会議参加。組織全体の人事戦略立案に携わる</p>
+      </div>
+      <div class="career-stage reveal">
+        <div class="career-dot">5</div>
+        <p class="career-year">12年〜</p>
+        <p class="career-position">部長・HR Director</p>
+        <p class="career-desc">会社全体の人材戦略を担う。CHROへのパスもあり</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Evaluation -->
+<section class="section">
+  <div class="section-inner">
+    <p class="section-label">Evaluation</p>
+    <h2 class="section-title">評価・昇給制度</h2>
+    <p class="section-desc">透明性の高い評価体系で、頑張りをきちんと報酬に反映します。</p>
+    <div class="eval-layout">
+      <div class="eval-card reveal">
+        <div class="eval-num">01</div>
+        <h3 class="eval-title">目標設定・評価プロセス</h3>
+        <div class="eval-steps">
+          <div class="eval-step">
+            <span class="eval-step-num">1</span>
+            <p class="eval-step-body">期初に上司と目標設定面談（SMART目標で合意）</p>
+          </div>
+          <div class="eval-step">
+            <span class="eval-step-num">2</span>
+            <p class="eval-step-body">中間面談でフィードバック・目標修正（必要に応じて）</p>
+          </div>
+          <div class="eval-step">
+            <span class="eval-step-num">3</span>
+            <p class="eval-step-body">期末に自己評価・上司評価・360度フィードバック実施</p>
+          </div>
+          <div class="eval-step">
+            <span class="eval-step-num">4</span>
+            <p class="eval-step-body">評価結果と賞与・昇給・昇格に反映。必ず本人に説明</p>
+          </div>
+        </div>
+      </div>
+      <div class="eval-card reveal">
+        <div class="eval-num" style="color:rgba(26,26,46,0.1)">02</div>
+        <h3 class="eval-title">評価の透明性へのこだわり</h3>
+        <div class="eval-steps">
+          <div class="eval-step">
+            <span class="eval-step-num" style="background:var(--ink);color:var(--cream)">✓</span>
+            <p class="eval-step-body">評価基準は全員に公開。「なぜその評価か」を必ず説明します</p>
+          </div>
+          <div class="eval-step">
+            <span class="eval-step-num" style="background:var(--ink);color:var(--cream)">✓</span>
+            <p class="eval-step-body">異議申し立て制度あり。納得できない場合は人事本部に相談できます</p>
+          </div>
+          <div class="eval-step">
+            <span class="eval-step-num" style="background:var(--ink);color:var(--cream)">✓</span>
+            <p class="eval-step-body">昇格・昇給の基準テーブルを公開。自分のキャリアを自分で設計できます</p>
+          </div>
+          <div class="eval-step">
+            <span class="eval-step-num" style="background:var(--ink);color:var(--cream)">✓</span>
+            <p class="eval-step-body">賞与は年2回。月収×最大6ヶ月分（業績・個人評価連動）</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Training -->
+<section class="section" style="background:var(--warm)">
+  <div class="section-inner">
+    <p class="section-label">Training</p>
+    <h2 class="section-title">研修・育成体系</h2>
+    <p class="section-desc">入社から管理職まで、キャリアの各ステージで必要な学びを体系的に提供します。</p>
+    <div class="training-grid">
+      <div class="training-list">
+        <div class="training-item active reveal" onclick="selectTraining(this,'入社前〜3ヶ月研修','入社前オリエンテーション・社会人基礎研修・各部門配属前トレーニング・OJT担当者制度の3本柱で、スムーズな立ち上がりをサポート。入社後90日間は専任トレーナーが毎週1on1を実施。','入社前オリエンテーション,社会人基礎研修,OJT制度,90日フォローアップ')">
+          <span class="training-icon"><svg class="icon-svg" aria-hidden="true"><use href="img/icons.svg#icon-leaf"/></svg></span>
+          <div>
+            <p class="training-item-label">Onboarding</p>
+            <p class="training-item-title">入社前〜3ヶ月研修</p>
+          </div>
+        </div>
+        <div class="training-item reveal" onclick="selectTraining(this,'スキルアップ研修','ビジネスマナー・Excel/PowerPoint・プレゼンテーション・ロジカルシンキングなど、実務に直結するスキルを年間通じて受講できます。外部研修への参加費も補助。','Excel/PowerPoint,プレゼン研修,ロジカルシンキング,外部研修補助')">
+          <span class="training-icon"><svg class="icon-svg" aria-hidden="true"><use href="img/icons.svg#icon-chart"/></svg></span>
+          <div>
+            <p class="training-item-label">Skill Up</p>
+            <p class="training-item-title">スキルアップ研修</p>
+          </div>
+        </div>
+        <div class="training-item reveal" onclick="selectTraining(this,'人事専門職研修','採用・労務・組織開発それぞれの専門領域に特化した研修。社会保険労務士資格取得支援・HR系資格取得支援・外部カンファレンス参加支援も充実。','採用実務研修,労務管理,組織開発基礎,社労士資格支援')">
+          <span class="training-icon"><svg class="icon-svg" aria-hidden="true"><use href="img/icons.svg#icon-target"/></svg></span>
+          <div>
+            <p class="training-item-label">Specialist</p>
+            <p class="training-item-title">人事専門職研修</p>
+          </div>
+        </div>
+        <div class="training-item reveal" onclick="selectTraining(this,'管理職研修','主任昇格前後の必修プログラム。チームマネジメント・コーチング・1on1実践・評価者研修・ハラスメント防止まで、管理職に必要なスキルを網羅。','チームマネジメント,コーチング,1on1実践,評価者研修')">
+          <span class="training-icon"><svg class="icon-svg" aria-hidden="true"><use href="img/icons.svg#icon-handshake"/></svg></span>
+          <div>
+            <p class="training-item-label">Management</p>
+            <p class="training-item-title">管理職研修</p>
+          </div>
+        </div>
+      </div>
+      <div class="training-detail reveal" id="trainingDetail">
+        <h3 id="trainingTitle">入社前〜3ヶ月研修</h3>
+        <p id="trainingDesc">入社前オリエンテーション・社会人基礎研修・各部門配属前トレーニング・OJT担当者制度の3本柱で、スムーズな立ち上がりをサポート。入社後90日間は専任トレーナーが毎週1on1を実施。</p>
+        <div class="training-tags" id="trainingTags">
+          <span class="training-tag">入社前オリエンテーション</span>
+          <span class="training-tag">社会人基礎研修</span>
+          <span class="training-tag">OJT制度</span>
+          <span class="training-tag">90日フォローアップ</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="cta-band">
+  <div class="cta-band-inner">
+    <h2>充実した制度とともに、<br>あなたのキャリアを描こう。</h2>
+    <div class="cta-band-btns">
+      <a href="apply.html" class="btn-primary">エントリーはこちら →</a>
+      <a href="interviews.html" class="btn-secondary">先輩の声を見る</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div><p class="footer-brand">Human Resources</p><p class="footer-brand-sub">人事グループ 採用サイト</p><p class="footer-desc">人と組織の未来を共に描く。社員一人ひとりが最大限に輝ける環境づくりに取り組んでいます。</p></div>
+    <div><p class="footer-nav-title">採用情報</p><ul class="footer-nav-links"><li><a href="company.html">会社・人事紹介</a></li><li><a href="benefits.html">働く環境・制度</a></li><li><a href="interviews.html">先輩インタビュー</a></li><li><a href="events.html">採用イベント</a></li><li><a href="apply.html">応募フォーム</a></li></ul></div>
+    <div><p class="footer-nav-title">社内ポータル</p><ul class="footer-nav-links"><li><a href="portal.html">申請・手続き</a></li><li><a href="faq.html">よくある質問</a></li><li><a href="procedures.html">手続きフロー</a></li><li><a href="regulations.html">規程・制度</a></li></ul></div>
+    <div><p class="footer-nav-title">その他</p><ul class="footer-nav-links"><li><a href="#">プライバシーポリシー</a></li><li><a href="mailto:hr-recruit@company.jp">お問い合わせ</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><span>© 2026 Human Resources Group. All rights reserved.</span><span style="letter-spacing:0.2em">HR · GROUP</span></div>
+</footer>
+<script>
+const obs=new IntersectionObserver(e=>{e.forEach((el,i)=>{if(el.isIntersecting)setTimeout(()=>el.target.classList.add('visible'),i*80)})},{threshold:0.1,rootMargin:'0px 0px -60px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+function selectTraining(el,title,desc,tags){
+  document.querySelectorAll('.training-item').forEach(i=>i.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('trainingTitle').textContent=title;
+  document.getElementById('trainingDesc').textContent=desc;
+  const tagsEl=document.getElementById('trainingTags');
+  tagsEl.innerHTML=tags.split(',').map(t=>`<span class="training-tag">${t.trim()}</span>`).join('');
+}
+</script>
+</body>
+</html>

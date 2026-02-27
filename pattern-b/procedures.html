@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="img/favicon.png" type="image/png">
+<title>手続きフロー | 社内ポータル 人事グループ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;700&family=Noto+Sans+JP:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--ink:#1a1a2e;--cream:#f8f5ef;--warm:#ede8df;--accent:#c8a96e;--accent-light:#e8d5b0;--text:#3d3d52;--muted:#8585a0}
+html{scroll-behavior:smooth}
+body{font-family:'Noto Sans JP',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden}
+.portal-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:72px;background:var(--ink);border-bottom:1px solid rgba(200,169,110,0.2)}
+.portal-nav-logo{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:500;color:var(--cream);letter-spacing:0.05em;text-decoration:none}
+.portal-nav-logo span{font-size:11px;font-family:'Noto Sans JP',sans-serif;font-weight:300;display:block;letter-spacing:0.2em;color:rgba(248,245,239,0.45);margin-top:-2px}
+.portal-nav-links{display:flex;gap:32px;list-style:none;align-items:center}
+.portal-nav-links a{font-size:13px;font-weight:300;letter-spacing:0.1em;color:rgba(248,245,239,0.6);text-decoration:none;transition:color 0.25s}
+.portal-nav-links a:hover,.portal-nav-links a.active{color:var(--accent)}
+.btn-recruit{border:1px solid rgba(200,169,110,0.4);color:var(--accent)!important;padding:8px 20px;font-size:12px!important}
+.btn-recruit:hover{background:var(--accent)!important;color:var(--ink)!important;border-color:var(--accent)!important}
+.page-header{padding:160px 80px 80px;background:var(--ink);position:relative;overflow:hidden}
+.page-header::after{content:'FLOW';position:absolute;bottom:-30px;right:40px;font-family:'Cormorant Garamond',serif;font-size:200px;font-weight:300;color:rgba(255,255,255,0.04);line-height:1;pointer-events:none}
+.page-header-inner{max-width:1200px;margin:0 auto;position:relative;z-index:2}
+.page-label{font-size:10px;letter-spacing:0.4em;color:var(--accent);text-transform:uppercase;margin-bottom:20px;display:flex;align-items:center;gap:12px}
+.page-label::before{content:'';width:24px;height:1px;background:var(--accent)}
+.page-title{font-family:'Noto Serif JP',serif;font-size:clamp(32px,4vw,56px);font-weight:300;color:var(--cream);letter-spacing:0.05em;line-height:1.4;margin-bottom:16px}
+.page-subtitle{font-size:15px;font-weight:300;color:rgba(248,245,239,0.55);line-height:1.9;letter-spacing:0.04em;max-width:560px}
+.breadcrumb{background:rgba(26,26,46,0.95);padding:16px 80px}
+.breadcrumb-inner{max-width:1200px;margin:0 auto;display:flex;gap:8px;align-items:center;font-size:12px;color:rgba(248,245,239,0.4)}
+.breadcrumb a{color:rgba(248,245,239,0.4);text-decoration:none}.breadcrumb a:hover{color:var(--accent)}
+
+.proc-layout{display:grid;grid-template-columns:260px 1fr;gap:0;max-width:1360px;margin:0 auto}
+.proc-sidebar{background:var(--warm);padding:40px 0;position:sticky;top:72px;height:calc(100vh - 72px);overflow-y:auto}
+.sidebar-title{font-size:10px;letter-spacing:0.3em;color:var(--accent);text-transform:uppercase;padding:0 28px;margin-bottom:16px}
+.proc-menu-item{padding:16px 28px;display:flex;align-items:flex-start;gap:12px;cursor:pointer;transition:background 0.25s;border-left:3px solid transparent;text-decoration:none;color:inherit}
+.proc-menu-item:hover,.proc-menu-item.active{background:var(--accent-light);border-left-color:var(--accent)}
+.proc-menu-icon{flex-shrink:0;margin-top:2px}
+.proc-menu-icon .icon-svg,.proc-meta-icon .icon-svg,.step-circle-icon .icon-svg{width:20px;height:20px;color:var(--accent);display:block}
+.proc-menu-text{}
+.proc-menu-label{font-size:13px;font-weight:400;color:var(--ink);letter-spacing:0.04em;line-height:1.4}
+.proc-menu-time{font-size:10px;color:var(--muted);margin-top:2px;letter-spacing:0.05em}
+
+.proc-content{padding:64px 72px}
+.proc-section{margin-bottom:80px;scroll-margin-top:90px}
+.proc-sec-label{font-size:10px;letter-spacing:0.35em;color:var(--accent);text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:10px}
+.proc-sec-label::before{content:'';width:20px;height:1px;background:var(--accent)}
+.proc-sec-title{font-family:'Noto Serif JP',serif;font-size:24px;font-weight:300;color:var(--ink);letter-spacing:0.05em;margin-bottom:10px}
+.proc-sec-desc{font-size:14px;font-weight:300;color:var(--muted);line-height:1.9;letter-spacing:0.04em;margin-bottom:8px}
+.proc-sec-meta{display:flex;gap:20px;margin-bottom:32px;flex-wrap:wrap}
+.proc-meta-item{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted)}
+.proc-meta-icon{font-size:14px}
+
+/* Step flow */
+.step-flow{position:relative}
+.step-card{display:grid;grid-template-columns:72px 1fr;gap:28px;position:relative;margin-bottom:4px}
+.step-card:not(:last-child)::before{content:'';position:absolute;left:35px;top:72px;height:calc(100% - 52px);width:2px;background:rgba(200,169,110,0.2);z-index:0}
+.step-left{z-index:1}
+.step-circle{width:72px;height:72px;background:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
+.step-circle-num{font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--accent);line-height:1}
+.step-circle-icon{font-size:16px;line-height:1}
+.step-right{padding:16px 0 40px}
+.step-tag{font-size:9px;letter-spacing:0.3em;color:var(--accent);text-transform:uppercase;margin-bottom:6px}
+.step-title{font-family:'Noto Serif JP',serif;font-size:17px;font-weight:400;color:var(--ink);margin-bottom:10px;letter-spacing:0.04em}
+.step-detail{font-size:13px;font-weight:300;color:var(--muted);line-height:2;letter-spacing:0.04em}
+.step-note{background:var(--accent-light);border-left:3px solid var(--accent);padding:12px 16px;margin-top:10px;font-size:12px;color:var(--text);line-height:1.9}
+.step-warn{background:rgba(200,80,80,0.07);border-left:3px solid #c85050;padding:12px 16px;margin-top:10px;font-size:12px;color:#a03030;line-height:1.9}
+.step-sys{display:flex;gap:10px;background:rgba(26,26,46,0.05);border:1px solid rgba(26,26,46,0.1);padding:12px 16px;margin-top:10px;font-size:12px;color:var(--text);line-height:1.8;align-items:flex-start}
+
+.info-row{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin:20px 0}
+.info-cell{background:var(--warm);padding:18px 22px}
+.info-cell-key{font-size:10px;letter-spacing:0.25em;color:var(--accent);margin-bottom:5px}
+.info-cell-val{font-size:13px;font-weight:300;color:var(--ink);line-height:1.7}
+.proc-divider{border:none;border-top:2px solid rgba(200,169,110,0.2);margin:48px 0}
+
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease}
+.reveal.visible{opacity:1;transform:none}
+@media(max-width:900px){.portal-nav{padding:0 24px}.portal-nav-links{display:none}.page-header{padding:120px 24px 60px}.breadcrumb{padding:14px 24px}.proc-layout{grid-template-columns:1fr}.proc-sidebar{position:static;height:auto}.proc-content{padding:40px 24px}.info-row{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav class="portal-nav">
+  <a href="portal.html" class="portal-nav-logo">社内ポータル<span>人事グループ 内部向けサイト</span></a>
+  <ul class="portal-nav-links">
+    <li><a href="portal.html">ホーム</a></li>
+    <li><a href="faq.html">FAQ</a></li>
+    <li><a href="procedures.html" class="active">手続きフロー</a></li>
+    <li><a href="regulations.html">規程・制度</a></li>
+    <li><a href="index.html" class="btn-recruit">採用サイトへ →</a></li>
+  </ul>
+</nav>
+<div class="page-header">
+  <div class="page-header-inner">
+    <p class="page-label">Procedure Guide</p>
+    <h1 class="page-title">手続きフロー</h1>
+    <p class="page-subtitle">各種申請の手順を図解でわかりやすく説明します。よくある失敗例・注意点も必ず確認してください。</p>
+  </div>
+</div>
+<div class="breadcrumb"><div class="breadcrumb-inner"><a href="portal.html">ホーム</a><span> › </span><span>手続きフロー</span></div></div>
+
+<div class="proc-layout">
+  <div class="proc-sidebar">
+    <p class="sidebar-title">手続き一覧</p>
+    <a href="#kyuka" class="proc-menu-item active"><span class="proc-menu-icon"><svg class="icon-svg" aria-hidden="true"><use href="img/icons.svg#icon-calendar"/></svg></span><div class="proc-menu-text"><p class="proc-menu-label">有給休暇申請</p><p class="proc-menu-time">最短3営業日前</p></div></a>
+    <a href="#zangyo" class="proc-menu-item"><span class="proc-menu-icon"><svg class="icon-svg" aria-hidden="true"><use href="img/icons.svg#icon-clock"/></svg></span><div class="proc-menu-text"><p class="proc-menu-label">残業申請</p><p class="proc-menu-time">当日17時まで（原則）</p></div></a>
+    <a href="#kekkon" class="proc-menu-item"><span class="proc-menu-icon"><svg class="icon-svg" aria-hidden="true"><use href="img/icons.svg#icon-ring"/></svg></span><div class="proc-menu-text"><p class="proc-menu-label">結婚・氏名変更</p><p class="proc-menu-time">発生後2週間以内</p></div></a>
+    <a href="#hikkoshi" class="proc-menu-item"><span class="proc-menu-icon"><svg class="icon-svg" aria-hidden="true"><use href="img/icons.svg#icon-home"/></svg></span><div class="proc-menu-text"><p class="proc-menu-label">引越し・住所変更</p><p class="proc-menu-time">発生後1週間以内</p></div></a>
+    <a href="#ikuji" class="proc-menu-item"><span class="proc-menu-icon"><svg class="icon-svg" aria-hidden="true"><use href="img/icons.svg#icon-baby"/></svg></span><div class="proc-menu-text"><p class="proc-menu-label">産休・育休申請</p><p class="proc-menu-time">取得開始1ヶ月前まで</p></div></a>
+    <a href="#fukuri" class="proc-menu-item"><span class="proc-menu-icon"><svg class="icon-svg" aria-hidden="true"><use href="img/icons.svg#icon-gift"/></svg></span><div class="proc-menu-text"><p class="proc-menu-label">福利厚生各種申請</p><p class="proc-menu-time">購入・受講後3ヶ月以内</p></div></a>
+  </div>
+
+  <div class="proc-content">
+
+    <!-- 有給 -->
+    <div class="proc-section reveal" id="kyuka">
+      <p class="proc-sec-label">Leave Application</p>
+      <h2 class="proc-sec-title">有給休暇申請</h2>
+      <p class="proc-sec-desc">年次有給休暇・特別休暇（慶弔等）の申請手順です。</p>
+      <div class="proc-sec-meta">
+        <span class="proc-meta-item"><span class="proc-meta-icon"><svg class="icon-svg" aria-hidden="true"><use href="img/icons.svg#icon-clock"/></svg></span>所要時間：5分</span>
+        <span class="proc-meta-item"><span class="proc-meta-icon"><svg class="icon-svg" aria-hidden="true"><use href="img/icons.svg#icon-document"/></svg></span>システム：HR Core</span>
+        <span class="proc-meta-item"><span class="proc-meta-icon"><svg class="icon-svg" aria-hidden="true"><use href="img/icons.svg#icon-calendar"/></svg></span>申請期限：希望日の3営業日前まで</span>
+      </div>
+      <div class="step-flow">
+        <div class="step-card">
+          <div class="step-left"><div class="step-circle"><span class="step-circle-num">1</span><span class="step-circle-icon"><svg class="icon-svg" aria-hidden="true"><use href="img/icons.svg#icon-document"/></svg></span></div></div>
+          <div class="step-right">
+            <p class="step-tag">System Login</p>
+            <p class="step-title">HR Coreにログインし「勤怠申請」を選択</p>
+            <p class="step-detail">社内ネットワークまたはVPN接続で <strong>hr-core.company.jp</strong> にアクセス。左メニューから「勤怠申請」→「有給休暇申請」を選択します。</p>
+            <div class="step-sys"><span>Tip</span><span>初めてのアクセスはITサポート（内線#3000）へ。シングルサインオン対応済みなので社員番号・パスワードでログインできます。</span></div>
+          </div>
+        </div>
+        <div class="step-card">
+          <div class="step-left"><div class="step-circle"><span class="step-circle-num">2</span><span class="step-circle-icon"><svg class="icon-svg" aria-hidden="true"><use href="img/icons.svg#icon-document"/></svg></span></div></div>
+          <div class="step-right">
+            <p class="step-tag">Input</p>
+            <p class="step-title">取得希望日・休暇種別を入力する</p>
+            <p class="step-detail">「休暇日」「休暇種別（年次有給 / 半日有給 / 特別休暇等）」「業務引継ぎ先」を入力します。特別休暇は理由の選択が必要です。</p>
+            <div class="step-note"> 半日有給は「午前休」「午後休」から選択。午前休は〜12:00まで、午後休は13:00〜の出勤が必要です。</div>
+          </div>
+        </div>
+        <div class="step-card">
+          <div class="step-left"><div class="step-circle"><span class="step-circle-num">3</span><span class="step-circle-icon"><svg class="icon-svg" aria-hidden="true"><use href="img/icons.svg#icon-document"/></svg></span></div></div>
+          <div class="step-right">
+            <p class="step-tag">Submit</p>
+            <p class="step-title">申請を送信・上長承認を待つ</p>
+            <p class="step-detail">「申請する」ボタンで送信。上長にメール通知が届きます。承認・否認の結果はメールで通知されます。承認前に休暇取得してはいけません。</p>
+            <div class="step-warn">NG：承認メールが届く前に休暇を取得すると「無断欠勤」扱いになる場合があります。必ず承認後に休暇を取得してください。</div>
+          </div>
+        </div>
+        <div class="step-card">
+          <div class="step-left"><div class="step-circle"><span class="step-circle-num">4</span><span class="step-circle-icon"><svg class="icon-svg" aria-hidden="true"><use href="img/icons.svg#icon-check"/></svg></span></div></div>
+          <div class="step-right">
+            <p class="step-tag">Confirmation</p>
+            <p class="step-title">承認メール受信・休暇取得</p>
+            <p class="step-detail">承認メールが届いたら休暇の取得が確定です。チームメンバーへの事前連絡・引継ぎも忘れずに。Slackの「本日の勤務状況」チャンネルへの投稿も推奨します。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="proc-divider">
+
+    <!-- 残業 -->
+    <div class="proc-section reveal" id="zangyo">
+      <p class="proc-sec-label">Overtime Application</p>
+      <h2 class="proc-sec-title">残業申請</h2>
+      <p class="proc-sec-desc">残業・時間外労働は原則事前申請が必要です。事後申請は月2回まで。</p>
+      <div class="proc-sec-meta">
+        <span class="proc-meta-item"><span class="proc-meta-icon"><svg class="icon-svg" aria-hidden="true"><use href="img/icons.svg#icon-clock"/></svg></span>所要時間：3分</span>
+        <span class="proc-meta-item"><span class="proc-meta-icon"><svg class="icon-svg" aria-hidden="true"><use href="img/icons.svg#icon-document"/></svg></span>システム：HR Core</span>
+        <span class="proc-meta-item"><span class="proc-meta-icon"><svg class="icon-svg" aria-hidden="true"><use href="img/icons.svg#icon-calendar"/></svg></span>申請期限：当日17時まで（事前）</span>
+      </div>
+      <div class="info-row">
+        <div class="info-cell"><p class="info-cell-key">平日残業</p><p class="info-cell-val">17:30以降の勤務。当日17時までに申請・承認が必要</p></div>
+        <div class="info-cell"><p class="info-cell-key">休日出勤</p><p class="info-cell-val">土日・祝日の出勤。前週金曜17時までに申請</p></div>
+        <div class="info-cell"><p class="info-cell-key">深夜残業</p><p class="info-cell-val">22時以降は深夜手当が加算（別途申告不要・自動計算）</p></div>
+        <div class="info-cell"><p class="info-cell-key">月上限</p><p class="info-cell-val">45時間/月・360時間/年（労基法36協定）</p></div>
+      </div>
+      <div class="step-flow">
+        <div class="step-card">
+          <div class="step-left"><div class="step-circle"><span class="step-circle-num">1</span><span class="step-circle-icon"><svg class="icon-svg" aria-hidden="true"><use href="img/icons.svg#icon-document"/></svg></span></div></div>
+          <div class="step-right">
+            <p class="step-tag">Confirm with Manager</p>
+            <p class="step-title">まず上長に口頭・チャットで相談・確認を取る</p>
+            <p class="step-detail">系統として「残業が必要な業務の発生」→「上長への相談」→「システム申請」の順で行います。上長の事前了承なく申請しても却下される場合があります。</p>
+          </div>
+        </div>
+        <div class="step-card">
+          <div class="step-left"><div class="step-circle"><span class="step-circle-num">2</span><span class="step-circle-icon"><svg class="icon-svg" aria-hidden="true"><use href="img/icons.svg#icon-document"/></svg></span></div></div>
+          <div class="step-right">
+            <p class="step-tag">Apply on HR Core</p>
+            <p class="step-title">HR Coreで残業申請フォームに入力</p>
+            <p class="step-detail">「残業理由」「予定終了時刻」「対応業務内容」を入力。予定時刻を超える場合は延長申請が必要です（2時間単位）。</p>
+            <div class="step-warn">NG：申請・承認なしで残業した場合、残業代が不支給になる場合があります。</div>
+          </div>
+        </div>
+        <div class="step-card">
+          <div class="step-left"><div class="step-circle"><span class="step-circle-num">3</span><span class="step-circle-icon"><svg class="icon-svg" aria-hidden="true"><use href="img/icons.svg#icon-check"/></svg></span></div></div>
+          <div class="step-right">
+            <p class="step-tag">Work & Record</p>
+            <p class="step-title">承認後に残業開始・実績を打刻</p>
+            <p class="step-detail">承認メール受信後に作業を開始。終業時はHR Coreで打刻（PC操作で自動記録）してください。実際の終了時刻が申請時刻と2時間以上乖離する場合は翌営業日中に修正申請が必要です。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="proc-divider">
+
+    <!-- 結婚 -->
+    <div class="proc-section reveal" id="kekkon">
+      <p class="proc-sec-label">Marriage Procedure</p>
+      <h2 class="proc-sec-title">結婚・氏名変更の手続き</h2>
+      <p class="proc-sec-desc">婚姻届提出後2週間以内に、以下の手続きを行ってください。</p>
+      <div class="step-flow">
+        <div class="step-card">
+          <div class="step-left"><div class="step-circle"><span class="step-circle-num">1</span><span class="step-circle-icon"><svg class="icon-svg" aria-hidden="true"><use href="img/icons.svg#icon-document"/></svg></span></div></div>
+          <div class="step-right">
+            <p class="step-tag">Documents</p>
+            <p class="step-title">戸籍謄本（抄本）を取得する</p>
+            <p class="step-detail">婚姻届受理後に市区町村役所で戸籍謄本（または抄本）を取得。新しい氏名・生年月日が確認できるものが必要です。</p>
+          </div>
+        </div>
+        <div class="step-card">
+          <div class="step-left"><div class="step-circle"><span class="step-circle-num">2</span><span class="step-circle-icon"><svg class="icon-svg" aria-hidden="true"><use href="img/icons.svg#icon-document"/></svg></span></div></div>
+          <div class="step-right">
+            <p class="step-tag">Apply</p>
+            <p class="step-title">HR Coreで「身上変更届」を提出</p>
+            <p class="step-detail">氏名・住所（変更の場合）・通勤経路（変更の場合）を入力。戸籍謄本のスキャンをPDFで添付します。</p>
+            <div class="step-note"> 慶弔休暇（結婚：本人5日）もこのタイミングで申請できます。婚姻日から3ヶ月以内が申請期限です。</div>
+            <div class="step-note"> 結婚祝い金（10万円）も別途申請が必要です。「慶弔金申請」フォームから申請してください。</div>
+          </div>
+        </div>
+        <div class="step-card">
+          <div class="step-left"><div class="step-circle"><span class="step-circle-num">3</span><span class="step-circle-icon"><svg class="icon-svg" aria-hidden="true"><use href="img/icons.svg#icon-document"/></svg></span></div></div>
+          <div class="step-right">
+            <p class="step-tag">ID Update</p>
+            <p class="step-title">社員証・名刺・社内システムの更新</p>
+            <p class="step-detail">身上変更届の承認後、ITサポート（内線#3000）に社員証の再発行を依頼。名刺は総務部（内線#1500）へ。メールアドレス変更が必要な場合はIT部門へ別途依頼してください。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="proc-divider">
+
+    <!-- 引越し -->
+    <div class="proc-section reveal" id="hikkoshi">
+      <p class="proc-sec-label">Moving Procedure</p>
+      <h2 class="proc-sec-title">引越し・住所変更の手続き</h2>
+      <p class="proc-sec-desc">転居後1週間以内に、通勤経路・住所変更の手続きが必要です。通勤手当が変更になる場合は翌月から反映されます。</p>
+      <div class="step-flow">
+        <div class="step-card">
+          <div class="step-left"><div class="step-circle"><span class="step-circle-num">1</span><span class="step-circle-icon"><svg class="icon-svg" aria-hidden="true"><use href="img/icons.svg#icon-document"/></svg></span></div></div>
+          <div class="step-right">
+            <p class="step-tag">Apply</p>
+            <p class="step-title">HR Coreで「住所変更届」と「通勤経路変更申請」を提出</p>
+            <p class="step-detail">新住所・新通勤経路・最寄り駅・定期代を入力。経路は最短ルート（Google Mapsのスクリーンショットを添付）を申告してください。</p>
+            <div class="step-warn">❌ 住所変更の届出を怠ると、緊急連絡が届かない・住民税の特別徴収がずれる等のトラブルが起きます。転居後速やかに届出してください。</div>
+          </div>
+        </div>
+        <div class="step-card">
+          <div class="step-left"><div class="step-circle"><span class="step-circle-num">2</span><span class="step-circle-icon"><svg class="icon-svg" aria-hidden="true"><use href="img/icons.svg#icon-document"/></svg></span></div></div>
+          <div class="step-right">
+            <p class="step-tag">Transport Card</p>
+            <p class="step-title">Suica/PASMOの定期区間を変更・証明書を提出</p>
+            <p class="step-detail">定期区間変更後、定期券（または利用区間の証明）の写真をHR Coreに添付します。翌月給与から新通勤手当が適用されます（月末5日までの申請で翌月反映）。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="proc-divider">
+
+    <!-- 産休育休 -->
+    <div class="proc-section reveal" id="ikuji">
+      <p class="proc-sec-label">Parental Leave</p>
+      <h2 class="proc-sec-title">産休・育休申請</h2>
+      <p class="proc-sec-desc">産前産後休業・育児休業の申請フローです。できるだけ早めの申請をお願いします。</p>
+      <div class="proc-sec-meta">
+        <span class="proc-meta-item"><span class="proc-meta-icon"><svg class="icon-svg" aria-hidden="true"><use href="img/icons.svg#icon-calendar"/></svg></span>育休申請：開始1ヶ月前まで</span>
+        <span class="proc-meta-item"><span class="proc-meta-icon"><svg class="icon-svg" aria-hidden="true"><use href="img/icons.svg#icon-chart"/></svg></span>社会保険料免除あり</span>
+        <span class="proc-meta-item"><span class="proc-meta-icon"><svg class="icon-svg" aria-hidden="true"><use href="img/icons.svg#icon-gift"/></svg></span>出産祝い金（5万円）</span>
+      </div>
+      <div class="step-flow">
+        <div class="step-card">
+          <div class="step-left"><div class="step-circle"><span class="step-circle-num">1</span><span class="step-circle-icon"><svg class="icon-svg" aria-hidden="true"><use href="img/icons.svg#icon-document"/></svg></span></div></div>
+          <div class="step-right">
+            <p class="step-tag">Consult HR</p>
+            <p class="step-title">妊娠が確認されたら、まず人事担当者に相談</p>
+            <p class="step-detail">産前何週から休みたいか・育休期間の希望を人事担当者と相談します。個別の事情（つわり・体調）に応じた対応もご相談ください。相談内容は上長には共有しません（本人許可がない限り）。</p>
+          </div>
+        </div>
+        <div class="step-card">
+          <div class="step-left"><div class="step-circle"><span class="step-circle-num">2</span><span class="step-circle-icon"><svg class="icon-svg" aria-hidden="true"><use href="img/icons.svg#icon-document"/></svg></span></div></div>
+          <div class="step-right">
+            <p class="step-tag">Submit Form</p>
+            <p class="step-title">産前産後休業申請・育児休業申請をHR Coreで提出</p>
+            <p class="step-detail">母子健康手帳（写し）・出産予定日証明書を添付します。育休の開始・終了予定日を入力します（後から変更可能）。</p>
+            <div class="step-note"> 出産祝い金（5万円）はこのフォームから同時申請できます。</div>
+          </div>
+        </div>
+        <div class="step-card">
+          <div class="step-left"><div class="step-circle"><span class="step-circle-num">3</span><span class="step-circle-icon"><svg class="icon-svg" aria-hidden="true"><use href="img/icons.svg#icon-document"/></svg></span></div></div>
+          <div class="step-right">
+            <p class="step-tag">Benefits Setup</p>
+            <p class="step-title">社会保険料免除・育休給付金の手続き</p>
+            <p class="step-detail">人事担当者が代理で社会保険事務所に申請します（本人の作業不要）。育休給付金（雇用保険）の受取口座等は書類で確認します。</p>
+          </div>
+        </div>
+        <div class="step-card">
+          <div class="step-left"><div class="step-circle"><span class="step-circle-num">4</span><span class="step-circle-icon"><svg class="icon-svg" aria-hidden="true"><use href="img/icons.svg#icon-document"/></svg></span></div></div>
+          <div class="step-right">
+            <p class="step-tag">Return Plan</p>
+            <p class="step-title">復帰3ヶ月前にキャリア面談を実施</p>
+            <p class="step-detail">復帰希望日・勤務形態（時短・フルタイム・テレワーク等）を相談します。保育園・育児状況に応じて柔軟に対応します。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="proc-divider">
+
+    <!-- 福利厚生 -->
+    <div class="proc-section reveal" id="fukuri">
+      <p class="proc-sec-label">Benefits Application</p>
+      <h2 class="proc-sec-title">福利厚生各種申請</h2>
+      <p class="proc-sec-desc">テレワーク補助・自己啓発支援・慶弔金等の申請フロー一覧です。</p>
+      <div class="info-row">
+        <div class="info-cell"><p class="info-cell-key">テレワーク補助（年5万円）</p><p class="info-cell-val">購入から3ヶ月以内に申請。領収書添付必須。対象品目あり。</p></div>
+        <div class="info-cell"><p class="info-cell-key">自己啓発支援（年20万円）</p><p class="info-cell-val">受講・受験前に事前申請が必要。事後申請は不可。</p></div>
+        <div class="info-cell"><p class="info-cell-key">人間ドック補助（全額）</p><p class="info-cell-val">提携クリニックに予約 → 受診 → 領収書提出で全額補助。</p></div>
+        <div class="info-cell"><p class="info-cell-key">慶弔金（結婚10万・出産5万）</p><p class="info-cell-val">事由発生から3ヶ月以内に申請。証明書類の提出が必要。</p></div>
+      </div>
+      <div class="step-note">すべての申請は HR Core の「福利厚生申請」メニューから行います。不明点は人事担当者（内線#2100）にご連絡ください。</div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const obs=new IntersectionObserver(e=>{e.forEach((el,i)=>{if(el.isIntersecting)setTimeout(()=>el.target.classList.add('visible'),i*80)})},{threshold:0.1,rootMargin:'0px 0px -60px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+document.querySelectorAll('.proc-menu-item').forEach(item=>{
+  item.addEventListener('click',()=>{
+    document.querySelectorAll('.proc-menu-item').forEach(i=>i.classList.remove('active'));
+    item.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>

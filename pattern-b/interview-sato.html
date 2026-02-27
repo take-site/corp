@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="img/favicon.png" type="image/png">
+<title>佐藤 健一 インタビュー | 人事グループ採用サイト</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;700&family=Noto+Sans+JP:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--ink:#1a1a2e;--cream:#f8f5ef;--warm:#ede8df;--accent:#c8a96e;--text:#3d3d52;--muted:#8585a0}
+html{scroll-behavior:smooth}
+body{font-family:'Noto Sans JP',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:72px;background:rgba(248,245,239,0.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(200,169,110,0.2)}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:500;color:var(--ink);letter-spacing:0.05em;text-decoration:none}
+.nav-logo span{font-size:11px;font-family:'Noto Sans JP',sans-serif;font-weight:300;display:block;letter-spacing:0.2em;color:var(--muted);margin-top:-2px}
+.nav-links{display:flex;gap:40px;list-style:none;align-items:center}
+.nav-links a{font-size:13px;font-weight:300;letter-spacing:0.12em;color:var(--text);text-decoration:none;transition:color 0.25s}
+.nav-links a:hover{color:var(--accent)}
+.btn-nav{background:var(--ink);color:var(--cream)!important;padding:10px 22px;font-size:12px!important;letter-spacing:0.15em!important}
+.page-header{padding:160px 80px 80px;background:var(--ink);position:relative;overflow:hidden}
+.page-header-inner{max-width:1200px;margin:0 auto;position:relative;z-index:2}
+.page-label{font-size:10px;letter-spacing:0.4em;color:var(--accent);text-transform:uppercase;margin-bottom:12px}
+.page-title{font-family:'Noto Serif JP',serif;font-size:clamp(28px,3.5vw,44px);font-weight:300;color:var(--cream);letter-spacing:0.05em;line-height:1.4}
+.breadcrumb{background:var(--warm);padding:16px 80px}
+.breadcrumb-inner{max-width:1200px;margin:0 auto;font-size:12px;color:var(--muted)}
+.breadcrumb a{color:var(--muted);text-decoration:none}.breadcrumb a:hover{color:var(--accent)}
+.section{padding:80px 80px}
+.section-inner{max-width:1200px;margin:0 auto}
+.interview-hero{display:grid;grid-template-columns:1fr 1.2fr;gap:64px;align-items:start;margin-bottom:80px}
+.interview-hero-img{aspect-ratio:4/5;background:var(--ink);position:relative;overflow:hidden;border-radius:4px}
+.interview-hero-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.interview-hero-quote{font-family:'Noto Serif JP',serif;font-size:clamp(18px,2vw,24px);font-weight:300;color:var(--ink);line-height:1.9;padding-left:20px;border-left:3px solid var(--accent);margin-bottom:24px}
+.interview-hero-body{font-size:14px;font-weight:300;color:var(--muted);line-height:2;letter-spacing:0.04em}
+.back-link{display:inline-flex;align-items:center;gap:8px;font-size:12px;letter-spacing:0.12em;color:var(--muted);text-decoration:none;margin-bottom:48px;transition:color 0.25s}
+.back-link:hover{color:var(--accent)}
+.day-section{background:var(--ink)}
+.day-section .section-inner{padding:0}
+.day-timeline{display:grid;grid-template-columns:100px 1fr;gap:0;margin-top:48px;position:relative}
+.day-timeline::before{content:'';position:absolute;left:100px;top:0;bottom:0;width:1px;background:rgba(200,169,110,0.2)}
+.day-row{display:contents}
+.day-time{padding:24px 24px 24px 0;font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--accent);text-align:right;border-bottom:1px solid rgba(255,255,255,0.05)}
+.day-event{padding:24px 0 24px 40px;border-bottom:1px solid rgba(255,255,255,0.05);position:relative}
+.day-event::before{content:'';position:absolute;left:-4px;top:32px;width:8px;height:8px;background:var(--accent)}
+.day-event-title{font-size:15px;font-weight:400;color:var(--cream);margin-bottom:6px;letter-spacing:0.04em}
+.day-event-detail{font-size:12px;font-weight:300;color:rgba(248,245,239,0.5);line-height:1.8;letter-spacing:0.04em}
+footer{background:var(--ink);padding:80px;position:relative}
+.footer-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:64px}
+.footer-brand{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:500;color:var(--cream);margin-bottom:16px}
+.footer-nav-title{font-size:10px;letter-spacing:0.3em;color:var(--accent);text-transform:uppercase;margin-bottom:20px}
+.footer-nav-links{list-style:none}
+.footer-nav-links li{margin-bottom:12px}
+.footer-nav-links a{font-size:12px;font-weight:300;color:rgba(248,245,239,0.55);text-decoration:none;transition:color 0.25s}
+.footer-nav-links a:hover{color:var(--accent)}
+.footer-bottom{max-width:1200px;margin:48px auto 0;padding-top:24px;border-top:1px solid rgba(255,255,255,0.06);font-size:11px;color:rgba(248,245,239,0.3)}
+@media(max-width:900px){nav{padding:0 24px}.nav-links{display:none}.page-header{padding:120px 24px 60px}.breadcrumb{padding:14px 24px}.section{padding:64px 24px}.interview-hero{grid-template-columns:1fr}.footer-inner{grid-template-columns:1fr 1fr}.day-timeline{grid-template-columns:80px 1fr}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">Human Resources<span>人事グループ 採用サイト</span></a>
+  <ul class="nav-links">
+    <li><a href="company.html">会社紹介</a></li>
+    <li><a href="benefits.html">働く環境</a></li>
+    <li><a href="interviews.html" class="active">先輩の声</a></li>
+    <li><a href="events.html">採用イベント</a></li>
+    <li><a href="portal.html" class="btn-nav">社員の方はこちら →</a></li>
+  </ul>
+</nav>
+<div class="page-header">
+  <div class="page-header-inner">
+    <p class="page-label">Interview</p>
+    <h1 class="page-title">佐藤 健一<br>採用・研修グループ / 採用ヘッド</h1>
+    <p style="font-size:14px;color:rgba(248,245,239,0.6);letter-spacing:0.08em">2014年入社（新卒）</p>
+  </div>
+</div>
+<div class="breadcrumb"><div class="breadcrumb-inner"><a href="index.html">TOP</a><span> › </span><a href="interviews.html">先輩インタビュー</a><span> › </span><span>佐藤 健一</span></div></div>
+
+<section class="section">
+  <div class="section-inner">
+    <a href="interviews.html" class="back-link">← 先輩インタビュー一覧へ</a>
+    <div class="interview-hero">
+      <div class="interview-hero-img">
+        <img src="img/sato.png" alt="佐藤 健一">
+      </div>
+      <div>
+        <p class="interview-hero-quote">「採用は会社の未来への投資。10年続けた今もまだ飽きない。」</p>
+        <p class="interview-hero-body">
+          新卒採用を10年担当し、「採用は会社の未来への投資」をモットーに年間200名超の採用を指揮してきました。毎年、新しい候補者や大学、トレンドと向き合うので、同じ仕事でも常に新しい発見があります。採用ヘッドとして戦略立案から現場のサポートまで幅広く携わり、チームの成長も自分の喜びです。人事グループの採用チームで、次の10年も一緒に走る仲間を迎えたいと思っています。
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section day-section">
+  <div class="section-inner">
+    <p class="page-label" style="color:var(--accent)">A Day in the Life</p>
+    <h2 style="font-family:'Noto Serif JP',serif;font-size:clamp(22px,2.5vw,34px);font-weight:300;color:var(--cream);margin-bottom:12px;letter-spacing:0.05em">佐藤 健一の1日</h2>
+    <div class="day-timeline">
+      <div class="day-row">
+        <div class="day-time">8:45</div>
+        <div class="day-event"><p class="day-event-title">出社・採用KPIダッシュボード確認</p><p class="day-event-detail">応募数・選考進捗・内定承諾率を確認し、当日の優先事項を整理。</p></div>
+      </div>
+      <div class="day-row">
+        <div class="day-time">10:00</div>
+        <div class="day-event"><p class="day-event-title">採用チーム全体MTG</p><p class="day-event-detail">新卒・中途の進捗共有と、説明会・イベントの役割分担。課題のすり合わせ。</p></div>
+      </div>
+      <div class="day-row">
+        <div class="day-time">13:00</div>
+        <div class="day-event"><p class="day-event-title">経営層への採用報告・予算協議</p><p class="day-event-detail">来期の採用計画と採用費について、経営会議向けの資料を説明。</p></div>
+      </div>
+      <div class="day-row">
+        <div class="day-time">15:30</div>
+        <div class="day-event"><p class="day-event-title">大学キャリアセンター訪問・関係構築</p><p class="day-event-detail">提携大学を訪問し、説明会の日程や学生の傾向について情報交換。</p></div>
+      </div>
+      <div class="day-row">
+        <div class="day-time">18:30</div>
+        <div class="day-event"><p class="day-event-title">退勤</p><p class="day-event-detail">翌日の面接官アサインを確認し、採用サイトの更新チェックをして終業。</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div><p class="footer-brand">Human Resources</p><p class="footer-brand-sub">人事グループ 採用サイト</p></div>
+    <div><p class="footer-nav-title">採用情報</p><ul class="footer-nav-links"><li><a href="company.html">会社・人事紹介</a></li><li><a href="benefits.html">働く環境・制度</a></li><li><a href="interviews.html">先輩インタビュー</a></li><li><a href="events.html">採用イベント</a></li><li><a href="apply.html">応募フォーム</a></li></ul></div>
+    <div><p class="footer-nav-title">社内ポータル</p><ul class="footer-nav-links"><li><a href="portal.html">申請・手続き</a></li><li><a href="faq.html">よくある質問</a></li><li><a href="procedures.html">手続きフロー</a></li><li><a href="regulations.html">規程・制度</a></li></ul></div>
+    <div><p class="footer-nav-title">その他</p><ul class="footer-nav-links"><li><a href="#">プライバシーポリシー</a></li><li><a href="mailto:hr-recruit@company.jp">お問い合わせ</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><span>© 2026 Human Resources Group.</span><span>HR · GROUP</span></div>
+</footer>
+</body>
+</html>
